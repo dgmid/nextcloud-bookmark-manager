@@ -1,0 +1,204 @@
+
+main {
+	
+	font-size: 13px;
+	
+	position: fixed;
+	top: 0;
+	left: 200px;
+	right: 0;
+	bottom: 0;
+	
+	/* note(@duncanmid): fake mac os window chrome */
+  	
+  	background: linear-gradient(#EDEBED, #D6D4D6) no-repeat border-box, linear-gradient(#EDEBED, #D6D4D6) no-repeat border-box;
+				background-size: 100% 88px, 100% 36px;
+				background-position: left top, left bottom;
+				
+	h1 {
+		
+		text-align: center;
+		font-size: 13px;
+		font-weight: normal;
+		line-height: 24px;
+	}
+}
+
+aside {
+	
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	
+	width: 200px;
+	
+	background-color: $sidebar;
+	color: rgba($background, .85);
+	
+	.sidebar-scroll {
+		
+		overflow-y: scroll;
+		position: absolute;
+		top: 109px;
+		left: 0;
+		right: 0;
+		bottom: 160px;
+		
+		
+		/* note(@duncanmid): scroll shadows by @kizmarh and @leaverou */
+		
+		background:
+			linear-gradient($sidebar 30%, rgba(255,255,255,0)),
+			linear-gradient(rgba(255,255,255,0), $sidebar 70%) 0 100%,
+			radial-gradient(farthest-side at 50% 0, rgba(255,255,255,.2), rgba(0,0,0,0)),
+			radial-gradient(farthest-side at 50% 100%, rgba(255,255,255,.2), rgba(0,0,0,0)) 0 100%;
+		
+		background:
+			linear-gradient($sidebar 30%, rgba(255,255,255,0)),
+			linear-gradient(rgba(255,255,255,0), $sidebar 70%) 0 100%,
+			radial-gradient(farthest-side at 50% 0, rgba(255,255,255,.2), rgba(0,0,0,0)),
+			radial-gradient(farthest-side at 50% 100%, rgba(255,255,255,.2), rgba(0,0,0,0)) 0 100%;
+		
+		background-repeat: no-repeat;
+		background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+		
+		background-attachment: local, local, scroll, scroll;
+		
+	}
+	
+	.list-title {
+		
+		display: block;
+		font-size: 12px;
+		line-height: 22px;
+		padding: 0 20px 0 15px;
+		font-weight: 500;
+		
+		position: absolute;
+		top: 87px;
+	}
+	
+	dl {
+		
+		font-size: 12px;
+		line-height: 22px;
+		
+		&#taglist-extras {
+			
+			margin-top: 11px;
+		}
+		
+		dt {
+			
+			padding: 0 20px 0 15px;
+			font-weight: 500;
+		}
+		
+		dd {
+			
+			font-weight: 400;
+			padding: 0;
+			
+			a {
+				
+				display: block;
+				padding: 0 20px;
+				color: rgba($background, .85);
+				text-decoration: none;
+				
+				transition: all .15s ease-in-out;
+				
+				-webkit-user-drag: none;
+				cursor: default;
+				
+				&:hover {
+					
+					background: rgba($background, .2);
+				}
+				
+				&.selected {
+					
+					background: $selected;
+					color: $background;
+				}
+				
+				.tag-count {
+					
+					display: inline-block;
+					float: right;
+				}
+			}
+			
+			input[type='checkbox'] {
+				
+				margin-left: 20px;
+			}
+		}
+	}
+	
+	#column-list {
+		
+		width: 200px;
+		position: absolute;
+		left: 0;
+		bottom: 36px;
+	}
+}
+
+main,
+aside {
+	
+	header {
+		
+		height: 32px;
+		-webkit-app-region: drag;
+	}
+}
+
+thead {
+	
+	-webkit-app-region: drag;
+}
+
+.tag {
+	
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	overflow: hidden;
+	text-indent: -1000px;
+	margin: 0 2px;
+}
+
+#bookmarks {
+	
+	width: 100%;
+	
+	tbody {
+		
+		tr {
+			
+			td {
+				
+				cursor: default;
+			}
+		}
+	}
+	
+	.tag {
+		
+		text-indent: 1000px;
+	}
+}
+
+.padded-left { padding-left: 20px !important; }
+.padded-right { padding-right: 20px !important; padding-left: 20px !important; }
+
+#add-bookmark {
+	
+	position: absolute;
+	right: 20px;
+	bottom: 10px;
+}

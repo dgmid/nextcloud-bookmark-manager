@@ -1,0 +1,43 @@
+{
+  "name": "nextcloud-bookmark-manager",
+  "version": "1.0.0",
+  "productName": "Nextcloud Bookmark Manager",
+  "description": "Access and manage your Nextcloud bookmarks on the Mac",
+  "main": "dist/js/main.min.js",
+  "scripts": {
+    "package": "npm prune -production; electron-packager . --electron-version=1.8.4 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build"
+  },
+  "author": {
+    "name": "D.G. Midwinter",
+    "email": "duncan@midwinter-dg.com",
+    "url": "https://www.midwinter-dg.com"
+  },
+  "homepage": "http://www.midwinter-dg.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/git-url-here"
+  },
+  "dependencies": {
+    "datatables.net": "^1.10.16",
+    "datatables.net-keytable": "^2.3.2",
+    "electron-store": "^1.3.0",
+    "err-code": "^1.1.2",
+    "jquery": "^3.3.1",
+    "select2": "^4.0.6-rc.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-htmlmin": "^4.0.0",
+    "gulp-iconutil": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify-es": "^1.0.1",
+    "pump": "^3.0.0",
+    "reset-css": "^3.0.0",
+    "run-sequence": "^2.2.1"
+  }
+}

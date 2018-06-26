@@ -1,0 +1,9 @@
+@import '../../node_modules/reset-css/_reset';
+@import 'partials/vars-and-mixins';
+@import 'partials/svg';
+
+@import 'partials/body';
+@import 'partials/forms';
+
+@import '../../node_modules/select2/dist/css/select2.min.css';
+@import 'partials/_select2-custom';
