@@ -14,6 +14,8 @@ const $ = require( 'jquery' )
 const dt = require( 'datatables.net' )( window, $ )
 const keytable = require( 'datatables.net-keytable' )( window, $ )
 
+let generate = require('string-to-color')
+
 const bookmarkTable = $('#bookmarks').DataTable({
 	
 	keys: {
@@ -161,7 +163,7 @@ function parseBookmarks( array ) {
 				
 			} else {
 				
-				color = stringToColour(tagitem)
+				color = generate(tagitem)
 			}
 			
 			taglist += `<span class="tag" title="${tagitem}" style="background-color: ${color};">${tagitem}</span>`
@@ -241,7 +243,7 @@ function buildTagList( array ) {
 		
 		} else {
 			
-			var color = stringToColour(tagitem.value)
+			var color = generate(tagitem.value)
 			
 			$('#taglist').append(
 			
@@ -267,30 +269,6 @@ function buildTagList( array ) {
 			<a href="#" class="filter selected" data-filter="">all bookmarks <span class="tag-count">${total}</span></a>
 		</dd>`
 	)
-}
-
-
-
-//note(@duncanmid): convert tag name to hex color
-
-var stringToColour = function( str ) {
-	
-	let hash = 0
-	
-	for ( let i = 0; i < str.length; i++ ) {
-	
-		hash = str.charCodeAt(i) + ((hash << 5) - hash)
-	}
-	
-	let colour = '#'
-	
-	for (let i = 0; i < 3; i++) {
-	
-		let value = (hash >> (i * 8)) & 0xFF
-		colour += ('00' + value.toString(16)).substr(-2)
-	}
-	
-	return colour
 }
 
 
