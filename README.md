@@ -47,4 +47,4 @@ The packaged app will be written to `build/Nextcloud Bookmark Manager-darwin-x64
 
 ## License
 
-**MDG Font Manager** is released under the MIT Licence
+**Nextcloud Bookmark Manager** is released under the MIT Licence
