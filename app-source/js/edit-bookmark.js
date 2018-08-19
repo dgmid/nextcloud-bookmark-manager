@@ -102,7 +102,7 @@ function populateForm( bookmark ) {
 	$('input[name="title"]').val( bookmark['item']['title'] )
 	$('textarea[name="description"]').val( bookmark['item']['description'] )
 	
-	//todo(@duncanmid): set any active tags
+	//note(@duncanmid): set any active tags
 	
 	//create blank array
 	let activeTags = []
@@ -227,6 +227,6 @@ $(document).ready(function() {
 	$('#modal-form').submit( function( e ) {
 		
 		e.preventDefault()
-		updateBookmark()	
+		updateBookmark()
 	})
 })

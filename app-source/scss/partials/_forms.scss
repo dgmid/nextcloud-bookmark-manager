@@ -1,3 +1,8 @@
+body.resize {
+	
+	background: url('#{$resize}') no-repeat right bottom;
+}
+
 header {
 	
 	padding: 10px 40px;
@@ -11,6 +16,10 @@ header {
 	top: 0;
 	left: 0;
 	right: 0;
+	
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .scroll {
@@ -25,7 +34,7 @@ header {
 
 form {
 	
-	padding: 20px 40px;
+	padding: 20px 40px 0;
 	
 	ul {
 		
@@ -98,4 +107,15 @@ form {
 footer {
 	
 	text-align: right;
+	padding: 15px 0 0;
+	
+	button {
+		
+		padding: 4px 8px;
+		
+		&:active {
+			
+			color: #fff;
+		}
+	}
 }

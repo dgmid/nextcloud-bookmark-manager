@@ -1,20 +1,21 @@
 'use strict'
 
 
-const {shell} = require('electron').remote
+const {shell} = require( 'electron' ).remote
 const {ipcRenderer} = require( 'electron' )
 
 const Store = require( 'electron-store' )
 const store = new Store()
 
-const { remote } = require('electron')
+const { remote } = require( 'electron' )
 const dialog = remote.dialog
 
 const $ = require( 'jquery' )
 const dt = require( 'datatables.net' )( window, $ )
 const keytable = require( 'datatables.net-keytable' )( window, $ )
 
-let generate = require('string-to-color')
+let generate = require( 'string-to-color' )
+let modal
 
 const bookmarkTable = $('#bookmarks').DataTable({
 	
@@ -74,8 +75,8 @@ const bookmarkTable = $('#bookmarks').DataTable({
 	}
 })
 
-
 var total
+
 
 //note(@duncanmid): get login credentials
 
@@ -178,8 +179,8 @@ function parseBookmarks( array ) {
 		bookmarkTable.row.add( [
 			
 			item.id,
-			item.title,
-			item.description,
+			htmlEntities( item.title ),
+			htmlEntities( item.description ),
 			item.url,
 			created.toLocaleDateString(),
 			modified.toLocaleDateString(),
@@ -254,7 +255,7 @@ function buildTagList( array ) {
 			)
 			
 			results.push( { "id": count , "text": tagitem.value } )
-			count++;
+			count++
 		}
 	}
 	
@@ -277,14 +278,14 @@ function buildTagList( array ) {
 
 ipcRenderer.on('delete-bookmark', (event, message) => {
 	
-	let bookmark = false;
+	let bookmark = false
 	
 	if( message == 'delete-bookmark' ) {
 		
 		bookmark = bookmarkTable.row('.selected').data()
 	
 	} else {
-		
+	
 		bookmark = message
 	}
 	
@@ -350,7 +351,7 @@ ipcRenderer.on('delete-bookmark', (event, message) => {
 
 ipcRenderer.on('edit-bookmark', (event, message) => {
 	
-	let bookmark = false;
+	let bookmark = false
 	
 	if( message == 'edit-bookmark' ) {
 		
@@ -364,7 +365,7 @@ ipcRenderer.on('edit-bookmark', (event, message) => {
 	
 	if( bookmark ) {
 		
-		openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + bookmark[0] )
+		openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + bookmark[0], 480, 340, true )
 		
 	} else {
 		
@@ -377,11 +378,11 @@ ipcRenderer.on('edit-bookmark', (event, message) => {
 
 
 
-//note(@duncanmid): preferences modal
+//note(@duncanmid): log in modal
 
 ipcRenderer.on('open-preferences', (event, message) => {
 	
-	openModal( 'file://' + __dirname + '/../html/preferences.html' )
+	openModal( 'file://' + __dirname + '/../html/login.html', 480, 180, false )
 })
 
 
@@ -399,22 +400,32 @@ ipcRenderer.on('refresh-bookmarks', (event, message) => {
 
 ipcRenderer.on('add-bookmark', (event, message) => {
 	
-	openModal( 'file://' + __dirname + '/../html/add-bookmark.html' )
+	openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 340, true )
 })
 
+
+//note(@duncanmid): close login modal
+
+ipcRenderer.on('close-login-modal', (event, message) => {
+	
+	modal.close()
+})
 
 
 //note(@duncanmid): modal
 
-function openModal( url ) {
+function openModal( url, width, height, resize ) {
 	
-	let modal = new remote.BrowserWindow({
+	modal = new remote.BrowserWindow({
 		
 			parent: remote.getCurrentWindow(),
 			modal: true,
-			width: 480,
-			height: 320,
-			resizable: false,
+			width: width,
+			minWidth: width,
+			maxWidth: width,
+			height: height,
+			minHeight: height,
+			resizable: resize,
 			show: false,
 			backgroundColor: '#ECECEC'
 		})
@@ -442,6 +453,16 @@ function setColControls() {
 	}
 }
 
+
+
+//note(@duncanmid): htmlentities
+
+function htmlEntities( str ) {
+    
+    return 	String(str)
+    		.replace(/</g, '&lt;')
+    		.replace(/>/g, '&gt;')
+}
 
 
 $(document).ready(function() {
@@ -486,7 +507,7 @@ $(document).ready(function() {
 	
 	$( '#add-bookmark' ).click( function() {
 		
-		openModal( 'file://' + __dirname + '/../html/add-bookmark.html' )
+		openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 340, true )
 	})
 	
 	
@@ -536,4 +557,11 @@ $(document).ready(function() {
 			}
 		}
 	})
+	
+	//note(@duncanmid): if missing credentials, open login window
+	
+	if( !server || !username || !password ) {
+		
+		openModal( 'file://' + __dirname + '/../html/login.html', 480, 180, false )
+	}
 })

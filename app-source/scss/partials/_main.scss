@@ -200,5 +200,11 @@ thead {
 	
 	position: absolute;
 	right: 20px;
-	bottom: 10px;
+	bottom: 7px;
+	padding: 4px 8px;
+	
+	&:active {
+		
+		color: #fff;
+	}
 }

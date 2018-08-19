@@ -28,7 +28,7 @@ exports.createAbout = () => {
 		
 		about.loadURL(url.format ({ 
 			
-			pathname: path.join(__dirname, '../html/about.html'), 
+			pathname: path.join(__dirname, '../html/about.html'),
 			protocol: 'file:', 
 			slashes: true 
 		}))

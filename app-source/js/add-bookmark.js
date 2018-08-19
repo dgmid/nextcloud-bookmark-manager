@@ -53,9 +53,9 @@ function addBookmark() {
 	const tags = $('#tags').select2('data')
 	
 	for (var i = 0; i < tags.length; i++) {
-			
+	
 		query += '&item[tags][]=' + encodeURIComponent(tags[i]['text'])
-			
+		
 	}
 	
 	const addUrl = "/index.php/apps/bookmarks/public/rest/v2/bookmark"

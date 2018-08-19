@@ -1,11 +1,12 @@
 {
   "name": "nextcloud-bookmark-manager",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "productName": "Nextcloud Bookmark Manager",
   "description": "Access and manage your Nextcloud bookmarks on the Mac",
   "main": "dist/js/main.min.js",
   "scripts": {
-    "package": "npm prune -production; electron-packager . --electron-version=1.8.4 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build"
+	"start": "electron .",
+    "package": "npm prune -production; electron-packager . --electron-version=1.8.6 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build"
   },
   "author": {
     "name": "D.G. Midwinter",

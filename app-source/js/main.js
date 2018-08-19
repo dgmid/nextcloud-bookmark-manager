@@ -1,11 +1,12 @@
 'use strict'
 
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow, ipcMain, protocol} = require('electron')
 const url = require('url') 
 const path = require('path')
 const Store = require('electron-store')
 
-let win
+let win,
+	loginFlow
 
 
 
@@ -61,6 +62,7 @@ function createWindow() {
 	win.setSheetOffset( 24 )
 	
 	function saveWindowBounds() {
+		
 		store.set('windowBounds', win.getBounds())
 	}
 	
@@ -72,6 +74,7 @@ function createWindow() {
 	}))
 	
 	win.once('ready-to-show', () => {
+		
 		win.show()
 	})
 	
@@ -79,11 +82,33 @@ function createWindow() {
 	win.on('move', saveWindowBounds)
 	
 	win.on('closed', () => {
+		
 		app.quit()
 	})
 	
 	require( './app-menu.min' )
 	require( './context-menu.min' )
+	
+	
+	protocol.registerFileProtocol('nc', (request, callback) => {
+		
+		const url = request.url.split( '&' )
+		
+		const 	user = url[1].replace('user:', ''),
+				pass = url[2].replace('password:', '')
+		
+		store.set( 'loginCredentials.username', user )
+		store.set( 'loginCredentials.password', pass )
+		
+		loginFlow.close()
+		
+		win.webContents.send('close-login-modal', 'close-login-modal')
+		win.reload()
+	
+	}, (error) => {
+	
+		if (error) console.error('Failed to register protocol')
+	})
 }
 
 app.on('ready', createWindow) 
@@ -95,12 +120,42 @@ ipcMain.on('refresh', (event, message) => {
 	win.webContents.send('refresh-bookmarks', 'refresh')
 })
 
+
+
 ipcMain.on('reload', (event, message) => {
 	
 	console.log('reload')
 	
-	win.reload()	
+	win.reload()
 })
+
+
+
+ipcMain.on('loginflow', (event, message) => {
+	
+	loginFlow = new BrowserWindow({
+		
+		width: 800,
+		height: 600,
+		resizable: false,
+		show: false,
+		titleBarStyle: 'hidden',
+		backgroundColor: '#0082c9',
+		webPreferences: {
+			nodeIntegration: false
+		}
+	})
 	
 	
+	loginFlow.loadURL( message + '/index.php/login/flow' , {
+		
+		userAgent: 'Nextcloud Bookmark Manager - Macintosh',
+		extraHeaders: 'OCS-APIRequest: true'
+	})
 	
+	
+	loginFlow.once('ready-to-show', () => {
+		
+		loginFlow.show()
+	})
+})

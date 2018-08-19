@@ -23,8 +23,8 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Preferences…',
-				accelerator: 'Command+,',
+				label: 'Log in to Nextcloud…',
+				accelerator: 'Command+l',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('open-preferences', 'open-preferences') }
 			
 			},
@@ -122,13 +122,13 @@ const template = [
 					if (focusedWindow) focusedWindow.reload()
 				}
 			},
-			{
+			/*{
 				label: 'Toggle Developer Tools',
 				accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
 				click (item, focusedWindow) {
 					if (focusedWindow) focusedWindow.webContents.toggleDevTools()
 				}
-			},
+			},*/
 			{
 				type: 'separator'
 			},
@@ -182,7 +182,7 @@ const template = [
 		[
 			{
 				label: 'midwinter-dg.com',
-				click () { require('electron').shell.openExternal('https://www.midwinter-dg.com') }
+				click () { require('electron').shell.openExternal('https://www.midwinter-dg.com/mac-apps/nextcloud-bookmark-manager.html') }
 			}
 		]
 	}
