@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Nextcloud Bookmark Manager - Edit Tag</title>
+		<link rel="stylesheet" type="text/css" href="../css/modal.min.css" media="all">
+	</head>
+	
+	<body class="resize">
+		<header>
+			Edit tag:&nbsp;
+		</header>
+		
+		<div class="scroll">
+			<form id="modal-form">
+				<input type="hidden" name="old_name" value="">
+				<ul id="fields">
+					<li>
+						<label for="new_name">new name</label>
+						<input type="text" name="new_name" placeholder=" " value="" required pattern="">
+					</li>
+				</ul>
+				
+				<footer>
+					<button id="cancel" type="button">Cancel</button>
+					<button id="update" type="submit">Update</button>
+				</footer>
+			</form>
+			
+		<script>
+			require( '../js/edit-tag.min' )
+		</script>
+	</body>
+</html>

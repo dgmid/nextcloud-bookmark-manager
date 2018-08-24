@@ -22,3 +22,14 @@ body {
   
 	color: $text;
 }
+
+::placeholder {
+	
+	opacity: .6;
+	transition: opacity .2s;
+}
+
+:focus::placeholder {
+	
+	opacity: 0;
+}

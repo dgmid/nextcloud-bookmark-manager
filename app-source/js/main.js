@@ -88,6 +88,7 @@ function createWindow() {
 	
 	require( './app-menu.min' )
 	require( './context-menu.min' )
+	require( './tags-menu.min' )
 	
 	
 	protocol.registerFileProtocol('nc', (request, callback) => {

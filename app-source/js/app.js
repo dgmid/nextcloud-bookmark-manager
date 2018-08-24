@@ -91,7 +91,7 @@ function getBookmarks() {
 	
 	const getUrl = "/index.php/apps/bookmarks/public/rest/v2/bookmark?page=-1"
 	
-	var getInit = {
+	let getInit = {
 		
 		method: 'GET',
 		headers: {
@@ -118,7 +118,7 @@ function getBookmarks() {
 	
 	}).then(function(message) {
 		
-		var doc = JSON.parse(message)
+		let doc = JSON.parse(message)
 		
 
 		if (doc['status'] == 'error') {
@@ -146,17 +146,17 @@ function getBookmarks() {
 
 function parseBookmarks( array ) {
 	
-	var allTags = []
+	let allTags = []
 	
 	for ( let item of array ) {
 		
-		var taglist = ''
+		let taglist = ''
 		
 		if( item.tags.length < 1 ) { item.tags.push('un-tagged') }
 		
 		for ( let tagitem of item.tags ) {
 		
-			var color
+			let color
 			
 			if( tagitem === 'un-tagged' ) {
 				
@@ -172,7 +172,7 @@ function parseBookmarks( array ) {
 			allTags.push( tagitem )
 		}
 		
-		var created = 	new Date( item.added * 1000 ),
+		let created = 	new Date( item.added * 1000 ),
 			modified = 	new Date( item.lastmodified * 1000 )
 			
 		
@@ -201,8 +201,8 @@ function buildTagList( array ) {
 	//clear the taglists first
 	$('.taglist').html( '' )
 	
-	var compressed = []
-	var copy = array.slice(0)
+	let compressed = [],
+	copy = array.slice(0)
 	
 	for (var i = 0; i < array.length; i++) {
 	
@@ -292,7 +292,7 @@ ipcRenderer.on('delete-bookmark', (event, message) => {
 	
 	if( bookmark ) {
 	
-		var response = dialog.showMessageBox({	
+		let response = dialog.showMessageBox({	
 							message: `Are you sure you want to delete the bookmark ${bookmark[1]}?`,
 							detail: 'This operation is not reversable.',
 							buttons: ['Delete Bookmark','Cancel']
@@ -302,7 +302,7 @@ ipcRenderer.on('delete-bookmark', (event, message) => {
 		
 			const deleteUrl = "/index.php/apps/bookmarks/public/rest/v2/bookmark/"
 			
-			var deleteInit = {
+			let deleteInit = {
 				
 				method: 'DELETE',
 				headers: {
@@ -373,6 +373,70 @@ ipcRenderer.on('edit-bookmark', (event, message) => {
 			'Edit Bookmark Error',
 			'An entry must be selected in order to edit'
 		)
+	}
+})
+
+
+
+//note(@duncanmid): edit tag
+
+ipcRenderer.on('edit-tag', (event, message) => {
+	
+	openModal( 'file://' + __dirname + '/../html/edit-tag.html?tag=' + message, 480, 180, true )
+})
+
+
+
+//note(@duncanmid): delete tag
+
+ipcRenderer.on('delete-tag', (event, message) => {
+	
+	let response = dialog.showMessageBox({	
+							message: `Are you sure you want to delete the tag ${message}?`,
+							detail: 'This operation is not reversable.',
+							buttons: ['Delete Tag','Cancel']
+						})
+	
+	if( response === 0 ) {
+		
+		const deleteUrl = "/index.php/apps/bookmarks/public/rest/v2/"
+		
+		let deleteInit = {
+			
+			method: 'DELETE',
+			headers: {
+				'Authorization': 'Basic ' + btoa( username + ':' + password ),
+				'Content-Type': 'application/json'
+			},
+			mode: 'cors',
+			cache: 'default'
+		}
+		
+		console.log(server + deleteUrl + 'tag?old_name=' + encodeURIComponent(message))
+		
+		fetch(server + deleteUrl + 'tag?old_name=' + encodeURIComponent(message), deleteInit).then(function(response) {
+			
+			if (response.ok) {
+				
+				return response.text()
+			
+			} else {
+				
+				console.log(response.text())
+				
+				dialog.showErrorBox(
+					'Delete Tag Error',
+					`An error occured whilst trying to delete the tag: ${message}`
+				)
+				
+				return response.text()
+			}
+		
+		}).then(function(message) {
+			
+			bookmarkTable.clear().draw()
+			getBookmarks()
+		})
 	}
 })
 
@@ -478,8 +542,19 @@ $(document).ready(function() {
 		$('.filter').removeClass('selected')
 		$(this).addClass('selected')
 		
-		var data = $(this).data('filter')
+		let data = $(this).data('filter')
 		bookmarkTable.columns(6).search(data).draw()
+	
+	})
+	
+	
+	$('#taglist').on('mousedown', '.filter', function(e) {
+		
+		if(e.which == 3) {
+			
+			let data = $(this).data('filter')
+			ipcRenderer.send('show-tags-menu', data )
+		}
 	})
 	
 	
@@ -517,7 +592,7 @@ $(document).ready(function() {
 		
 		if( event.which === 3 ) {
 			
-			var data = bookmarkTable.row( this ).data()
+			let data = bookmarkTable.row( this ).data()
 			
 			if( data ) {
 			
