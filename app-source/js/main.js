@@ -5,6 +5,8 @@ const url = require('url')
 const path = require('path')
 const Store = require('electron-store')
 
+const getAvailableBrowsers = require('detect-installed-browsers').getAvailableBrowsers
+
 let win,
 	loginFlow
 
@@ -36,7 +38,9 @@ let store = new Store({
 			password: ''
 		},
 		
-		tags: null
+		tags: null,
+		
+		browsers: null
 	}
 })
 
@@ -90,6 +94,16 @@ function createWindow() {
 	require( './context-menu.min' )
 	require( './tags-menu.min' )
 	
+	getAvailableBrowsers( {}, ( browserList ) => {
+		
+		let results = []
+		
+		for ( let browser of browserList ) {
+			
+			results.push( { "name": browser.name } )
+			store.set('browsers', results )
+		}
+	})
 	
 	protocol.registerFileProtocol('nc', (request, callback) => {
 		
@@ -124,8 +138,6 @@ ipcMain.on('refresh', (event, message) => {
 
 
 ipcMain.on('reload', (event, message) => {
-	
-	console.log('reload')
 	
 	win.reload()
 })

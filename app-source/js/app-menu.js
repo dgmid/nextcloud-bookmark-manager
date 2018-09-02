@@ -122,13 +122,13 @@ const template = [
 					if (focusedWindow) focusedWindow.reload()
 				}
 			},
-			{
+			/*{
 				label: 'Toggle Developer Tools',
 				accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
 				click (item, focusedWindow) {
 					if (focusedWindow) focusedWindow.webContents.toggleDevTools()
 				}
-			},
+			},*/
 			{
 				type: 'separator'
 			},
@@ -181,7 +181,7 @@ const template = [
 		submenu:
 		[
 			{
-				label: 'midwinter-dg.com',
+				label: 'Nextcloud Bookmark Manager Homepage',
 				click () { require('electron').shell.openExternal('https://www.midwinter-dg.com/mac-apps/nextcloud-bookmark-manager.html') }
 			}
 		]

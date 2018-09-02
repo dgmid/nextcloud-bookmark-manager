@@ -112,7 +112,11 @@ function getBookmarks() {
 		
 		} else {
 			
-			console.log('response ERROR')
+			dialog.showErrorBox(
+				'Server connection error',
+				`there was an error connecting to: ${server}`
+			)
+			
 			console.log( response.error() )
 		}
 	
@@ -123,8 +127,12 @@ function getBookmarks() {
 
 		if (doc['status'] == 'error') {
 			
-			showError(doc['message'])
-		
+			dialog.showErrorBox(
+				'JSON parsing error',
+				`An error occured parsing the bookmarks`
+			)
+			
+			console.log(doc['message'])	
 		
 		} else {
 			
@@ -135,7 +143,11 @@ function getBookmarks() {
 	
 	}).catch(function(error) {
 		
-		console.log('ERROR')
+		dialog.showErrorBox(
+			'Server connection error',
+			`there was an error connecting to: ${server}`
+		)
+		
 		console.log(error)
 	})
 }
@@ -494,12 +506,12 @@ function openModal( url, width, height, resize ) {
 			backgroundColor: '#ECECEC'
 		})
 		
-		modal.loadURL( url )
+	modal.loadURL( url )
+	
+	modal.once('ready-to-show', () => {
 		
-		modal.once('ready-to-show', () => {
-			
-			modal.show()
-		})
+		modal.show()
+	})
 }
 
 
