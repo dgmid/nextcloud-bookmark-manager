@@ -3,12 +3,14 @@
 const {app, BrowserWindow, ipcMain, protocol} = require('electron')
 const url = require('url') 
 const path = require('path')
+const dialog = require('electron').dialog
 const Store = require('electron-store')
 
 const getAvailableBrowsers = require('detect-installed-browsers').getAvailableBrowsers
 
 let win,
-	loginFlow
+	loginFlow,
+	exportProcess
 
 
 
@@ -37,6 +39,8 @@ let store = new Store({
 			username: '',
 			password: ''
 		},
+		
+		exportPath: app.getPath('desktop'),
 		
 		tags: null,
 		
@@ -171,4 +175,41 @@ ipcMain.on('loginflow', (event, message) => {
 		
 		loginFlow.show()
 	})
+})
+
+
+
+app.on('export', (message) => {
+	
+	const exportPath = store.get('exportPath')
+	
+	dialog.showOpenDialog(win, {
+			
+			defaultPath: exportPath + '/',
+			buttonLabel: 'Export Bookmarks',
+			properties: [	'openDirectory',
+							'createDirectory'
+						]
+		},		
+		
+		runExportProcess
+	)
+	
+	
+	function runExportProcess( exportPath ) {
+		
+		if( exportPath ) {
+			
+			store.set('exportPath', exportPath)
+			
+			const exportProcess = new BrowserWindow({ show: false })
+			
+			exportProcess.loadURL(url.format ({ 
+				
+				pathname: path.join(__dirname, '../html/export-bookmarks.html'), 
+				protocol: 'file:', 
+				slashes: true 
+			}))
+		}
+	}
 })

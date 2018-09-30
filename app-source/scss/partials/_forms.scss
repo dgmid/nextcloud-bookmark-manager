@@ -112,10 +112,17 @@ footer {
 	button {
 		
 		padding: 4px 8px;
+		border: 1px solid #C5C3C5;
+		border-bottom-color: #9F9E9F;
+		background: #fff;
+		border-radius: 4px;
 		
 		&:active {
 			
 			color: #fff;
+			border-color: #237DFE;
+			border-bottom-color: #0240DD;
+			background-image: linear-gradient(-180deg, #4A97FD 0%, #0968E5 100%);
 		}
 	}
 }

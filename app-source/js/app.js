@@ -114,7 +114,7 @@ function getBookmarks() {
 			
 			dialog.showErrorBox(
 				'Server connection error',
-				`there was an error connecting to: ${server}`
+				`there was an error connecting to:\n${server}`
 			)
 			
 			console.log( response.error() )
@@ -145,7 +145,7 @@ function getBookmarks() {
 		
 		dialog.showErrorBox(
 			'Server connection error',
-			`there was an error connecting to: ${server}`
+			`there was an error connecting to:\n${server}`
 		)
 		
 		console.log(error)

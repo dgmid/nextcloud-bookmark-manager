@@ -25,14 +25,14 @@ ipc.on('show-tags-menu', ( event, message ) => {
 	
 	const tagsMenuTemplate = [
 		{
-			label: `Edit ${tag}…`,
+			label: `Edit ${tag} Tag…`,
 			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('edit-tag', message) }
 		},
 		{
 			type: 'separator'
 		},
 		{
-			label: `Delete ${tag}…`,
+			label: `Delete ${tag} Tag…`,
 			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('delete-tag', message) }
 		},
 	]

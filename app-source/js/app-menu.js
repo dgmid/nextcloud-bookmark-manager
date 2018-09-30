@@ -23,7 +23,7 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Log in to Nextcloud…',
+				label: 'Log in/out to Nextcloud…',
 				accelerator: 'Command+l',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('open-preferences', 'open-preferences') }
 			
@@ -109,6 +109,14 @@ const template = [
 				accelerator: 'Command+D',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('delete-bookmark', 'delete-bookmark') }
 			},
+			{
+				type: 'separator'
+			},
+			{
+				label: 'Export Bookmarks File…',
+				accelerator: 'Command+Alt+E',
+				click () { app.emit('export', 'export') }
+			}
 		]  
 	},
 	{
@@ -122,13 +130,13 @@ const template = [
 					if (focusedWindow) focusedWindow.reload()
 				}
 			},
-			/*{
+			/* {
 				label: 'Toggle Developer Tools',
 				accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
 				click (item, focusedWindow) {
 					if (focusedWindow) focusedWindow.webContents.toggleDevTools()
 				}
-			},*/
+			}, */
 			{
 				type: 'separator'
 			},
