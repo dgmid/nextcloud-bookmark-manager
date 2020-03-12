@@ -1,21 +1,94 @@
 
-$text: 			#000;
-$background: 	#fff;
-$sidebar: 		#031320;
-$selected: 		#1F89F1;
+:root {
+	
+	// main window
+	
+	--text:					#252525;
+	--dividers:				#e6e6e6;
+	--titlebar:				#454545;
+	--footer:				linear-gradient(#edebed, #d6d4d6) no-repeat border-box;
+	--header-border:		#b5b4b5;
+	--main:					rgba(0,0,0,.15);
+	--overlay:				rgba(255,255,255,.33);
+	--tabs:					#f0f0f0;
+	--tab-dividers:			#cecece;
+	
+	// table
+			
+	--table-text:			#7b7b7b;
+	--table-border:			#a2a2a2;
+	--stripe-odd:			#f5f5f5;
+	--stripe-even:			#fff;
+	--sorted-odd:			#f5f5f5;
+	--sorted-even:			#fff;
+	--select:				#e0e0e0;
+	--select-sort:			#e0e0e0;
+	
+	// sidebar
+	
+	--side-text:			rgba(0,0,0,.85);
+	--side-hover:			rgba(0,0,0,.15);
+	
+	// modal
+	
+	--modal-header:			rgba(0,0,0,.35);
+	--menu:					#ededed;
+	--input-color:			#000000;
+	--input-border:			#cccccc;
+	--input-background:		#ffffff;
+	--select:				#ffffff;
+	--select-border:		#b2b2b2;
+	
+	// buttons
+	
+	--button:				#ffffff;
+	--button-color:			rgba(0,0,0,.85);
+	--button-border:		#c0c0c0;
+}
 
-$tabletext:		#4E4E4E;
-$tableborder: 	#ACAAAC;
-
-$stripeodd: 	#EDF3FE;
-$stripeeven:	#ffffff;
-
-$sortedodd: 	#D9E5FE;
-$sortedeven: 	#EAF1FF;
-
-$select:		#E1EBFE;
-$selectsort:	#D6E3FE;
-
-$form-control:	#cccccc;
-$invalid:		#E14540;
-$valid:			#37CA41;
+[data-theme^="dark"] {
+	
+	// main window
+	
+	--text:					#fff;
+	--dividers:				#000;
+	--titlebar:				#c8c6c6;
+	--footer:				linear-gradient(#4b4b4b, #3d3d3d) no-repeat border-box;
+	--header-border:		#000000;
+	--main:					rgba(0,0,0,.15);
+	--overlay:				rgba(0,0,0,.33);
+	--tabs:					#2A2B2D;
+	--tab-dividers:			#4D5052;
+	
+	// table
+	
+	--table-text:			#9c9c9c;
+	--table-border:			#000;
+	--stripe-odd:			#2e3031;
+	--stripe-even:			#232627;
+	--sorted-odd:			#2e3031;
+	--sorted-even:			#232627;
+	--select:				#454545;
+	--select-sort:			#454545;
+	
+	// sidebar
+	
+	--side-text:			rgba(255,255,255,.85);
+	--side-hover:			rgba(255,255,255,.15);
+	
+	// modal
+	
+	--modal-header:			rgba(255,255,255,.15);
+	--menu: 				#343434;
+	--input-color:			#dcdcdc;
+	--input-border:			#565656;
+	--input-background:		#292724;
+	--select:				#616161;
+	--select-border:		#7f7f7f;
+	
+	// buttons
+	
+	--button:				#616161;
+	--button-color:			rgba(255,255,255,.85);
+	--button-border:		#7f7f7f;
+}

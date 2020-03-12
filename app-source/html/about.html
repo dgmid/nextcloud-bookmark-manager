@@ -3,6 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>About Nextcloud Bookmark Manager</title>
+	<script>
+		require( '../js/theme.min' )
+	</script>
 	<link rel="stylesheet" type="text/css" href="../css/about.min.css" media="all">
 </head>
 <body>
@@ -25,7 +28,7 @@
 			<dd id="license"></dd>
 		</dl>
 		
-		<button id="info" role="button">more info</button>
+		<button id="info" class="ui-button" role="button">more info</button>
 	</main>
 	
 	<script>
@@ -44,7 +47,7 @@
 			
 			$('#info').click(function() {
 				
-				require('electron').shell.openExternal( packageData['homepage'] )
+				require('electron').shell.openExternal( packageData['homepage'] + '?app' )
 			})
 		})
 	</script>

@@ -1,10 +1,11 @@
 'use strict'
 
 const {app, BrowserWindow, ipcMain, protocol} = require('electron')
-const url = require('url') 
-const path = require('path')
-const dialog = require('electron').dialog
-const Store = require('electron-store')
+const url 		= require('url') 
+const path 		= require('path')
+const dialog 	= require('electron').dialog
+const Store 	= require('electron-store')
+const log		= require( 'electron-log' )
 
 const getAvailableBrowsers = require('detect-installed-browsers').getAvailableBrowsers
 
@@ -41,9 +42,7 @@ let store = new Store({
 		},
 		
 		exportPath: app.getPath('desktop'),
-		
 		tags: null,
-		
 		browsers: null
 	}
 })
@@ -56,18 +55,20 @@ function createWindow() {
 	
 	win = new BrowserWindow({
 		show: false,
-		titleBarStyle: 'hidden',
 		x: x,
 		y: y,
 		width: width,
 		height: height,
 		minWidth: 460,
 		minHeight: 396,
-		backgroundColor: '#fff',
+		vibrancy: 'sidebar',
+		webPreferences: {
+			devTools: true,
+			preload: path.join(__dirname, './preload.min.js'),
+			nodeIntegration: true,
+		},
 		icon: path.join(__dirname, '../assets/icon/Icon.icns')
 	})
-	
-	win.setSheetOffset( 24 )
 	
 	function saveWindowBounds() {
 		
@@ -94,9 +95,26 @@ function createWindow() {
 		app.quit()
 	})
 	
-	require( './app-menu.min' )
-	require( './context-menu.min' )
-	require( './tags-menu.min' )
+	win.webContents.on('did-fail-load', () => {
+		
+		log.error( `main window did not load` )
+	})
+	
+	win.webContents.on( 'crashed', ( event, killed ) => {
+		
+		log.info( `main window has crashed:` )
+		log.error( event )
+	})
+	
+	win.on( 'unresponsive', () => {
+		
+		log.info( `main window is not responding…` )
+	})
+	
+	win.on( 'responsive', () => {
+		
+		log.info( `main window is responding` )
+	})
 	
 	getAvailableBrowsers( {}, ( browserList ) => {
 		
@@ -128,6 +146,10 @@ function createWindow() {
 	
 		if (error) console.error('Failed to register protocol')
 	})
+	
+	require( './menu-app.min' )
+	require( './menu-bookmarks.min' )
+	require( './menu-tags.min' )
 }
 
 app.on('ready', createWindow) 
@@ -141,13 +163,6 @@ ipcMain.on('refresh', (event, message) => {
 
 
 
-ipcMain.on('reload', (event, message) => {
-	
-	win.reload()
-})
-
-
-
 ipcMain.on('loginflow', (event, message) => {
 	
 	loginFlow = new BrowserWindow({
@@ -155,14 +170,16 @@ ipcMain.on('loginflow', (event, message) => {
 		width: 800,
 		height: 600,
 		resizable: false,
+		minimizable: false,
+		maximizable: false,
 		show: false,
 		titleBarStyle: 'hidden',
 		backgroundColor: '#0082c9',
 		webPreferences: {
+			devTools: true,
 			nodeIntegration: false
 		}
 	})
-	
 	
 	loginFlow.loadURL( message + '/index.php/login/flow' , {
 		
@@ -170,10 +187,30 @@ ipcMain.on('loginflow', (event, message) => {
 		extraHeaders: 'OCS-APIRequest: true'
 	})
 	
-	
 	loginFlow.once('ready-to-show', () => {
 		
 		loginFlow.show()
+	})
+	
+	loginFlow.webContents.on('did-fail-load', () => {
+		
+		log.error( `loginflow window did not load` )
+	})
+	
+	loginFlow.webContents.on( 'crashed', ( event, killed ) => {
+		
+		log.info( `loginflow window has crashed:` )
+		log.error( event )
+	})
+	
+	loginFlow.on( 'unresponsive', () => {
+		
+		log.info( `loginflow window is not responding…` )
+	})
+	
+	loginFlow.on( 'responsive', () => {
+		
+		log.info( `loginflow window is responding` )
 	})
 })
 
@@ -212,4 +249,11 @@ app.on('export', (message) => {
 			}))
 		}
 	}
+})
+
+
+ipcMain.on('error-in-render', function(event, message) {
+	
+	log.error(`exception in render process:`)
+	log.info (message)
 })

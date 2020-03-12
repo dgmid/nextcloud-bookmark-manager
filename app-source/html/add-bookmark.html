@@ -3,6 +3,9 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Nextcloud Bookmark Manager - Add Bookmark</title>
+		<script>
+			require( '../js/theme.min' )
+		</script>
 		<link rel="stylesheet" type="text/css" href="../css/modal.min.css" media="all">
 	</head>
 	
@@ -16,15 +19,15 @@
 				<ul id="fields">
 					<li>
 						<label for="url">url</label>
-						<input type="url" name="url" placeholder=" " required pattern="https?://.+" title="this field is required">
+						<input type="url" id="url" class="mousetrap" name="url" placeholder=" " required pattern="https?://.+" title="this field is required" autofocus>
 					</li>
 					<li>
 						<label for="title">title</label>
-						<input type="text" name="title" placeholder=" " title="this field is required">
+						<input type="text" id="title" class="mousetrap" name="title" placeholder=" " title="this field is required">
 					</li>
 					<li>
 						<label for="description">description</label>
-						<textarea name="description" placeholder=" "></textarea>
+						<textarea name="description" id="description" class="mousetrap" placeholder=" "></textarea>
 					</li>
 					<li>
 						<label for="tags">tags</label>
@@ -34,12 +37,12 @@
 				</ul>
 				
 				<footer>
-					<button id="cancel" type="button">Cancel</button>
-					<button id="update" type="submit">Add Bookmark</button>
+					<button id="cancel" class="ui-button" type="button">Cancel</button>
+					<button id="update" class="ui-button" type="submit">Add Bookmark</button>
 				</footer>
 			</form>		
 		<script>
-			require( '../js/add-bookmark.min' )
+			require( '../js/modal-add-bookmark.min' )
 		</script>
 	</body>
 </html>

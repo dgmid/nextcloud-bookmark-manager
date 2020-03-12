@@ -3,39 +3,42 @@
 <head>
 	<meta charset="utf-8">
 	<title>Nextcloud Bookmark Manager</title>
+	<script>
+		require( '../js/theme.min' )
+	</script>
 	<link rel="stylesheet" type="text/css" href="../css/app.min.css" media="all">
 </head>
+
 <body>
 	<main>
-		<header>
-			<h1>Nextcloud Bookmark Manager</h1>
-		</header>
 		<table id="bookmarks" class="stripe hover compact order-column">
 			<thead>
-		        <tr>
-			        <th>ID</th>
-					<th>title</th>
-		            <th>description</th>
-		            <th>url</th>
-		            <th>created</th>
-		            <th>modified</th>
-		            <th>tags</th>
-		        </tr>
-		    </thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th>Description</th>
+					<th>Url</th>
+					<th>Created</th>
+					<th>Modified</th>
+					<th>Tags</th>
+				</tr>
+			</thead>
 		</table>
-		
-		<button id="add-bookmark">Add New Bookmark</button>
 	</main>
 	
 	<aside>
-		<header></header>
-		<span class="list-title">Tags</span>
-		<div class="sidebar-scroll">
-			<dl id="taglist" class="taglist">
+		<nav>
+			<dl id="filter-all" class="taglist">
 			</dl>
-			<dl id="taglist-extras" class="taglist">
-			</dl>
-		</div>
+		</nav>
+		
+		<nav>
+			<span class="list-title">Tags</span>
+			<div class="sidebar-scroll">
+				<dl id="taglist" class="taglist"></dl>
+				<dl id="taglist-extras" class="taglist"></dl>
+			</div>
+		</nav>
 		
 		<dl id="column-list">
 			<dt>Columns</dt>
@@ -44,7 +47,21 @@
 			<dd><label><input id="created" class="col-toggle" type="checkbox" data-column="4" /> Created</label></dd>
 			<dd><label><input id="modified" class="col-toggle" type="checkbox" data-column="5" /> Modified</label></dd>
 		</dl>
+		
+		<div class="search-field">
+			<input id="search" placeholder="search">
+			<button id="clear"></button>
+		</div>
 	</aside>
+	
+	<footer>
+		<button id="add-bookmark" class="ui-button">
+			<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11">
+				<polygon fill-rule="evenodd" points="23 6 23 10.999 28 11 28 12 23 11.999 23 17 22 17 22 11.999 17 12 17 11 22 10.999 22 6" transform="translate(-17 -6)"/>
+			</svg>
+			Add New Bookmark
+		</button>
+	</footer>
 	
 	<script>
 		require( '../js/app.min' )

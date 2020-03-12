@@ -1,13 +1,15 @@
 body.resize {
 	
-	background: url('#{$resize}') no-repeat right bottom;
+	background-image: var(--resize);
+	background-repeat: no-repeat;
+	background-position: right bottom;
 }
 
 header {
 	
 	padding: 10px 40px;
-	background: lighten($sidebar, 10%);
-	color: $background;
+	background-color: var(--modal-header);
+	color: #fff;
 	font-size: 13px;
 	line-height: 18px;
 	text-align: center;
@@ -46,6 +48,7 @@ form {
 			
 			label {
 				
+				color: var(--text);
 				display: block;
 				float: left;
 				width: 80px;
@@ -67,8 +70,9 @@ form {
 				padding-left: 10px;
 				padding-right: 28px;
 				width: calc(100% - 80px);
-				border: 1px solid $form-control;
-				background-color: #fff;
+				color: var(--input-color);
+				background-color: var(--input-background);
+				border: 1px solid var(--input-border);
 				background-position: right 6px top 6px;
 				background-repeat: no-repeat;
 				
@@ -78,12 +82,12 @@ form {
 				
 					&:invalid:not(:placeholder-shown) {
 						
-						background-image: url('#{$error}');
+						background-image: var(--error);
 					}
 					
 					&:valid {
 						
-						background-image: url('#{$check}');
+						background-image: var(--check);
 					}
 				}
 			}
@@ -99,7 +103,13 @@ form {
 				resize: none;
 			}
 			
-			
+			.select2-container--custom .select2-selection {
+				
+				box-shadow: none;
+				color: var(--input-color);
+				background-color: var(--input-background);
+				border: 1px solid var(--input-border);
+			}
 		}
 	}
 }
@@ -124,5 +134,13 @@ footer {
 			border-bottom-color: #0240DD;
 			background-image: linear-gradient(-180deg, #4A97FD 0%, #0968E5 100%);
 		}
+	}
+}
+
+[data-theme="dark"] {
+	
+	header {
+		
+		//background-color: var(--accent-dark);
 	}
 }

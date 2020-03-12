@@ -7,13 +7,10 @@ main {
 	top: 0;
 	left: 200px;
 	right: 0;
-	bottom: 0;
+	bottom: 36px;
+	z-index: 1;
 	
-	/* note(@duncanmid): fake mac os window chrome */
-  	
-  	background: linear-gradient(#EDEBED, #D6D4D6) no-repeat border-box, linear-gradient(#EDEBED, #D6D4D6) no-repeat border-box;
-				background-size: 100% 88px, 100% 36px;
-				background-position: left top, left bottom;
+	background: var(--main);
 				
 	h1 {
 		
@@ -22,50 +19,48 @@ main {
 		font-weight: normal;
 		line-height: 24px;
 	}
+	
+	#loader {
+		
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: var(--overlay);
+		z-index: 1;
+		
+		&::after {
+			
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			
+			background: var(--loader) no-repeat center center;
+		}
+	}
 }
 
 aside {
 	
+	padding-top: 28px;
 	position: fixed;
 	top: 0;
 	left: 0;
 	bottom: 0;
-	
 	width: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	
-	background-color: $sidebar;
-	color: rgba($background, .85);
+	color: var(--side-text);
+	border-right: 1px solid var(--dividers);
 	
-	.sidebar-scroll {
-		
-		overflow-y: scroll;
-		position: absolute;
-		top: 109px;
-		left: 0;
-		right: 0;
-		bottom: 160px;
-		
-		
-		/* note(@duncanmid): scroll shadows by @kizmarh and @leaverou */
-		
-		background:
-			linear-gradient($sidebar 30%, rgba(255,255,255,0)),
-			linear-gradient(rgba(255,255,255,0), $sidebar 70%) 0 100%,
-			radial-gradient(farthest-side at 50% 0, rgba(255,255,255,.2), rgba(0,0,0,0)),
-			radial-gradient(farthest-side at 50% 100%, rgba(255,255,255,.2), rgba(0,0,0,0)) 0 100%;
-		
-		background:
-			linear-gradient($sidebar 30%, rgba(255,255,255,0)),
-			linear-gradient(rgba(255,255,255,0), $sidebar 70%) 0 100%,
-			radial-gradient(farthest-side at 50% 0, rgba(255,255,255,.2), rgba(0,0,0,0)),
-			radial-gradient(farthest-side at 50% 100%, rgba(255,255,255,.2), rgba(0,0,0,0)) 0 100%;
-		
-		background-repeat: no-repeat;
-		background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
-		
-		background-attachment: local, local, scroll, scroll;
-		
-	}
+	.sidebar-scroll { overflow-y: scroll; }
 	
 	.list-title {
 		
@@ -74,20 +69,17 @@ aside {
 		line-height: 22px;
 		padding: 0 20px 0 15px;
 		font-weight: 500;
-		
-		position: absolute;
-		top: 87px;
 	}
 	
 	dl {
 		
 		font-size: 12px;
 		line-height: 22px;
+		padding: 0 10px;
 		
-		&#taglist-extras {
-			
-			margin-top: 11px;
-		}
+		&#taglist-extras { margin-top: 11px; }
+		
+		&#folderlist-extras { margin-bottom: 11px;}
 		
 		dt {
 			
@@ -102,10 +94,13 @@ aside {
 			
 			a {
 				
-				display: block;
-				padding: 0 20px;
-				color: rgba($background, .85);
+				display: flex;
+				align-items: center;
+				padding: 0 10px;
+				
+				color: var(--side-text);
 				text-decoration: none;
+				border-radius: 6px;
 				
 				transition: all .15s ease-in-out;
 				
@@ -114,25 +109,54 @@ aside {
 				
 				&:hover {
 					
-					background: rgba($background, .2);
+					background: var(--side-hover);
+				}
+				
+				.filter-icon {
+					
+					width: 25px;
+					height: 22px;
+					margin-right: 5px;
+					
+					background-color: var(--side-text);
+					
+					&.icon-home { mask: var(--icon-home) no-repeat center right; }
+					&.icon-untagged { mask: var(--icon-untagged) no-repeat center right 3px; }
+				}
+				
+				.filter-name {
+					
+					flex-grow: 2;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					padding-right: 5px;
 				}
 				
 				&.selected {
 					
-					background: $selected;
-					color: $background;
-				}
-				
-				.tag-count {
+					background: var(--accent-light);
+					color: #fff;
 					
-					display: inline-block;
-					float: right;
+					.filter-icon { background-color: #fff; }
 				}
 			}
 			
 			input[type='checkbox'] {
 				
-				margin-left: 20px;
+				margin-left: 10px;
+			}
+		}
+		
+		&#filter-all,
+		&#taglist-extras {
+			
+			dd {
+				
+				a {
+					
+					padding-left: 0;
+				}
 			}
 		}
 	}
@@ -140,20 +164,114 @@ aside {
 	#column-list {
 		
 		width: 200px;
-		position: absolute;
-		left: 0;
-		bottom: 36px;
 	}
 }
 
-main,
 aside {
 	
-	header {
+	.search-field {
 		
-		height: 32px;
-		-webkit-app-region: drag;
+		height: 40px;
+		padding: 8px 10px;
+		position: relative;
+		
+		#search {
+			
+			color: var(--text-color);
+			width: 100%;
+			height: 22px;
+			font-size: 13px;
+			padding: 0 24px;
+			background: #ffffff var(--icon-search) no-repeat left 5px center;
+			border: 1px solid #b9b9b9;
+			border-radius: 3px;
+			box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+		}
+		
+		#clear {
+			
+			display: none;
+			width: 20px;
+			height: 20px;
+			background: var(--icon-clear) no-repeat center;
+			border: none;
+			outline: none;
+			position: absolute;
+			top: 9px;
+			right: 11px;
+		}
 	}
+}
+
+footer {
+	
+	background: var(--footer);
+	position: absolute;
+	left: 200px;
+	right: 0;
+	bottom: 0;
+	height: 35px;
+	z-index: 0;
+	
+	padding: 0 20px;
+	
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-start;
+	align-items: center;
+	
+	#add-bookmark {
+		
+		height: 23px;
+		
+		svg {
+			
+			polygon { fill: var(--button-color); }
+		}
+		
+		&:focus,
+		&:active {
+			
+			svg {
+				
+				polygon { fill: #fff; }
+			}
+		}
+	}
+	
+	#update,
+	#dev {
+		
+		white-space: nowrap;
+		height: 15px;
+		font-size: 11px;
+		font-weight: 500;
+		color: #fff;
+		border: 0;
+		border-radius: 3px;
+		margin-right: 10px;
+	}
+	
+	#update {
+		
+		
+		background-color: #6236FF;
+		
+		&:active { background-color: #9164FF; }
+		&:focus { outline: none; }
+	}
+	
+	#dev {
+		
+		padding: 1px 6px;
+		margin-top: 1px;
+		background-color: #18bf64;
+		
+		&.α { background-color: #fb434a; }
+		&.β { background-color: #007cff; }
+	}
+	
+	.fadein { display: none; }
 }
 
 thead {
@@ -164,12 +282,39 @@ thead {
 .tag {
 	
 	display: inline-block;
-	width: 10px;
-	height: 10px;
+	width: 12px;
+	height: 12px;
+	border: 1px solid transparent;
 	border-radius: 50%;
 	overflow: hidden;
 	text-indent: -1000px;
 	margin: 0 2px;
+}
+
+aside {
+	
+	.tag {
+		
+		width: 10px;
+		height: 10px;
+		margin-right: 10px;
+	 }
+}
+
+.selected {
+	
+	.tag {
+		
+		border-color: #fff;
+		
+		&.untagged {
+			
+			border: 0;
+			border-radius: 0;
+			background-color: #fff;
+			mask: var(--icon-untagged) no-repeat center center;
+		}
+	}
 }
 
 #bookmarks {
@@ -194,24 +339,52 @@ thead {
 }
 
 .padded-left { padding-left: 20px !important; }
-.padded-right { padding-right: 20px !important; padding-left: 20px !important; }
 
-#add-bookmark {
+.padded-right {
 	
-	position: absolute;
-	right: 20px;
-	bottom: 7px;
-	padding: 4px 8px;
-	border: 1px solid #C5C3C5;
-	border-bottom-color: #9F9E9F;
-	background: #fff;
-	border-radius: 4px;
+	padding-right: 20px !important;
+	padding-left: 20px !important;
+}
+
+td.padded-right {
 	
-	&:active {
+	display: flex;
+	justify-content: flex-end;
+}
+
+[data-theme="dark"] {
+	
+	aside {
 		
-		color: #fff;
-		border-color: #237DFE;
-		border-bottom-color: #0240DD;
-		background-image: linear-gradient(-180deg, #4A97FD 0%, #0968E5 100%);
+		.search-field {
+			
+			#search {
+				
+				background-color: rgba(255,255,255,.1);
+				border-color: rgba(255,255,255,.1);
+				box-shadow: inset 0 2px 2px rgba(0,0,0,0.1);
+			}
+		}
+	}
+	
+	.tag {
+		
+		filter:	invert(100%);
+	}
+	
+	.selected {
+		
+		.tag {
+			
+			border-color: #000;
+			
+			&.untagged {
+				
+				border: 0;
+				border-radius: 0;
+				background-color: #000;
+				mask: var(--icon-untagged) no-repeat center center;
+			}
+		}
 	}
 }

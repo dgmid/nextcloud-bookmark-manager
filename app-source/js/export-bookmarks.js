@@ -40,7 +40,8 @@ function getBookmarks() {
 			'Content-Type': 'application/json'
 		},
 		mode: 'cors',
-		cache: 'default'
+		cache: 'no-cache',
+		credentials: 'omit'
 	}
 	
 	

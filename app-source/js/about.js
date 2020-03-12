@@ -22,8 +22,12 @@ exports.createAbout = () => {
 			minimizable: false,
 			maximizable: false,
 			alwaysOnTop: true,
-			backgroundColor: '#1C283B',
-			webPreferences: { devTools: false }
+			vibrancy: 'window',
+			webPreferences: {
+				devTools: true,
+				preload: path.join(__dirname, './preload.min.js'),
+				nodeIntegration: true,
+			}
 		})
 		
 		about.loadURL(url.format ({ 

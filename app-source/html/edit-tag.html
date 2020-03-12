@@ -3,10 +3,13 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Nextcloud Bookmark Manager - Edit Tag</title>
+		<script>
+			require( '../js/theme.min' )
+		</script>
 		<link rel="stylesheet" type="text/css" href="../css/modal.min.css" media="all">
 	</head>
 	
-	<body class="resize">
+	<body>
 		<header>
 			Edit tag:&nbsp;
 		</header>
@@ -17,18 +20,18 @@
 				<ul id="fields">
 					<li>
 						<label for="new_name">new name</label>
-						<input type="text" name="new_name" placeholder=" " value="" required pattern="">
+						<input type="text" id="new_name" name="new_name" placeholder=" " value="" required pattern="">
 					</li>
 				</ul>
 				
 				<footer>
-					<button id="cancel" type="button">Cancel</button>
-					<button id="update" type="submit">Update</button>
+					<button id="cancel" class="ui-button" type="button">Cancel</button>
+					<button id="update" class="ui-button" type="submit">Update</button>
 				</footer>
 			</form>
 			
 		<script>
-			require( '../js/edit-tag.min' )
+			require( '../js/modal-edit-tag.min' )
 		</script>
 	</body>
 </html>

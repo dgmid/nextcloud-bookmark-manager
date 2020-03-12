@@ -8,7 +8,7 @@ const $ = require( 'jquery' )
 
 
 
-//note(@duncanmid): open loginflow webview
+//note(dgmid): open loginflow webview
 
 function loginFlow( theserver ) {
 	

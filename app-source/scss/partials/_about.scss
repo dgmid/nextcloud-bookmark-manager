@@ -3,14 +3,12 @@ body {
 	
 	text-align: center;
 	padding: 0;
-	background: $background;
 	
 	header {
 		
 		height: 90px;
 		padding-top: 30px;
 		-webkit-app-region: drag;
-		background: $sidebar;
 		
 		figure {
 			
@@ -26,23 +24,21 @@ body {
 		
 		padding: 80px 20px 0;
 		height: 270px;
-		background-image: linear-gradient(-180deg, #EDEBED 0%, #D6D4D6 100%);
 		
 		h1 {
 			
 			font-size: 15px;
 			margin-bottom: 20px;
-			color: $text;
+			color: var(--text);
 			font-weight: 500;
 		}
 		
 		p {
 			
 			font-size: 13px;
-			font-weight: 200;
 			width: 160px;
 			margin: 0 auto 15px;
-			color: $text;
+			color: var(--text);
 		}
 		
 		dl {
@@ -54,7 +50,7 @@ body {
 			dt, dd {
 				
 				display: inline;
-				color: $text;
+				color: var(--text);
 			}
 			
 			dt {
