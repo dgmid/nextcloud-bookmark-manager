@@ -331,14 +331,17 @@ ipcRenderer.on('open-login', (event, message) => {
 
 ipcRenderer.on('refresh-bookmarks', (event, message) => {
 	
-	maintable.bookmarkTable.clear().draw()
+	if( !$('#loader').length ) {
 	
-	loader( 'add' )
-	
-	fetch.bookmarksApi( 'all', '', '', function( array ) {
+		maintable.bookmarkTable.clear().draw()
 		
-		parseBookmarks( array )
-	})
+		loader( 'add' )
+		
+		fetch.bookmarksApi( 'all', '', '', function( array ) {
+			
+			parseBookmarks( array )
+		})
+	}
 })
 
 
@@ -448,7 +451,7 @@ function loader( string  ) {
 	
 	if( string === 'add'  ) {
 		
-		$('main .loader').remove()
+		$('main #loader').remove()
 		$('main').append('<div id="loader"></div>')
 	
 	} else {
