@@ -5,6 +5,8 @@ const ipc 			= require( 'electron' ).ipcRenderer
 const dialog 		= remote.dialog
 const Store 		= require( 'electron-store' )
 const store 		= new Store()
+const Mousetrap 	= require( 'mousetrap' )
+
 const $ 			= require( 'jquery' )
 
 const fetch			= require( './fetch.min' )
@@ -12,6 +14,14 @@ const serialize		= require( './serialize.min' )
 
 const 	urlParams = new URLSearchParams( location.search ),
 		theTag = urlParams.get('tag')
+
+
+
+//note(dgmid): register kbd shortcut
+Mousetrap.bind('command+.', function() {
+	
+	closeModal()
+})
 
 
 

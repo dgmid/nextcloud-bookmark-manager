@@ -369,7 +369,7 @@ ipcRenderer.on('reload', (event, message) => {
 	
 	maintable.bookmarkTable.clear().draw()
 	
-	fetch.getAllBookmarks( function( array ) {
+	fetch.bookmarksApi( 'all', '', '', function( array ) {
 		
 		parseBookmarks( array )
 	})

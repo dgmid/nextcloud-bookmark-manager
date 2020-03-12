@@ -1,11 +1,12 @@
 'use strict'
 
-const remote = require( 'electron' ).remote
+const remote 		= require( 'electron' ).remote
 const {ipcRenderer} = require( 'electron' )
-const Store = require( 'electron-store' )
-const store = new Store()
+const Store 		= require( 'electron-store' )
+const store 		= new Store()
+const Mousetrap 	= require( 'mousetrap' )
 
-const $ = require( 'jquery' )
+const $ 			= require( 'jquery' )
 
 
 
@@ -16,6 +17,14 @@ const 	server 		= store.get( 'loginCredentials.server' ),
 		password 	= store.get( 'loginCredentials.password' )
 
 if( server ) { $('input[name="server"]').val( server ) }
+
+
+
+//note(dgmid): register kbd shortcut
+Mousetrap.bind('command+.', function() {
+	
+	closeModal()
+})
 
 
 

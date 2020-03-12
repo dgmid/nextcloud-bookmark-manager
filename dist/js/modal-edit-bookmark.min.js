@@ -6,6 +6,7 @@ const dialog 		= remote.dialog
 
 const Store 		= require( 'electron-store' )
 const store 		= new Store()
+const Mousetrap 	= require( 'mousetrap' )
 
 const $ 			= require( 'jquery' )
 require('select2')($)
@@ -16,6 +17,15 @@ const serialize		= require( './serialize.min' )
 
 const 	urlParams = new URLSearchParams( location.search ),
 		theId = urlParams.get('id')
+
+
+
+//note(dgmid): register kbd shortcut
+Mousetrap.bind('command+.', function() {
+	
+	closeModal()
+})
+
 
 
 //note(dgmid): populate form

@@ -131,7 +131,7 @@ const template = [
 			{
 				label: 'Reload Bookmarks',
 				accelerator: 'Cmd+R',
-				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('reload', 'reload') }
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('refresh-bookmarks', 'refresh-bookmarks') }
 			},
 			//@exclude
 			{
