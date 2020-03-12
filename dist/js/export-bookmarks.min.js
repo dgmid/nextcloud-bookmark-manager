@@ -28,6 +28,15 @@ let bookmarks =
 
 
 
+//note(dgmid): log exceptions
+
+window.onerror = function( error, url, line ) {
+	
+	ipcRenderer.send( 'error-in-render', {error, url, line} )
+}
+
+
+
 function getBookmarks() {
 	
 	const getUrl = "/index.php/apps/bookmarks/public/rest/v2/bookmark?page=-1"

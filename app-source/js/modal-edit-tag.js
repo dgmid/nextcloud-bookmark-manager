@@ -17,6 +17,15 @@ const 	urlParams = new URLSearchParams( location.search ),
 
 
 
+//note(dgmid): log exceptions
+
+window.onerror = function( error, url, line ) {
+	
+	ipcRenderer.send( 'error-in-render', {error, url, line} )
+}
+
+
+
 //note(dgmid): register kbd shortcut
 Mousetrap.bind('command+.', function() {
 	

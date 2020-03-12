@@ -10,6 +10,15 @@ const $ 			= require( 'jquery' )
 
 
 
+//note(dgmid): log exceptions
+
+window.onerror = function( error, url, line ) {
+	
+	ipcRenderer.send( 'error-in-render', {error, url, line} )
+}
+
+
+
 //note(dgmid): get login credentials
 
 const 	server 		= store.get( 'loginCredentials.server' ),
