@@ -15,9 +15,8 @@ exports.createAbout = () => {
 	
 		about = new BrowserWindow({
 			show: false,
-			titleBarStyle: 'hidden',
 			width: 340,
-			height: 360,
+			height: 370,
 			resizable: false,
 			minimizable: false,
 			maximizable: false,

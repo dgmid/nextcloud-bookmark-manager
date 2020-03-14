@@ -6,9 +6,8 @@ body {
 	
 	header {
 		
-		height: 90px;
-		padding-top: 30px;
-		-webkit-app-region: drag;
+		height: 70px;
+		padding-top: 10px;
 		
 		figure {
 			
@@ -53,10 +52,7 @@ body {
 				color: var(--text);
 			}
 			
-			dt {
-				
-				padding-right: 5px;
-			}
+			dt { padding-right: 5px; }
 			
 			dd::after {
 					
@@ -65,5 +61,7 @@ body {
 				white-space: pre-line;
 			}
 		}
+		
+		button.ui-button { font-size: 11px; }
 	}
 }
