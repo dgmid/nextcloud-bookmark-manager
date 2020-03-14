@@ -1,18 +1,21 @@
-# ![icon](https://user-images.githubusercontent.com/1267580/41953184-826301cc-79d4-11e8-8dd2-5d31a3701517.png) Nextcloud Bookmark Manager
+# Nextcloud Bookmark Manager
+
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dgmid/nextcloud-bookmark-manager?label=latest%20release&logo=github)](https://github.com/dgmid/nextcloud-bookmark-manager/releases/latest) ![GitHub All Releases](https://img.shields.io/github/downloads/dgmid/nextcloud-bookmark-manager/total)
 
 A Mac App for accessing and managing Nextcloud bookmarks.
 
-![nextcloud-bookmark-manager](https://user-images.githubusercontent.com/1267580/41953185-82ead2c8-79d4-11e8-85c8-f10a1c795fd3.png)
+![nextcloud-bookmark-manager](https://user-images.githubusercontent.com/1267580/76679066-b1991980-65dd-11ea-9f57-a38d29a6be07.png)
 
 ## Requirements
 
 [node.js / npm](https://www.npmjs.com/get-npm)
+A server running [Nextcloud](https://nextcloud.com/) with the [Bookmarks](https://github.com/nextcloud/bookmarks) app installed
 
-To modify a/o build this project you will need to install electron and electron packager
+To build this project you will need to install **electron packager** and **asar**
 
 ```shell
-npm install electron -g --save-exact
-npm install electron-packager -g
+npm install -g electron-packager
+npm install -g asar
 ```
 
 ## Usage
@@ -29,12 +32,7 @@ gulp watch
 
 To test the app run:
 ```shell
-electron .
-```
-
-To update all files prior to packaging run:
-```shell
-gulp build
+npm start
 ```
 
 To package the final app run:
@@ -42,9 +40,3 @@ To package the final app run:
 npm run package
 ```
 The packaged app will be written to `build/Nextcloud Bookmark Manager-darwin-x64/` in the project directory.
-
-**Note**: packaging the app runs `npm prune -production` and so you will need to run `npm install` again before making any further modifications.
-
-## License
-
-**Nextcloud Bookmark Manager** is released under the MIT Licence
