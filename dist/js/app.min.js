@@ -564,10 +564,19 @@ $(document).ready(function() {
 			
 			if( !$('#add-bookmark, .col-toggle').is(":focus") ) {
 				
-				const data = maintable.bookmarkTable.row(cell.index().row).data()
+				let data = maintable.bookmarkTable.row(cell.index().row).data()
 				shell.openExternal(data[3])
 			}
 		}
+	})
+	
+	
+	//note(dgmid): open url on double-click
+	
+	$('#bookmarks tbody').on('dblclick', 'tr', function() {
+		
+		let data = maintable.bookmarkTable.row(this).data()
+		shell.openExternal(data[3])
 	})
 	
 	

@@ -6,7 +6,7 @@
 	--text:					#252525;
 	--dividers:				#e6e6e6;
 	--titlebar:				#454545;
-	--footer:				linear-gradient(#edebed, #d6d4d6) no-repeat border-box;
+	--footer:				linear-gradient(#e4e4e4, #cdcdcd) no-repeat border-box;
 	--header-border:		#b5b4b5;
 	--main:					rgba(0,0,0,.15);
 	--overlay:				rgba(255,255,255,.15);
@@ -16,10 +16,10 @@
 	// table
 			
 	--table-text:			#7b7b7b;
-	--table-border:			#a2a2a2;
-	--stripe-odd:			#f5f5f5;
+	--table-border:			#c1c1c1;
+	--stripe-odd:			#f4f5f5;
 	--stripe-even:			#fff;
-	--sorted-odd:			#f5f5f5;
+	--sorted-odd:			#f4f5f5;
 	--sorted-even:			#fff;
 	--select:				#e0e0e0;
 	--select-sort:			#e0e0e0;
@@ -31,7 +31,7 @@
 	
 	// modal
 	
-	--modal-header:			rgba(0,0,0,.35);
+	--modal-header:			rgba(0,0,0,.15);
 	--menu:					#ededed;
 	--input-color:			#000000;
 	--input-border:			#cccccc;
@@ -53,23 +53,23 @@
 	--text:					#fff;
 	--dividers:				#000;
 	--titlebar:				#c8c6c6;
-	--footer:				linear-gradient(#4b4b4b, #3d3d3d) no-repeat border-box;
+	--footer:				linear-gradient(#484c58, #3b3f48) no-repeat border-box;
 	--header-border:		#000000;
 	--main:					rgba(0,0,0,.15);
 	--overlay:				rgba(0,0,0,.15);
-	--tabs:					#2A2B2D;
-	--tab-dividers:			#4D5052;
+	--tabs:					#313545;
+	--tab-dividers:			#535767;
 	
 	// table
 	
 	--table-text:			#9c9c9c;
 	--table-border:			#000;
-	--stripe-odd:			#2e3031;
-	--stripe-even:			#232627;
-	--sorted-odd:			#2e3031;
-	--sorted-even:			#232627;
-	--select:				#454545;
-	--select-sort:			#454545;
+	--stripe-odd:			#2e303d;
+	--stripe-even:			#232633;
+	--sorted-odd:			#2e303d;
+	--sorted-even:			#232633;
+	--select:				#3F4151;
+	--select-sort:			#3F4151;
 	
 	// sidebar
 	
@@ -78,17 +78,17 @@
 	
 	// modal
 	
-	--modal-header:			rgba(255,255,255,.15);
-	--menu: 				#343434;
+	--modal-header:			rgba(255,255,255,.1);
+	--menu: 				#222532;
 	--input-color:			#dcdcdc;
 	--input-border:			#565656;
-	--input-background:		#292724;
+	--input-background:		#222532;
 	--select:				#616161;
 	--select-border:		#7f7f7f;
 	
 	// buttons
 	
-	--button:				#616161;
+	--button:				#676973;
 	--button-color:			rgba(255,255,255,.85);
 	--button-border:		#7f7f7f;
 }
