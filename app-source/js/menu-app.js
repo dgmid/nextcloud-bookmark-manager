@@ -81,6 +81,14 @@ const template = [
 				type: 'separator'
 			},
 			{
+				label: 'Sync all Bookmarks',
+				accelerator: 'Cmd+R',
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('refresh-bookmarks', 'refresh-bookmarks') }
+			},
+			{
+				type: 'separator'
+			},
+			{
 				label: 'Export Bookmarks File…',
 				accelerator: 'Command+Alt+E',
 				click () { app.emit('export', 'export') }
@@ -128,11 +136,6 @@ const template = [
 		label: 'View',
 		submenu:
 		[
-			{
-				label: 'Reload Bookmarks',
-				accelerator: 'Cmd+R',
-				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('refresh-bookmarks', 'refresh-bookmarks') }
-			},
 			//@exclude
 			{
 				label: 'Toggle Developer Tools',
