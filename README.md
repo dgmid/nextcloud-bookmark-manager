@@ -4,7 +4,7 @@
 
 A Mac App for accessing and managing Nextcloud bookmarks.
 
-![nextcloud-bookmark-manager](https://user-images.githubusercontent.com/1267580/76679066-b1991980-65dd-11ea-9f57-a38d29a6be07.png)
+![nextcloud-bookmark-manager](https://user-images.githubusercontent.com/1267580/76684687-49aef700-660e-11ea-9d79-95791af8275d.png)
 
 ## Requirements
 

@@ -1,6 +1,6 @@
 {
   "name": "nextcloud-bookmark-manager",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0-beta",
   "productName": "Nextcloud Bookmark Manager",
   "description": "Access and manage your Nextcloud bookmarks on the Mac",
   "main": "dist/js/main.min.js",
