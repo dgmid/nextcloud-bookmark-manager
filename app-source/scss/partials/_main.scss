@@ -27,40 +27,50 @@ main {
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: var(--overlay);
-		z-index: 1;
-		
-		&::after {
-			
-			content: '';
-			display: block;
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			
-			background: var(--loader) no-repeat center center;
-		}
+		z-index: 1;	
+		background: var(--loader) no-repeat center center;
 	}
 }
 
 aside {
 	
-	padding-top: 28px;
 	position: fixed;
 	top: 0;
 	left: 0;
 	bottom: 0;
 	width: 200px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
 	
 	color: var(--side-text);
 	border-right: 1px solid var(--dividers);
 	
-	.sidebar-scroll { overflow-y: scroll; }
+	#sidebar { display: none; }
+	
+	#sidebar-all {
+		
+		position: absolute;
+		top: 28px;
+		left: 0;
+		right: 0;
+	}
+	
+	#sidebar-tags {
+		
+		position: absolute;
+		top: 70px;
+		left: 0;
+		right: 0;
+		bottom: 180px;
+	}
+	
+	.sidebar-scroll {
+		
+		overflow-y: scroll;
+		position: absolute;
+		top: 60px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
 	
 	.list-title {
 		
@@ -77,9 +87,13 @@ aside {
 		line-height: 22px;
 		padding: 0 10px;
 		
-		&#taglist-extras { margin-top: 11px; }
-		
-		&#folderlist-extras { margin-bottom: 11px;}
+		&#taglist-extras {
+			
+			margin-top: 11px;
+			top: 20px;
+			left: 0;
+			right: 0;
+		}
 		
 		dt {
 			
@@ -164,6 +178,10 @@ aside {
 	#column-list {
 		
 		width: 200px;
+		position: absolute;
+		bottom: 50px;
+		left: 0;
+		right: 0;
 	}
 }
 
@@ -173,7 +191,10 @@ aside {
 		
 		height: 40px;
 		padding: 8px 10px;
-		position: relative;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
 		
 		#search {
 			

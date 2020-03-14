@@ -22,7 +22,7 @@ exports.createAbout = () => {
 			minimizable: false,
 			maximizable: false,
 			alwaysOnTop: true,
-			vibrancy: 'window',
+			vibrancy: 'under-window',
 			webPreferences: {
 				devTools: true,
 				preload: path.join(__dirname, './preload.min.js'),

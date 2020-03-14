@@ -187,6 +187,7 @@ function buildTagList( array ) {
 			</a>
 		</dd>` )
 	
+	$('#sidebar').fadeIn( 400 )
 	loader( 'remove' )
 }
 

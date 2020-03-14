@@ -63,3 +63,8 @@ button.ui-button {
 	
 	&:disabled { opacity: .5; }
 }
+
+[data-theme^="dark"] {
+	
+	::placeholder { color: #fff; }
+}

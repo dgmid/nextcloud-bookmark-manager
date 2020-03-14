@@ -27,26 +27,28 @@
 	</main>
 	
 	<aside>
-		<nav>
-			<dl id="filter-all" class="taglist">
-			</dl>
-		</nav>
-		
-		<nav>
-			<span class="list-title">Tags</span>
-			<div class="sidebar-scroll">
-				<dl id="taglist" class="taglist"></dl>
+		<div id="sidebar">
+			<nav id="sidebar-all">
+				<dl id="filter-all" class="taglist">
+				</dl>
+			</nav>
+			
+			<nav id="sidebar-tags">
+				<span class="list-title">Tags</span>
+				<div class="sidebar-scroll">
+					<dl id="taglist" class="taglist"></dl>
+				</div>
 				<dl id="taglist-extras" class="taglist"></dl>
-			</div>
-		</nav>
-		
-		<dl id="column-list">
-			<dt>Columns</dt>
-			<dd><label><input id="description" class="col-toggle" type="checkbox" data-column="2" checked /> Description</label></dd>
-			<dd><label><input id="url" class="col-toggle" type="checkbox" data-column="3" checked /> URL</label></dd>
-			<dd><label><input id="created" class="col-toggle" type="checkbox" data-column="4" /> Created</label></dd>
-			<dd><label><input id="modified" class="col-toggle" type="checkbox" data-column="5" /> Modified</label></dd>
-		</dl>
+			</nav>
+			
+			<dl id="column-list">
+				<dt>Columns</dt>
+				<dd><label><input id="description" class="col-toggle" type="checkbox" data-column="2" checked /> Description</label></dd>
+				<dd><label><input id="url" class="col-toggle" type="checkbox" data-column="3" checked /> URL</label></dd>
+				<dd><label><input id="created" class="col-toggle" type="checkbox" data-column="4" /> Created</label></dd>
+				<dd><label><input id="modified" class="col-toggle" type="checkbox" data-column="5" /> Modified</label></dd>
+			</dl>
+		</div>
 		
 		<div class="search-field">
 			<input id="search" placeholder="search">
