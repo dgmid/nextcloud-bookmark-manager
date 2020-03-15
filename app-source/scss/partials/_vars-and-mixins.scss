@@ -5,7 +5,6 @@
 	
 	--text:					#252525;
 	--dividers:				#e6e6e6;
-	--titlebar:				#454545;
 	--footer:				linear-gradient(#e4e4e4, #cdcdcd) no-repeat border-box;
 	--header-border:		#b5b4b5;
 	--main:					rgba(0,0,0,.15);
@@ -50,26 +49,25 @@
 	
 	// main window
 	
-	--text:					#fff;
-	--dividers:				#000;
-	--titlebar:				#c8c6c6;
-	--footer:				linear-gradient(#484c58, #3b3f48) no-repeat border-box;
-	--header-border:		#000000;
+	--text:					rgba(255,255,255,1);
+	--dividers:				rgba(0,0,0,.85);
+	--footer:				linear-gradient(rgba(86,86,86,.5), rgba(58,58,58,.5)) no-repeat border-box;
+	--header-border:		rgba(0,0,0,.85);
 	--main:					rgba(0,0,0,.15);
 	--overlay:				rgba(0,0,0,.15);
-	--tabs:					#313545;
-	--tab-dividers:			#535767;
+	--tabs:					rgba(80,80,80,.4);
+	--tab-dividers:			rgba(164,164,164,.4);
 	
 	// table
 	
-	--table-text:			#9c9c9c;
-	--table-border:			#000;
-	--stripe-odd:			#2e303d;
-	--stripe-even:			#232633;
-	--sorted-odd:			#2e303d;
-	--sorted-even:			#232633;
-	--select:				#3F4151;
-	--select-sort:			#3F4151;
+	--table-text:			rgba(255,255,255,.65);
+	--table-border:			rgba(0,0,0,.85);
+	--stripe-odd:			rgba(60,60,60,.4);
+	--stripe-even:			rgba(34,34,34,.4);
+	--sorted-odd:			transparent;
+	--sorted-even:			transparent;
+	--select:				rgba(80,80,80,.5);
+	--select-sort:			rgba(80,80,80,.5);
 	
 	// sidebar
 	
@@ -79,16 +77,16 @@
 	// modal
 	
 	--modal-header:			rgba(255,255,255,.1);
-	--menu: 				#222532;
-	--input-color:			#dcdcdc;
-	--input-border:			#565656;
-	--input-background:		#222532;
-	--select:				#616161;
-	--select-border:		#7f7f7f;
+	--menu: 				rgba(34,34,34,.9);
+	--input-color:			rgba(255,255,255,.75);
+	--input-border:			rgba(164,164,164,.4);
+	--input-background:		rgba(0,0,0,.5);
+	--select:				rgba(0,0,0,.5);
+	--select-border:		rgba(164,164,164,.4);
 	
 	// buttons
 	
-	--button:				#676973;
+	--button:				rgba(255,255,255,.25);
 	--button-color:			rgba(255,255,255,.85);
-	--button-border:		#7f7f7f;
+	--button-border:		rgba(0,0,0,.35);
 }

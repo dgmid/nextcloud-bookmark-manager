@@ -73,7 +73,7 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 			},
 			{
 				className: 'padded-left',
-				targets: [ 1 ]	
+				targets: [ 1 ]
 			},
 			{
 				targets: [ 2 ],

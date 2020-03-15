@@ -229,7 +229,6 @@ ipcRenderer.on('delete-bookmark', (event, message) => {
 			fetch.bookmarksApi('delete', bookmark[0], '', function() {
 				
 				maintable.bookmarkTable.clear().draw()
-				
 				loader( 'add' )
 				
 				fetch.bookmarksApi('all', '', '', function( array ){
@@ -294,6 +293,7 @@ ipcRenderer.on('edit-tag', (event, message) => {
 
 ipcRenderer.on('delete-tag', (event, message) => {
 	
+	log.info('DELETE TAG')
 	log.info(message)
 	
 	let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {	
@@ -302,9 +302,12 @@ ipcRenderer.on('delete-tag', (event, message) => {
 								buttons: ['Delete Tag','Cancel']
 							})
 	
+	log.info('RESPONSE')
+	log.info(response)
+	
 	if( response === 0 ) {
 		
-		fetch.bookmarksApi( 'deletetag', '', message, function() {
+		fetch.bookmarksApi( 'deletetag', '', encodeURIComponent(message), function() {
 			
 			maintable.bookmarkTable.clear().draw()
 			loader( 'add' )

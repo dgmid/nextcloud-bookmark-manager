@@ -61,7 +61,7 @@ function createWindow() {
 		height: height,
 		minWidth: 580,
 		minHeight: 396,
-		vibrancy: 'sidebar',
+		vibrancy: 'under-window',
 		webPreferences: {
 			devTools: true,
 			preload: path.join(__dirname, './preload.min.js'),

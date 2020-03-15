@@ -73,11 +73,7 @@ module.exports.bookmarksApi = function( call, id, data, callback ) {
 		credentials: 'omit'
 	}
 	
-	// modifytag /index.php/apps/bookmarks/public/rest/v2/tag?${data}
-	// deletetag /index.php/apps/bookmarks/public/rest/v2/
-	
 	let url = `${path}${calltype[call]['url']}${id}${data}`
-	
 	log.info(`${call} : ${url}`)
 	
 	fetch(server + url, init)

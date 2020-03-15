@@ -146,11 +146,6 @@ table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column
 	color: var(--text);
 }
 
-table.dataTable.display tbody tr:hover > .sorting_1, table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
-	
-	background-color: var(--select-sort);
-}
-
 table.dataTable.compact thead th,
 table.dataTable.compact thead td {
 
