@@ -21,6 +21,7 @@ exports.createAbout = () => {
 			minimizable: false,
 			maximizable: false,
 			alwaysOnTop: true,
+			title: '',
 			vibrancy: 'under-window',
 			webPreferences: {
 				devTools: true,
