@@ -293,21 +293,16 @@ ipcRenderer.on('edit-tag', (event, message) => {
 
 ipcRenderer.on('delete-tag', (event, message) => {
 	
-	log.info('DELETE TAG')
-	log.info(message)
-	
+	let tag = message
 	let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {	
-								message: `Are you sure you want to delete the tag ${message}?`,
+								message: `Are you sure you want to delete the tag ${tag}?`,
 								detail: `This operation is not reversable.`,
 								buttons: ['Delete Tag','Cancel']
 							})
 	
-	log.info('RESPONSE')
-	log.info(response)
-	
 	if( response === 0 ) {
 		
-		fetch.bookmarksApi( 'deletetag', '', encodeURIComponent(message), function() {
+		fetch.bookmarksApi( 'deletetag', '', encodeURIComponent(tag), function() {
 			
 			maintable.bookmarkTable.clear().draw()
 			loader( 'add' )

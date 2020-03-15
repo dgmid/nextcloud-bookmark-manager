@@ -1,7 +1,7 @@
 'use strict'
 
-const { remote } = require( 'electron' )
-const path = require( 'path' )
+const { remote }	= require( 'electron' )
+const path 			= require( 'path' )
 
 let modal
 
