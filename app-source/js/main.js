@@ -9,6 +9,8 @@ const log		= require( 'electron-log' )
 
 const getAvailableBrowsers = require('detect-installed-browsers').getAvailableBrowsers
 
+
+
 let win,
 	loginFlow,
 	exportProcess
@@ -218,35 +220,38 @@ ipcMain.on('loginflow', (event, message) => {
 
 app.on('export', (message) => {
 	
-	const exportPath = store.get('exportPath')
-	
-	dialog.showOpenDialog(win, {
-			
-			defaultPath: exportPath + '/',
-			buttonLabel: 'Export Bookmarks',
-			properties: [	'openDirectory',
-							'createDirectory'
-						]
-		},		
+	let exportPath	= store.get('exportPath')
 		
-		runExportProcess
-	)
-	
-	
-	function runExportProcess( exportPath ) {
+	dialog.showSaveDialog(win, {
 		
-		if( exportPath ) {
+		defaultPath: exportPath,
+		buttonLabel: 'Export Bookmarks',
+		properties: [	'openDirectory',
+						'createDirectory'
+					],
+		filters: [
+			{	name:		'html',
+				extensions:	['html']
+			}
+		]
+	
+	}).then((data) =>{
+		
+		if( data.canceled === false ) {
 			
-			store.set('exportPath', exportPath)
+			runExportProcess( data.filePath )
+		}
+	})
+	
+	
+	function runExportProcess( filePath ) {
+		
+		if( filePath ) {
 			
-			const exportProcess = new BrowserWindow({ show: false })
+			const exp = require( './export.min' )
 			
-			exportProcess.loadURL(url.format ({ 
-				
-				pathname: path.join(__dirname, '../html/export-bookmarks.html'), 
-				protocol: 'file:', 
-				slashes: true 
-			}))
+			store.set( 'exportPath', filePath )
+			exp.exportBookmarks( filePath )
 		}
 	}
 })
