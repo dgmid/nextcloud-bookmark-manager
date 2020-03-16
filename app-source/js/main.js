@@ -131,21 +131,33 @@ function createWindow() {
 	
 	protocol.registerFileProtocol('nc', (request, callback) => {
 		
-		const url = request.url.split( '&' )
+		const url = request.url
 		
-		const 	user = url[1].replace('user:', ''),
-				pass = url[2].replace('password:', '')
-		
-		store.set( 'loginCredentials.username', user )
-		store.set( 'loginCredentials.password', pass )
-		
-		loginFlow.close()
-		
-		win.webContents.send('login-ok', 'login-ok')
+		if( url ) {
+			
+			const parts = url.split( '&' )
+			
+			const 	user = parts[1].replace('user:', ''),
+					pass = parts[2].replace('password:', '')
+			
+			store.set( 'loginCredentials.username', user )
+			store.set( 'loginCredentials.password', pass )
+			
+			loginFlow.close()
+			win.webContents.send('login-ok', 'login-ok')
+		}
 	
-	}, (error) => {
-	
-		if (error) console.error('Failed to register protocol')
+	}, ( error ) => {
+		
+		if (error) {
+			
+			log.error('Failed to register protocol')
+			
+			dialog.showErrorBox(
+				`Error`,
+				`Failed to register protocol`
+			)
+		}
 	})
 	
 	require( './menu-app.min' )
