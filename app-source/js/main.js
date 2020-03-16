@@ -77,10 +77,10 @@ function createWindow() {
 		store.set('windowBounds', win.getBounds())
 	}
 	
-	win.loadURL(url.format ({ 
+	win.loadURL(url.format ({
 		
 		pathname: path.join(__dirname, '../html/app.html'), 
-		protocol: 'file:', 
+		protocol: 'file:',
 		slashes: true 
 	}))
 	
@@ -141,8 +141,7 @@ function createWindow() {
 		
 		loginFlow.close()
 		
-		win.webContents.send('close-login-modal', 'close-login-modal')
-		win.reload()
+		win.webContents.send('login-ok', 'login-ok')
 	
 	}, (error) => {
 	

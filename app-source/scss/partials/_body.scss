@@ -34,6 +34,9 @@ body {
 	opacity: 0;
 }
 
+input,
+textarea { background: transparent; }
+
 button.ui-button {
 	
 	padding: 3px 14px;

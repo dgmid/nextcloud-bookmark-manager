@@ -108,7 +108,7 @@ $(document).ready(function() {
 			password: ''
 		} )
 		
-		ipcRenderer.send('reload', 'reload')
+		ipcRenderer.send('refresh', 'refresh')
 		
 		closeModal()
 	})
