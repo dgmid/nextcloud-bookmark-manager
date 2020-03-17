@@ -16,7 +16,7 @@ const template = [
 		label: name,
 		submenu: [
 			{
-				label: 'About ' + name,
+				label: `About ${name}`,
 				click() { about.createAbout() }
 			},
 			{
@@ -144,10 +144,10 @@ const template = [
 					if (focusedWindow) focusedWindow.webContents.toggleDevTools()
 				}
 			},
-			//@end
 			{
 				type: 'separator'
 			},
+			//@end
 			{
 				role: 'resetzoom'
 			},
