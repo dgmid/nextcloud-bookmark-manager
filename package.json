@@ -1,12 +1,12 @@
 {
   "name": "nextcloud-bookmark-manager",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "productName": "Nextcloud Bookmark Manager",
   "description": "Access and manage your Nextcloud bookmarks on the Mac",
   "main": "dist/js/main.min.js",
   "scripts": {
     "start": "electron .",
-    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=8.1.1 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
+    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=7.1.14 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
   },
   "author": {
     "name": "D.G. Midwinter",
@@ -37,7 +37,8 @@
   },
   "devDependencies": {
     "del": "^5.1.0",
-    "electron": "^8.1.1",
+    "devtron": "^1.4.0",
+    "electron": "^7.1.14",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-cssnano": "^2.1.3",

@@ -11,7 +11,7 @@ const log			= require( 'electron-log' )
 const fetch			= require( './fetch.min' )
 const maintable		= require( './bookmark-table.min' )
 const modalWindow	= require( './modal.min' )
-
+const exp 			= require( './export.min' )
 
 let server 		= store.get( 'loginCredentials.server' ),
 	username 	= store.get( 'loginCredentials.username' ),
@@ -350,6 +350,15 @@ ipcRenderer.on('refresh-bookmarks', (event, message) => {
 	}
 })
 
+
+
+//note(dgmid): export all bookmarks
+
+ipcRenderer.on('export-bookmarks', (event, message) => {
+	
+	let exportPath	= store.get('exportPath')
+	exp.exportBookmarks( exportPath )
+})
 
 
 //note(dgmid): close login modal

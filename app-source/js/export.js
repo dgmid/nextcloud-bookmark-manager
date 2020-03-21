@@ -1,19 +1,49 @@
 'use strict'
 
-const { Notification } 	= require('electron')
-const path 				= require('path')
-const dialog 			= require('electron').dialog
-const fs 				= require( 'fs-extra' )
-const log 				= require( 'electron-log' )
-const Store 			= require( 'electron-store' )
-const bookmarks			= new Store( {name: 'bookmarks'} )
+const { remote } 	= require('electron')
+const path 			= require('path')
+const dialog		= remote.dialog
+const fs 			= require( 'fs-extra' )
+const log 			= require( 'electron-log' )
+const Store 		= require( 'electron-store' )
+const store			= new Store()
+const bookmarks		= new Store( {name: 'bookmarks'} )
 
 
 
 module.exports.exportBookmarks = function( filePath ) {
 	
-	let exportname 		= path.basename( filePath ),
-		exportpath 		= path.dirname( filePath ),
+	dialog.showSaveDialog(remote.getCurrentWindow(), {
+			
+		defaultPath: filePath,
+		buttonLabel: 'Export Bookmarks',
+		properties: [	'openDirectory',
+						'createDirectory'
+					],
+		filters: [
+					{	name:		'html',
+						extensions:	['html']
+					}
+				]
+		}
+	).then((data) =>{
+		
+		if( data.canceled === false ) {
+			
+			log.info('OK!')
+			
+			store.set( 'exportPath', data.filePath )
+			exportAllBookmarks( data.filePath )
+		}
+	})
+}
+
+
+
+function exportAllBookmarks( exportPath ) {
+	
+	let exportname 		= path.basename( exportPath ),
+		exportpath 		= path.dirname( exportPath ),
 		bookmarkdata 	= bookmarks.get( 'data' )
 	
 	let output =
@@ -38,35 +68,24 @@ module.exports.exportBookmarks = function( filePath ) {
 		}
 	}
 	
-	
-	fs.outputFile( filePath, output )
+	fs.outputFile( exportPath, output )
 
-	.then(() => fs.readFile( filePath, 'utf8') )
+	.then( () => fs.readFile( exportPath, 'utf8')
 	
-	.then(data => {
+	).then(data => {
 		
-		let exportNotification = new Notification({
+		let exportNotification = new Notification('Nextcloud Bookmark Manager', {
 			
-			title: 		`Export Successful`,
-			subtitle: 	`the file: ${exportname}`,
-			body: 		`has been saved to: ${exportpath}`
+			body: `the file: ${exportname}\nhas been saved to: ${exportpath}`
 		})
-		
-		exportNotification.onclick = () => {
-			
-			exportProcess.close()
-		}
-		
-		exportNotification.show()
-	})
 	
-	.catch(error => {
+	}).catch(error => {
 		
 		log.error( error )
 		
 		dialog.showErrorBox(
 			`Export Error`,
-			`An error occured exporting:\n${filePath}`
+			`An error occured exporting:\n${exportPath}`
 		)
 	})
 }

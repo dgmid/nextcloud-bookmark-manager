@@ -12,8 +12,7 @@ const getAvailableBrowsers = require('detect-installed-browsers').getAvailableBr
 
 
 let win,
-	loginFlow,
-	exportProcess
+	loginFlow
 
 
 
@@ -129,7 +128,7 @@ function createWindow() {
 		}
 	})
 	
-	protocol.registerFileProtocol('nc', (request, callback) => {
+	protocol.registerFileProtocol('nc', (request, callack) => {
 		
 		const url = request.url
 		
@@ -227,45 +226,6 @@ ipcMain.on('loginflow', (event, message) => {
 	})
 })
 
-
-
-app.on('export', (message) => {
-	
-	let exportPath	= store.get('exportPath')
-		
-	dialog.showSaveDialog(win, {
-		
-		defaultPath: exportPath,
-		buttonLabel: 'Export Bookmarks',
-		properties: [	'openDirectory',
-						'createDirectory'
-					],
-		filters: [
-			{	name:		'html',
-				extensions:	['html']
-			}
-		]
-	
-	}).then((data) =>{
-		
-		if( data.canceled === false ) {
-			
-			runExportProcess( data.filePath )
-		}
-	})
-	
-	
-	function runExportProcess( filePath ) {
-		
-		if( filePath ) {
-			
-			const exp = require( './export.min' )
-			
-			store.set( 'exportPath', filePath )
-			exp.exportBookmarks( filePath )
-		}
-	}
-})
 
 
 ipcMain.on('error-in-render', function(event, message) {

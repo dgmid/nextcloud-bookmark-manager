@@ -3,7 +3,7 @@
 const { remote }	= require( 'electron' )
 const path 			= require( 'path' )
 
-let modal
+let modal = null
 
 
 module.exports.openModal = function( url, width, height, resize ) {
@@ -26,15 +26,15 @@ module.exports.openModal = function( url, width, height, resize ) {
 		devTools: true,
 			preload: path.join(__dirname, './preload.min.js'),
 			nodeIntegration: true
-		}	
+		}
 	})
-		
+	
 	modal.loadURL( url )
 	
 	modal.once('ready-to-show', () => {
 		
 		modal.show()
-	})	
+	})
 }
 
 

@@ -1,13 +1,14 @@
 'use strict'
 
-const electron = require('electron')
+const electron 		= require('electron')
 const {Menu, shell} = require('electron')
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
-const ipc = electron.ipcMain
-const path = require('path')
-const name = app.getName()
-var about = require('./about.min')
+const app 			= electron.app
+const ipc 			= electron.ipcMain
+const path 			= require('path')
+const name 			= app.name
+const log			= require( 'electron-log' )
+
+const about 		= require('./about.min')
 
 
 
@@ -91,7 +92,7 @@ const template = [
 			{
 				label: 'Export Bookmarks File…',
 				accelerator: 'Command+Alt+E',
-				click () { app.emit('export', 'export') }
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('export-bookmarks', 'export-bookmarks') }
 			}
 		]  
 	},
