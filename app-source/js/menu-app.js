@@ -1,9 +1,13 @@
 'use strict'
 
-const electron 		= require('electron')
-const {Menu, shell} = require('electron')
-const app 			= electron.app
-const ipc 			= electron.ipcMain
+let i18n = require('./i18n.min')
+
+const {
+	app,
+	Menu,
+	shell
+} = require( 'electron' )
+
 const path 			= require('path')
 const name 			= app.name
 const log			= require( 'electron-log' )
@@ -17,14 +21,14 @@ const template = [
 		label: name,
 		submenu: [
 			{
-				label: `About ${name}`,
+				label: i18n.t('menu:app.name', 'About {{name}}', { name: name }),
 				click() { about.createAbout() }
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: 'Log in/out to Nextcloud…',
+				label: i18n.t('menu:app.login', 'Log in/out to Nextcloud…'),
 				accelerator: 'Command+Ctrl+Alt+l',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('open-login', 'open-login') }
 			
@@ -57,11 +61,12 @@ const template = [
 		]
 	},
 	{
-		label: 'Bookmarks',
+		label: i18n.t('menu:bookmarks.bookmarks', 'Bookmarks'),
 		submenu:
 		[
 			{
 				label: 'Add New Bookmark…',
+				label: i18n.t('menu:bookmarks.new', 'Add New Bookmark…'),
 				accelerator: 'Command+N',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('add-bookmark', 'add-bookmark') }
 			},
@@ -69,12 +74,12 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Edit Bookmark…',
+				label: i18n.t('menu:bookmarks.edit', 'Edit Bookmark…'),
 				accelerator: 'Command+E',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('edit-bookmark', 'edit-bookmark') }
 			},
 			{
-				label: 'Delete Bookmark…',
+				label: i18n.t('menu:bookmarks.delete', 'Delete Bookmark…'),
 				accelerator: 'Command+D',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('delete-bookmark', 'delete-bookmark') }
 			},
@@ -82,7 +87,7 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Sync all Bookmarks',
+				label: i18n.t('menu:bookmarks.sync', 'Sync all Bookmarks'),
 				accelerator: 'Cmd+R',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('refresh-bookmarks', 'refresh-bookmarks') }
 			},
@@ -90,14 +95,14 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Export Bookmarks File…',
+				label: i18n.t('menu:bookmarks.export', 'Export Bookmarks File…'),
 				accelerator: 'Command+Alt+E',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('export-bookmarks', 'export-bookmarks') }
 			}
 		]  
 	},
 	{
-		label: 'Edit',
+		label: i18n.t('menu:edit.edit', 'Edit'),
 		submenu: [
 			{
 				role: 'undo'
@@ -127,14 +132,14 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Find…',
+				label: i18n.t('menu:edit.find', 'Find…'),
 				accelerator: 'Command+F',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('find', 'find') }
 			}
 		]
 	},
 	{
-		label: 'View',
+		label: i18n.t('menu:view.view', 'View'),
 		submenu:
 		[
 			//@exclude
@@ -167,38 +172,40 @@ const template = [
 		]
 	},
 	{
+		label: i18n.t('menu:window.window', 'Window'),
 		role: 'window',
 		submenu:
 		[
 			{
-				label: 'Close',
+				label: i18n.t('menu:window.close', 'Close'),
 				accelerator: 'CmdOrCtrl+W',
 				role: 'close'
 			},
 			{
-				label: 'Minimize',
+				label: i18n.t('menu:window.minimize', 'Minimize'),
 				accelerator: 'CmdOrCtrl+M',
 				role: 'minimize'
 			},
 			{
-				label: 'Zoom',
+				label: i18n.t('menu:window.zoom', 'Zoom'),
 				role: 'zoom'
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: 'Bring All to Front',
+				label: i18n.t('menu:window.front', 'Bring All to Front'),
 				role: 'front'
 			}
 		]
 	},
 	{
+		label: i18n.t('menu:help.help', 'Help'),
 		role: 'help',
 		submenu:
 		[
 			{
-				label: 'Nextcloud Bookmark Manager Homepage',
+				label: i18n.t('menu:help.homepage', 'Nextcloud Bookmark Manager Homepage'),
 				click () { require('electron').shell.openExternal('https://www.midwinter-dg.com/mac-apps/nextcloud-bookmark-manager.html?app') }
 			}
 		]

@@ -1,0 +1,32 @@
+{
+  "app": {
+    "name": "About {{name}}",
+    "login": "Log in/out to Nextcloud…"
+  },
+  "bookmarks": {
+    "bookmarks": "Bookmarks",
+    "new": "Add New Bookmark…",
+    "edit": "Edit Bookmark…",
+    "delete": "Delete Bookmark…",
+    "sync": "Sync all Bookmarks",
+    "export": "Export Bookmarks File…"
+  },
+  "edit": {
+    "edit": "Edit",
+    "find": "Find…"
+  },
+  "view": {
+    "view": "View"
+  },
+  "window": {
+    "window": "Window",
+    "close": "Close",
+    "minimize": "Minimize",
+    "zoom": "Zoom",
+    "front": "Bring All to Front"
+  },
+  "help": {
+    "help": "Help",
+    "homepage": "Nextcloud Bookmark Manager Homepage"
+  }
+}

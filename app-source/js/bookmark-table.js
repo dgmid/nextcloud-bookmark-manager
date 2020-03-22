@@ -1,5 +1,7 @@
 'use strict'
 
+const i18n		= require( './i18n.min' )
+
 const Store		= require( 'electron-store' )
 const store		= new Store()
 const $			= require( 'jquery' )
@@ -64,6 +66,16 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 	scrollY: 	'calc(100vh - 59px)', // window height - header - footer
 	paging: 	false,
 	dom: 'ltipr', // hide default search field
+	columns:
+	[
+		{title: 'ID'},
+		{title: i18n.t('bookmarktable:header.title', 'Title')},
+		{title: i18n.t('bookmarktable:header.description', 'Description')},
+		{title: i18n.t('bookmarktable:header.url', 'Url')},
+		{title: i18n.t('bookmarktable:header.created', 'Created')},
+		{title: i18n.t('bookmarktable:header.modified', 'Modified')},
+		{title: i18n.t('bookmarktable:header.tags', 'Tags')}
+	],
 	columnDefs:
 		[
 			{
@@ -89,13 +101,13 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				visible: store.get('tableColumns.created'),
 				searchable: false
 			},
-			{ 	className: 'dt-body-right',
-				targets: [ 4, 5 ]
-			},
 			{
 				targets: [ 5 ],
 				visible: store.get('tableColumns.modified'),
 				searchable: false
+			},
+			{ 	className: 'dt-body-right',
+				targets: [ 4, 5 ]
 			},
 			{
 				className: 'dt-body-right padded-right',
@@ -105,9 +117,9 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 	
 	language: {
 		emptyTable: ' ',
-		zeroRecords: 'No matching Bookmarks were found',
-		info: 'Showing _TOTAL_ Bookmarks',
-		infoEmpty: 'Showing 0 to 0 of 0 Bookmarks',
-		infoFiltered: '(filtered from _MAX_ Bookmarks)'
+		zeroRecords: i18n.t('bookmarktable:footer.zero', 'No matching Bookmarks were found'),
+		info: i18n.t('bookmarktable:footer.info', 'Showing _TOTAL_ Bookmarks'),
+		infoEmpty: i18n.t('bookmarktable:footer.empty', 'Showing 0 to 0 of 0 Bookmarks'),
+		infoFiltered: i18n.t('bookmarktable:footer.filtered', '(filtered from _MAX_ Bookmarks)')
 	}
 })

@@ -1,5 +1,7 @@
 'use strict'
 
+const i18n 				= require( './i18n.min' )
+
 const version 			= require('electron').remote.app.getVersion()
 const compareVersions	= require('compare-versions')
 const $					= require( 'jquery' )
@@ -19,7 +21,7 @@ module.exports = {
 			
 			if( compareVersions.compare( version, latest, '<' ) ) {
 				
-				module.exports.displayVersion( `<button id="update" class="fadein" type="button" tabindex="-1" data-url="https://www.midwinter-dg.com/mac-apps/nextcloud-bookmark-manager.html?app"><span id="update-version">${latest}</span> <span id="update-label">Update Available</span> &rarr;</button>` )
+				module.exports.displayVersion( `<button id="update" class="fadein" type="button" tabindex="-1" data-url="https://www.midwinter-dg.com/mac-apps/nextcloud-bookmark-manager.html?app"><span id="update-version">${latest}</span> <span id="update-label">${i18n.t('version:update', 'Update Available')}</span> &rarr;</button>` )
 			}
 			
 			if( compareVersions.compare( version, latest, '>' ) ) {

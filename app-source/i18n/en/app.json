@@ -1,0 +1,49 @@
+{
+  "errorbox": {
+    "title": {
+      "deletebookmark": "Delete Bookmark Error",
+      "editbookmark": "Edit Bookmark Error"
+    },
+    "content": {
+      "deletebookmark": "A bookmark must be selected in order to delete it",
+      "editbookmark": "A bookmark must be selected in order to edit it"
+    }
+  },
+  "dialog": {
+    "message": {
+      "deletetag": "Are you sure you want to delete the tag {{tag}}?",
+      "deletebookmark": "Are you sure you want to delete the bookmark {{bookmark}}?"
+    },
+    "detail": {
+      "deletetag": "This operation is not reversable.",
+      "deletebookmark": "This operation is not reversable."
+    },
+    "button": {
+      "deletetag": "Delete Tag",
+      "cancel": "Cancel",
+      "deletebookmark": "Delete Bookmark"
+    }
+  },
+  "sidebar": {
+    "filter": {
+      "all": "All Bookmarks",
+      "description": "Description",
+      "url": "URL",
+      "created": "Created",
+      "modified": "Modified"
+    },
+    "title": {
+      "tags": "Tags",
+      "columns": "Columns"
+    },
+    "search": "Search"
+  },
+  "button": {
+    "new": "Add New Bookmark"
+  },
+  "export": {
+    "notification": {
+      "body": "the file: {{name}}\nhas been saved to: {{path}}"
+    }
+  }
+}

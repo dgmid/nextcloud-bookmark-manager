@@ -1,5 +1,7 @@
 'use strict'
 
+const i18n = require( './i18n.min' )
+
 const { ipcRenderer, shell, remote } = require( 'electron' )
 const Store			= require( 'electron-store' )
 const store			= new Store()
@@ -12,6 +14,9 @@ const fetch			= require( './fetch.min' )
 const maintable		= require( './bookmark-table.min' )
 const modalWindow	= require( './modal.min' )
 const exp 			= require( './export.min' )
+
+const jqueryI18next = require( 'jquery-i18next' )
+jqueryI18next.init(i18n, $)
 
 let server 		= store.get( 'loginCredentials.server' ),
 	username 	= store.get( 'loginCredentials.username' ),
@@ -182,7 +187,7 @@ function buildTagList( array ) {
 		 `<dd>
 			<a href="#" class="filter selected" data-filter="">
 				<span class="filter-icon icon-home"></span>
-				<span class="filter-name">All Bookmarks</span>
+				<span class="filter-name">${i18n.t('app:sidebar.filter.all','All Bookmarks')}</span>
 				<span class="filter-count">${total}</span>
 			</a>
 		</dd>` )
@@ -219,9 +224,9 @@ ipcRenderer.on('delete-bookmark', (event, message) => {
 	if( bookmark ) {
 		
 		let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {	
-								message: `Are you sure you want to delete the bookmark ${bookmark[1]}?`,
-								detail: `This operation is not reversable.`,
-								buttons: ['Delete Bookmark','Cancel']
+								message: i18n.t('app:dialog.message.deletebookmark', 'Are you sure you want to delete the bookmark {{bookmark}}?', {bookmark: bookmark[1]}),
+								detail: i18n.t('app:dialog.detail.deletebookmark', 'This operation is not reversable.'),
+								buttons: [i18n.t('app:dialog.button.deletebookmark', 'Delete Bookmark'), i18n.t('app:dialog.button.cancel', 'Cancel')]
 							})
 			
 		if( response === 0 ) {
@@ -241,8 +246,8 @@ ipcRenderer.on('delete-bookmark', (event, message) => {
 	} else {
 	
 		dialog.showErrorBox(
-			`Delete Bookmark Error`,
-			`An entry must be selected in order to delete`
+			i18n.t('app:errorbox.title.deletebookmark', 'Delete Bookmark Error'),
+			i18n.t('app:errorbox.content.deletebookmark', 'A bookmark must be selected in order to delete it')
 		)
 	}
 })
@@ -272,8 +277,8 @@ ipcRenderer.on('edit-bookmark', (event, message) => {
 	} else {
 		
 		dialog.showErrorBox(
-			'Edit Bookmark Error',
-			'An entry must be selected in order to edit'
+			i18n.t('app:errorbox.title.editbookmark', 'Edit Bookmark Error'),
+			i18n.t('app:errorbox.content.editbookmark', 'A bookmark must be selected in order to edit it')
 		)
 	}
 })
@@ -294,10 +299,10 @@ ipcRenderer.on('edit-tag', (event, message) => {
 ipcRenderer.on('delete-tag', (event, message) => {
 	
 	let tag = message
-	let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {	
-								message: `Are you sure you want to delete the tag ${tag}?`,
-								detail: `This operation is not reversable.`,
-								buttons: ['Delete Tag','Cancel']
+	let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
+								message: i18n.t('app:dialog.message.deletetag', 'Are you sure you want to delete the tag {{tag}}?', {tag: tag}),
+								detail: i18n.t('app:dialog.detail.deletetag', 'This operation is not reversable.'),
+								buttons: [i18n.t('app:dialog.button.deletetag', 'Delete Tag'), i18n.t('app:dialog.button.cancel', 'Cancel')]
 							})
 	
 	if( response === 0 ) {
@@ -470,6 +475,20 @@ function loader( string  ) {
 
 $(document).ready(function() {
 	
+	//note(dgmid): set lang
+	
+	$('html').attr('lang', i18n.language)
+	
+	//note(dgmid): translate html strings
+	
+	$('#sidebar-tags .list-tags').html( i18n.t('app:sidebar.title.tags', 'Tags') )
+	$('#column-list dt').html( i18n.t('app:sidebar.title.columns', 'Columns') )
+	$('#description span').html( i18n.t('app:sidebar.filter.description', 'Description') )
+	$('#url span').html( i18n.t('app:sidebar.filter.url', 'URL') )
+	$('#created span').html( i18n.t('app:sidebar.filter.created', 'Created') )
+	$('#modified span').html( i18n.t('app:sidebar.filter.modified', 'Modified') )
+	$('#add-bookmark span').html( i18n.t('app:button.new', 'Add New Bookmark') )
+	$('#search').attr('placeholder', i18n.t('app:sidebar.search', 'Search'))
 	
 	//note(dgmid): click tag list item to filter table
 	

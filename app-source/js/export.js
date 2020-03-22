@@ -1,5 +1,7 @@
 'use strict'
 
+const i18n			= require( './i18n.min' )
+
 const { remote } 	= require('electron')
 const path 			= require('path')
 const dialog		= remote.dialog
@@ -16,7 +18,7 @@ module.exports.exportBookmarks = function( filePath ) {
 	dialog.showSaveDialog(remote.getCurrentWindow(), {
 			
 		defaultPath: filePath,
-		buttonLabel: 'Export Bookmarks',
+		buttonLabel: i18n.t('export:savedialog.button', 'Export Bookmarks'),
 		properties: [	'openDirectory',
 						'createDirectory'
 					],
@@ -30,8 +32,6 @@ module.exports.exportBookmarks = function( filePath ) {
 		
 		if( data.canceled === false ) {
 			
-			log.info('OK!')
-			
 			store.set( 'exportPath', data.filePath )
 			exportAllBookmarks( data.filePath )
 		}
@@ -42,8 +42,8 @@ module.exports.exportBookmarks = function( filePath ) {
 
 function exportAllBookmarks( exportPath ) {
 	
-	let exportname 		= path.basename( exportPath ),
-		exportpath 		= path.dirname( exportPath ),
+	let expname 		= path.basename( exportPath ),
+		exppath 		= path.dirname( exportPath ),
 		bookmarkdata 	= bookmarks.get( 'data' )
 	
 	let output =
@@ -76,7 +76,7 @@ function exportAllBookmarks( exportPath ) {
 		
 		let exportNotification = new Notification('Nextcloud Bookmark Manager', {
 			
-			body: `the file: ${exportname}\nhas been saved to: ${exportpath}`
+			body: i18n.t('export:notification.body', 'the file: {{name}}\nhas been saved to: {{- path}}', {name: expname, path: exppath})
 		})
 	
 	}).catch(error => {
@@ -84,8 +84,8 @@ function exportAllBookmarks( exportPath ) {
 		log.error( error )
 		
 		dialog.showErrorBox(
-			`Export Error`,
-			`An error occured exporting:\n${exportPath}`
+			i18n.t('export:errorbox.title', 'Export Error'),
+			i18n.t('export:errorbox.content', 'An error occured exporting:\n{{- filepath}}', {filepath: exportPath})
 		)
 	})
 }

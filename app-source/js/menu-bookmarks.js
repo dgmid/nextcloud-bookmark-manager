@@ -1,55 +1,62 @@
 'use strict'
 
-const electron = require( 'electron' )
-const {shell, app, clipboard} = require( 'electron' )
-const dialog = require( 'electron' ).dialog
-const BrowserWindow = electron.BrowserWindow
-const Menu = electron.Menu
-const MenuItem = electron.MenuItem
-const ipc = electron.ipcMain
+let i18n = require('./i18n.min')
 
-const Store = require( 'electron-store' )
-const store = new Store()
+const {
+	app,
+	BrowserWindow,
+	Menu,
+	MenuItem,
+	ipcMain,
+	shell,
+	clipboard
+} = require( 'electron' )
 
-const applescript = require( 'applescript' )
+const dialog 		= require( 'electron' ).dialog
+const Store 		= require( 'electron-store' )
+const store 		= new Store()
+const applescript 	= require( 'applescript' )
+
+
 
 //note(dgmid): decodeentities
 
 function decodeEntities( str ) {
-    
-    return 	String(str)
-    		.replace(/&lt;/g, '<')
-    		.replace(/&gt;/g, '>')
+	
+	return 	String(str)
+		.replace(/&lt;/g, '<')
+		.replace(/&gt;/g, '>')
 }
 
 
 
-ipc.on('show-bookmark-menu', ( event, message ) => {
+ipcMain.on('show-bookmark-menu', ( event, message ) => {
 	
 	let title = decodeEntities( message[1] )
 	
 	const bookmarkMenuTemplate = [
 		{
-			label: `Open ${title} in Default Browser`,
+			label: i18n.t('menubookmarks:open', 'Open {{title}} in Default Browser', { title: title }),
 			click () { require('electron').shell.openExternal( message[3] ) }
 		},
 		{
-			label: `Open ${title} with…`,
+			label: i18n.t('menubookmarks:with', 'Open {{title}} with…', { title: title }),
 			submenu: []
 		},
 		{
-			label: `Copy ${title} url to Clipboard`,
+			label: i18n.t('menubookmarks:copy', 'Copy {{title}} url to Clipboard', { title: title }),
 			click () { clipboard.writeText(message[3], title) }	
 		},
 		{
 			type: 'separator'
 		},
 		{
-			label: `Edit ${title} Bookmark…`,
+			label: i18n.t('menubookmarks:edit', 'Edit {{title}} Bookmark…', { title: title }),
 			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('edit-bookmark', message) }
 		},
 		{
 			label: `Delete ${title} Bookmark…`,
+			label: i18n.t('menubookmarks:delete', 'Delete {{title}} Bookmark…', { title: title }),
 			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('delete-bookmark', message) }
 			
 		},
@@ -80,8 +87,8 @@ ipc.on('show-bookmark-menu', ( event, message ) => {
 						if (err) {
 							
 							dialog.showErrorBox(
-								`Error launching: ${theBrowser}`,
-								`the url ${message[3]} could not be opened`
+								i18n.t('menubookmarks:errorbox.title', 'Error launching: {{browser}}', { browser: theBrowser }),
+								i18n.t('menubookmarks:errorbox.content', 'the url {{url}} could not be opened', { url: message[3] })
 							)
 							
 							console.log( err )

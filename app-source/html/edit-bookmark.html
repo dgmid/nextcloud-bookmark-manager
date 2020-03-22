@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="">
 	<head>
 		<meta charset="utf-8" />
 		<title>Nextcloud Bookmark Manager - Edit Bookmark</title>
@@ -10,36 +10,34 @@
 	</head>
 	
 	<body class="resize">
-		<header>
-			Edit bookmark:&nbsp;
-		</header>
+		<header><span data-i18n="editbookmark:header">Edit bookmark:</span>&nbsp;</header>
 		
 		<div class="scroll">
 			<form id="modal-form">
 				<input type="hidden" name="id" value="">
 				<ul id="fields">
 					<li>
-						<label for="url">url</label>
-						<input type="url" id="url" class="mousetrap" name="url" placeholder=" " required pattern="https?://.+" title="this field is required" value="" autofocus>
+						<label for="url" data-i18n="editbookmark:label.url">url</label>
+						<input type="url" id="url" class="mousetrap" name="url" placeholder=" " required pattern="https?://.+" title="this field is required" data-i18n="[title]editbookmark:input.required" value="" tabindex="1" autofocus>
 					</li>
 					<li>
-						<label for="title">title</label>
-						<input type="text" id="title" class="mousetrap" name="title" placeholder=" " value="">
+						<label for="title" data-i18n="editbookmark:label.title">title</label>
+						<input type="text" id="title" class="mousetrap" name="title" placeholder=" " required value="" tabindex="2">
 					</li>
 					<li>
-						<label for="description">description</label>
-						<textarea name="description" id="description" class="mousetrap" placeholder=" "></textarea>
+						<label for="description" data-i18n="editbookmark:label.description">description</label>
+						<textarea name="description" id="description" class="mousetrap" placeholder=" " tabindex="3"></textarea>
 					</li>
 					<li>
-						<label for="tags">tags</label>
-						<select id="tags" name="tags[]" multiple="multiple">
+						<label for="tags" data-i18n="editbookmark:label.tags">tags</label>
+						<select id="tags" name="tags[]" multiple="multiple" tabindex="4">
 						</select>
 					</li>
 				</ul>
 				
 				<footer>
-					<button id="cancel" class="ui-button" type="button">Cancel</button>
-					<button id="update" class="ui-button" type="submit">Update</button>
+					<button id="cancel" class="ui-button" type="button" data-i18n="editbookmark:button.cancel" tabindex="6">Cancel</button>
+					<button id="update" class="ui-button" type="submit" data-i18n="editbookmark:button.submit" tabindex="5">Update</button>
 				</footer>
 			</form>
 			

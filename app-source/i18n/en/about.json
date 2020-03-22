@@ -1,0 +1,13 @@
+{
+  "body": {
+    "description": "Access and manage your Nextcloud bookmarks on the Mac",
+    "label": {
+      "version": "version:",
+      "author": "author:",
+      "license": "license:"
+    },
+    "button": {
+      "info": "more info"
+    }
+  }
+}

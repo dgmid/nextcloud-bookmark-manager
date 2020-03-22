@@ -1,5 +1,7 @@
 'use strict'
 
+const i18n 			= require( './i18n.min' )
+
 const remote 		= require( 'electron' ).remote
 const {ipcRenderer} = require( 'electron' )
 const Store 		= require( 'electron-store' )
@@ -7,7 +9,9 @@ const store 		= new Store()
 const Mousetrap 	= require( 'mousetrap' )
 
 const $ 			= require( 'jquery' )
+const jqueryI18next = require( 'jquery-i18next' )
 
+jqueryI18next.init(i18n, $)
 
 
 //note(dgmid): log exceptions
@@ -16,6 +20,16 @@ window.onerror = function( error, url, line ) {
 	
 	ipcRenderer.send( 'error-in-render', {error, url, line} )
 }
+
+
+
+//note(dgmid): set lang & localize strings
+
+$('html').attr('lang', i18n.language)
+$('header').localize()
+$('label').localize()
+$('input').localize()
+$('button').localize()
 
 
 

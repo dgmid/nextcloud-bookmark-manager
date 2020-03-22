@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="">
 	<head>
 		<meta charset="utf-8" />
 		<title>Nextcloud Bookmark Manager - Edit Tag</title>
@@ -10,23 +10,21 @@
 	</head>
 	
 	<body>
-		<header>
-			Edit tag:&nbsp;
-		</header>
+		<header><span data-i18n="edittag:header">Edit tag:</span>&nbsp;</header>
 		
 		<div class="scroll">
 			<form id="modal-form">
 				<input type="hidden" name="old_name" value="">
 				<ul id="fields">
 					<li>
-						<label for="new_name">new name</label>
-						<input type="text" id="new_name" class="mousetrap" name="new_name" placeholder=" " value="" required pattern="">
+						<label for="new_name" data-i18n="edittag:label.newname">new name</label>
+						<input type="text" id="new_name" class="mousetrap" name="new_name" placeholder=" " required title="this field is required" data-i18n="[title]edittag:input.required" value="" tabindex="1">
 					</li>
 				</ul>
 				
 				<footer>
-					<button id="cancel" class="ui-button" type="button">Cancel</button>
-					<button id="update" class="ui-button" type="submit">Update</button>
+					<button id="cancel" class="ui-button" type="button" data-i18n="edittag:button.cancel" tabindex="3">Cancel</button>
+					<button id="update" class="ui-button" type="submit" data-i18n="edittag:button.submit" tabindex="2">Update</button>
 				</footer>
 			</form>
 			

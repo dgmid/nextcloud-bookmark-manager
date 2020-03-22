@@ -1,0 +1,13 @@
+{
+  "header": "Edit tag:",
+  "label": {
+    "newname": "new name"
+  },
+  "input": {
+    "required": "this field is required"
+  },
+  "button": {
+    "cancel": "Cancel",
+    "submit": "Update"
+  }
+}

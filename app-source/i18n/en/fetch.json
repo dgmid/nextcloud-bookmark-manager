@@ -1,0 +1,28 @@
+{
+  "errorbox": {
+    "title": {
+      "error": "Error",
+      "json": "JSON parsing error"
+    },
+    "content": {
+      "error": "problem retrieving:\n{{- server}}{{- url}}\n\n{{error}}",
+      "json": "An error occured parsing the bookmarks"
+    }
+  },
+  "dialog": {
+    "error": {
+      "message": {
+        "400": "Bad Request",
+        "401": "Unauthorized",
+        "403": "Forbidden",
+        "404": "Not Found",
+        "500": "Internal Server Error",
+        "501": "Not Implemented",
+        "502": "Bad Gateway",
+        "503": "Service Unavailable",
+        "504": "Gateway Timeout",
+        "default": "Unspecified"
+      }
+    }
+  }
+}

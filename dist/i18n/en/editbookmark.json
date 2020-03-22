@@ -1,0 +1,16 @@
+{
+  "header": "Edit bookmark:",
+  "label": {
+    "url": "url",
+    "title": "title",
+    "description": "description",
+    "tags": "tags"
+  },
+  "input": {
+    "required": "this field is required"
+  },
+  "button": {
+    "cancel": "Cancel",
+    "submit": "Update"
+  }
+}

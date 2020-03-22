@@ -1,0 +1,12 @@
+{
+  "savedialog": {
+    "button": "Export Bookmarks"
+  },
+  "errorbox": {
+    "title": "Export Error",
+    "content": "An error occured exporting:\n{{- filepath}}"
+  },
+  "notification": {
+    "body": "the file: {{name}}\nhas been saved to: {{- path}}"
+  }
+}
