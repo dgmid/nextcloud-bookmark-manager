@@ -50,20 +50,24 @@ function parseBookmarks( array ) {
 	
 	total = array.length
 	
-	let allTags = []
+	let allTags = [],
+		noTag
 	
 	for ( let item of array ) {
 		
 		let taglist = ''
 		
-		if( item.tags.length < 1 ) { item.tags.push('un-tagged') }
+		noTag = i18n.t('app:sidebar.filter.untagged', 'un-tagged')
+		
+		
+		if( item.tags.length < 1 ) { item.tags.push( noTag ) }
 		
 		for ( let tagitem of item.tags ) {
 		
 			let color,
 				untagged
 			
-			if( tagitem === 'un-tagged' ) {
+			if( tagitem === noTag ) {
 				
 				color		 = ''
 				untagged	 = ' untagged'
@@ -96,7 +100,7 @@ function parseBookmarks( array ) {
 		]).draw( false )
 	}
 	
-	buildTagList( allTags.sort() )
+	buildTagList( allTags.sort(), noTag )
 	
 	if( firstLoad === true ) {
 		
@@ -112,7 +116,7 @@ function parseBookmarks( array ) {
 
 //note(dgmid): get list of tags with count
 
-function buildTagList( array ) {
+function buildTagList( array, noTag ) {
 	
 	//clear the taglists first
 	$('.taglist').html( '' )
@@ -149,7 +153,7 @@ function buildTagList( array ) {
 	
 	for ( let tagitem of compressed ) {
 		
-		if( tagitem.value === 'un-tagged' ) {
+		if( tagitem.value === noTag ) {
 			
 			untagged =
 			
@@ -481,12 +485,10 @@ $(document).ready(function() {
 	
 	//note(dgmid): translate html strings
 	
-	$('#sidebar-tags .list-tags').html( i18n.t('app:sidebar.title.tags', 'Tags') )
+	$('#sidebar-tags .list-title').html( i18n.t('app:sidebar.title.tags', 'Tags') )
 	$('#column-list dt').html( i18n.t('app:sidebar.title.columns', 'Columns') )
 	$('#description span').html( i18n.t('app:sidebar.filter.description', 'Description') )
-	$('#url span').html( i18n.t('app:sidebar.filter.url', 'URL') )
-	$('#created span').html( i18n.t('app:sidebar.filter.created', 'Created') )
-	$('#modified span').html( i18n.t('app:sidebar.filter.modified', 'Modified') )
+	$('#column-list label span').localize()
 	$('#add-bookmark span').html( i18n.t('app:button.new', 'Add New Bookmark') )
 	$('#search').attr('placeholder', i18n.t('app:sidebar.search', 'Search'))
 	

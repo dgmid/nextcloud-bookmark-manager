@@ -1,0 +1,16 @@
+{
+  "header": {
+    "title": "Titolo",
+    "description": "Descrizione",
+    "url": "Url",
+    "created": "Creato",
+    "modified": "Modificato",
+    "tags": "Tag"
+  },
+  "footer": {
+    "zero": "Nessun segnalibro corrispondente trovato",
+    "info": "Mostra _TOTAL_ segnalibri",
+    "empty": "Mostra 0 a 0 di 0 Segnalibri",
+    "filtered": "(filtrato da _MAX_ segnalibri)"
+  }
+}

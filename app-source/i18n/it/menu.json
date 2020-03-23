@@ -1,0 +1,32 @@
+{
+  "app": {
+    "name": "Informazioni su {{name}}",
+    "login": "Accesso/disconnettersi a Nextcloud…"
+  },
+  "bookmarks": {
+    "bookmarks": "Segnalibri",
+    "new": "Aggiungi nuovo segnalibro…",
+    "edit": "Modifica segnalibro…",
+    "delete": "Elimina segnalibro…",
+    "sync": "Sincronizza segnalibri",
+    "export": "Esporta file segnalibri…"
+  },
+  "edit": {
+    "edit": "Modifica",
+    "find": "Cerca…"
+  },
+  "view": {
+    "view": "Vista"
+  },
+  "window": {
+    "window": "Finestra",
+    "close": "Chiudi",
+    "minimize": "Riduci a icona",
+    "zoom": "Zoom",
+    "front": "Porta tutto in primo piano"
+  },
+  "help": {
+    "help": "Aiuto",
+    "homepage": "Homepage del Nextcloud Bookmark Manager"
+  }
+}

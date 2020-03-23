@@ -1,0 +1,13 @@
+{
+  "body": {
+    "description": "Accedi e gestisci i tuoi segnalibri Nextcloud sul Mac",
+    "label": {
+      "version": "versione:",
+      "author": "sviluppatore:",
+      "license": "licenza:"
+    },
+    "button": {
+      "info": "ulteriori info"
+    }
+  }
+}

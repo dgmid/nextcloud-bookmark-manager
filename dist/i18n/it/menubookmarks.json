@@ -1,0 +1,11 @@
+{
+  "open": "Apri {{title}} nel browser predefinito",
+  "with": "Apri {{title}} con…",
+  "copy": "Copia l'URL di {{title}} negli appunti",
+  "edit": "Modifica {{title}} segnalibro…",
+  "delete": "Elimina {{title}} segnalibro…",
+  "errorbox": {
+    "title": "Errore durante l’avvio di: {{browser}}",
+    "content": "impossibile aprire l’url {{url}}"
+  }
+}

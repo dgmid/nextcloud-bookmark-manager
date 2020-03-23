@@ -1,0 +1,28 @@
+{
+  "errorbox": {
+    "title": {
+      "error": "Errore del server",
+      "json": "Errore di analisi JSON"
+    },
+    "content": {
+      "error": "si è verificato un errore:\n{{- server}}{{- url}}\n\n{{error}}",
+      "json": "Si è verificato un errore durante l’analisi dei segnalibri"
+    }
+  },
+  "dialog": {
+    "error": {
+      "message": {
+        "400": "Richiesta sbagliata",
+        "401": "Non autorizzato",
+        "403": "Proibito",
+        "404": "Non trovato",
+        "500": "Errore interno del server",
+        "501": "Non implementato",
+        "502": "Errore di connessione",
+        "503": "Servizio non disponibile",
+        "504": "Gateway Time-out",
+        "default": "Non specificato"
+      }
+    }
+  }
+}

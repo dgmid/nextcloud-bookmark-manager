@@ -1,0 +1,13 @@
+{
+  "header": "Modifica tag:",
+  "label": {
+    "newname": "nuovo nome"
+  },
+  "input": {
+    "required": "questo campo è richiesta"
+  },
+  "button": {
+    "cancel": "Annulla",
+    "submit": "Modifica"
+  }
+}

@@ -130,8 +130,8 @@ module.exports.bookmarksApi = function( call, id, data, callback ) {
 		
 		dialog.showErrorBox(
 			
-			i18n.t('fetch:errorbox.title.error', 'Error'),
-			i18n.t('fetch:errorbox.content.error', 'problem retrieving:\n{{- server}}{{- url}}\n\n{{error}}', {server: server, url: url, error: error})
+			i18n.t('fetch:errorbox.title.error', 'Server error'),
+			i18n.t('fetch:errorbox.content.error', 'there was an error retrieving:\n{{- server}}{{- url}}\n\n{{error}}', {server: server, url: url, error: error})
 		)
 	})
 }

@@ -1,0 +1,50 @@
+{
+  "errorbox": {
+    "title": {
+      "deletebookmark": "Errore: elimina segnalibro",
+      "editbookmark": "Errore: modifica segnalibro"
+    },
+    "content": {
+      "deletebookmark": "È necessario selezionare un segnalibro per eliminarlo",
+      "editbookmark": "È necessario selezionare un segnalibro per modificarlo"
+    }
+  },
+  "dialog": {
+    "message": {
+      "deletetag": "Sei sicuro di voler eliminare il tag {{tag}}?",
+      "deletebookmark": "Sei sicuro di voler eliminare il segnalibro {{bookmark}}?"
+    },
+    "detail": {
+      "deletetag": "Questa operazione non è reversibile.",
+      "deletebookmark": "Questa operazione non è reversibile."
+    },
+    "button": {
+      "deletetag": "Elimina tag",
+      "cancel": "Annulla",
+      "deletebookmark": "Elimina segnalibro"
+    }
+  },
+  "sidebar": {
+    "filter": {
+      "all": "Tutti i segnalibri",
+      "untagged": "senza tag",
+      "description": "Descrizione",
+      "url": "URL",
+      "created": "Creato",
+      "modified": "Modificato"
+    },
+    "title": {
+      "tags": "Tag",
+      "columns": "Colonne"
+    },
+    "search": "Cerca"
+  },
+  "button": {
+    "new": "Aggiungi nuovo segnalibro"
+  },
+  "export": {
+    "notification": {
+      "body": "il file: {{name}}\nè stato salvato in: {{path}}"
+    }
+  }
+}

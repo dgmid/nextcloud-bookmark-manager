@@ -27,6 +27,7 @@
   "sidebar": {
     "filter": {
       "all": "All Bookmarks",
+      "untagged": "un-tagged",
       "description": "Description",
       "url": "URL",
       "created": "Created",

@@ -1,11 +1,11 @@
 {
   "errorbox": {
     "title": {
-      "error": "Error",
+      "error": "Server error",
       "json": "JSON parsing error"
     },
     "content": {
-      "error": "problem retrieving:\n{{- server}}{{- url}}\n\n{{error}}",
+      "error": "there was an error retrieving:\n{{- server}}{{- url}}\n\n{{error}}",
       "json": "An error occured parsing the bookmarks"
     }
   },

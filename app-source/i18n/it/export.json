@@ -1,0 +1,12 @@
+{
+  "savedialog": {
+    "button": "Esporta segnalibri"
+  },
+  "errorbox": {
+    "title": "Errore di esportazione",
+    "content": "Si è verificato un errore durante l’esportazione di:\n{{- filepath}}"
+  },
+  "notification": {
+    "body": "il file: {{name}}\nè stato salvato in: {{- path}}"
+  }
+}

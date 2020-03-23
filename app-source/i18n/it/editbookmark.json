@@ -1,0 +1,16 @@
+{
+  "header": "Modifica segnalibro:",
+  "label": {
+    "url": "url",
+    "title": "titolo",
+    "description": "descrizione",
+    "tags": "tag"
+  },
+  "input": {
+    "required": "questo campo è richiesta"
+  },
+  "button": {
+    "cancel": "Annulla",
+    "submit": "Modifica"
+  }
+}
