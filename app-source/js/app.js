@@ -12,6 +12,7 @@ const log			= require( 'electron-log' )
 
 const fetch			= require( './fetch.min' )
 const maintable		= require( './bookmark-table.min' )
+const dates			= require( './dates.min' )
 const modalWindow	= require( './modal.min' )
 const exp 			= require( './export.min' )
 
@@ -82,10 +83,9 @@ function parseBookmarks( array ) {
 			
 			allTags.push( tagitem )
 		}
-		
-		let created = 	new Date( item.added * 1000 ),
-			modified = 	new Date( item.lastmodified * 1000 )
 			
+		let created = 	item.added,
+			modified = 	item.lastmodified
 		
 		maintable.bookmarkTable.row.add( [
 			
@@ -93,8 +93,10 @@ function parseBookmarks( array ) {
 			htmlEntities( item.title ),
 			htmlEntities( item.description ),
 			item.url,
-			created.toLocaleDateString(),
-			modified.toLocaleDateString(),
+			created,
+			dates.columnDate( created ),
+			modified,
+			dates.columnDate( modified ),
 			taglist
 		
 		]).draw( false )
@@ -500,7 +502,7 @@ $(document).ready(function() {
 		$(this).addClass('selected')
 		
 		let data = $(this).data('filter')
-		maintable.bookmarkTable.columns(6).search(data).draw()
+		maintable.bookmarkTable.columns(8).search(data).draw()
 	})
 	
 	

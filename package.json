@@ -26,6 +26,7 @@
     "datatables.net": "^1.10.20",
     "datatables.net-keytable": "^2.5.1",
     "datatables.net-plugins": "^1.10.20",
+    "dateformat": "^3.0.3",
     "detect-installed-browsers": "^1.0.0",
     "electron-log": "^4.1.0",
     "electron-store": "^5.1.1",

@@ -148,16 +148,23 @@ table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column
 
 table.dataTable.compact thead th,
 table.dataTable.compact thead td {
-
-	padding: 0 30px 0 20px;
+	
+	text-align: left;
+	padding: 0 30px 0 10px;
 	font-size: 11px;
 	line-height: 23px;
+}
+
+table.dataTable.compact thead th.tags-column {
+	
+	text-align: right;
+	padding-right: 40px !important;
 }
 
 table.dataTable.compact tbody th,
 table.dataTable.compact tbody td {
 	
-	padding: 4px;
+	padding: 4px 10px;
 }
 
 table.dataTable tbody th.dt-body-right,
@@ -171,6 +178,11 @@ table.dataTable th,
 table.dataTable td {
 	
 	box-sizing: content-box;
+}
+
+table.dataTable td.date-column {
+	
+	font-size: 12px;
 }
 
 .dataTables_wrapper {
