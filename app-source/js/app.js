@@ -90,6 +90,7 @@ function parseBookmarks( array ) {
 		maintable.bookmarkTable.row.add( [
 			
 			item.id,
+			' ',
 			htmlEntities( item.title ),
 			htmlEntities( item.description ),
 			item.url,
@@ -502,7 +503,7 @@ $(document).ready(function() {
 		$(this).addClass('selected')
 		
 		let data = $(this).data('filter')
-		maintable.bookmarkTable.columns(8).search(data).draw()
+		maintable.bookmarkTable.columns(9).search(data).draw()
 	})
 	
 	
@@ -586,18 +587,38 @@ $(document).ready(function() {
 			if( !$('#add-bookmark, .col-toggle').is(":focus") ) {
 				
 				let data = maintable.bookmarkTable.row(cell.index().row).data()
-				shell.openExternal(data[3])
+				shell.openExternal(data[4])
 			}
+		}
+	})
+	
+	
+	$('#bookmarks tbody').on('click', 'td.details-control', function () {
+		
+		let tr = $(this).closest('tr'),
+			row = maintable.bookmarkTable.row( tr )
+		
+		if ( row.child.isShown() ) {
+			// This row is already open - close it
+			row.child.hide()
+			tr.removeClass('shown')
+		
+		} else {
+			// Open this row
+			row.child( maintable.detailsTable(row.data()) ).show()
+			tr.addClass('shown')
 		}
 	})
 	
 	
 	//note(dgmid): open url on double-click
 	
-	$('#bookmarks tbody').on('dblclick', 'tr', function() {
+	$('#bookmarks tbody').on('dblclick', 'tr td:not(.details-control)', function() {
 		
-		let data = maintable.bookmarkTable.row(this).data()
-		shell.openExternal(data[3])
+		let tr = $(this).closest('tr')
+		
+		let data = maintable.bookmarkTable.row(tr).data()
+		shell.openExternal(data[4])
 	})
 	
 	

@@ -10,49 +10,6 @@ const keytable	= require( 'datatables.net-keytable' )( window, $ )
 
 
 
-$.fn.dataTable.render.ellipsis = function ( cutoff, wordbreak, escapeHtml ) {
-	var esc = function ( t ) {
-		return t
-			.replace( /&/g, '&amp;' )
-			.replace( /</g, '&lt;' )
-			.replace( />/g, '&gt;' )
-			.replace( /"/g, '&quot;' )
-	};
-
-	return function ( d, type, row ) {
-		// Order, search and type get the original data
-		if ( type !== 'display' ) {
-			return d
-		}
-
-		if ( typeof d !== 'number' && typeof d !== 'string' ) {
-			return d
-		}
-
-		d = d.toString(); // cast numbers
-
-		if ( d.length <= cutoff ) {
-			return d
-		}
-
-		var shortened = d.substr(0, cutoff-1)
-
-		// Find the last white space character in the string
-		if ( wordbreak ) {
-			shortened = shortened.replace(/\s([^\s]*)$/, '')
-		}
-
-		// Protect against uncontrolled HTML input
-		if ( escapeHtml ) {
-			shortened = esc( shortened )
-		}
-
-		return '<span class="ellipsis" title="'+esc(d)+'">'+shortened+'&#8230;</span>'
-	}
-}
-
-
-
 module.exports.bookmarkTable = $('#bookmarks').DataTable({
 	
 	keys: {
@@ -69,6 +26,7 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 	columns:
 	[
 		{title: 'ID'},
+		{title: ''},
 		{title: i18n.t('bookmarktable:header.title', 'Title')},
 		{title: i18n.t('bookmarktable:header.description', 'Description')},
 		{title: i18n.t('bookmarktable:header.url', 'Url')},
@@ -86,17 +44,19 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				searchable: false
 			},
 			{
-				className: 'padded-left',
 				targets: [ 1 ],
-			},
+				className: 'details-control',
+				orderable: false,
+				data: null,
+				defaultContent: '',
+				width: '5px'
+            },
 			{
 				targets: [ 2 ],
-				visible: store.get('tableColumns.description')
 			},
 			{
 				targets: [ 3 ],
-				visible: store.get('tableColumns.url'),
-				render: $.fn.dataTable.render.ellipsis( 50 )
+				visible: false
 			},
 			{
 				targets: [ 4 ],
@@ -104,28 +64,32 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 			},
 			{
 				targets: [ 5 ],
-				visible: store.get('tableColumns.created'),
-				searchable: false,
-				width: '100px',
-				iDataSort: 4
-			},
-			{
-				targets: [ 6 ],
 				visible: false
 			},
 			{
+				targets: [ 6 ],
+				visible: store.get('tableColumns.created'),
+				searchable: false,
+				width: '100px',
+				iDataSort: 5
+			},
+			{
 				targets: [ 7 ],
+				visible: false
+			},
+			{
+				targets: [ 8 ],
 				visible: store.get('tableColumns.modified'),
 				searchable: false,
 				width: '100px',
-				iDataSort: 6
+				iDataSort: 7
 			},
 			{ 	className: 'date-column',
-				targets: [ 5, 7 ]
+				targets: [ 6, 7 ]
 			},
 			{
 				className: 'tags-column dt-body-right padded-right',
-				targets: [ 8 ],
+				targets: [ 9 ],
 				width: '60px'
 			}
 		],
@@ -138,3 +102,35 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 		infoFiltered: i18n.t('bookmarktable:footer.filtered', '(filtered from _MAX_ Bookmarks)')
 	}
 })
+
+
+
+module.exports.detailsTable = function( data ) {
+	
+	return `<div class="details-panel">
+	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.url', 'Url')}:</div>
+		<div class="value nowrap">${data[4]}</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.description', 'Description')}:</div>
+		<div class="value">${data[3]}</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.created', 'Created')}:</div>
+		<div class="value">${data[6]}</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.modified', 'Modified')}:</div>
+		<div class="value">${data[8]}</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.tags', 'Tags')}:</div>
+		<div class="value">${data[9]}</div>
+	</div>
+</div>`
+}
