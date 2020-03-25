@@ -49,7 +49,7 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				orderable: false,
 				data: null,
 				defaultContent: '',
-				width: '10px'
+				width: '5px'
             },
 			{
 				targets: [ 2 ],
@@ -105,18 +105,32 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 
 
 
-module.exports.detailsTable = function( d ) {
+module.exports.detailsTable = function( data ) {
 	
-	// return '<table cellpadding="5" cellspacing="0" border="0">'+
-	// 	'<tr>'+
-	// 		'<td>URL:</td>'+
-	// 		'<td>' + d[4] + '</td>'+
-	// 	'</tr>'+
-	// 	'<tr>'+
-	// 		'<td>Description:</td>'+
-	// 		'<td>' + d[3] + '</td>'+
-	// 	'</tr>'+
-	// '</table>';
+	return `<div class="details-panel">
+	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.url', 'Url')}:</div>
+		<div class="value nowrap">${data[4]}</div>
+	</div>
 	
-	return `<dl><dt>URL:</dt><dd>${d[4]}</dd><dt>Description:</dt><dd>${d[3]}</dd></dl>`
+	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.description', 'Description')}:</div>
+		<div class="value">${data[3]}</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.created', 'Created')}:</div>
+		<div class="value">${data[6]}</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.modified', 'Modified')}:</div>
+		<div class="value">${data[8]}</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.tags', 'Tags')}:</div>
+		<div class="value">${data[9]}</div>
+	</div>
+</div>`
 }

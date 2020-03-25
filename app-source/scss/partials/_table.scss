@@ -128,6 +128,16 @@ table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:
 	background-color: var(--accent);
 }
 
+table.dataTable.hover tbody tr.shown + tr, table.dataTable.display tbody tr.shown + tr {
+	
+	background-color: var(--details-table);
+}
+
+table.dataTable.hover tbody tr.shown + tr td, table.dataTable.display tbody tr.shown + tr td {
+	
+	color: var(--text);
+}
+
 table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
 	
 	background-color: var(--sorted-odd);
@@ -165,6 +175,11 @@ table.dataTable.compact tbody th,
 table.dataTable.compact tbody td {
 	
 	padding: 4px 10px;
+}
+
+table.dataTable.compact tbody td.details-control {
+	
+	padding: 4px 0;
 }
 
 table.dataTable tbody th.dt-body-right,
