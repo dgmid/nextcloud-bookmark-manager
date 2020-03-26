@@ -107,6 +107,8 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 
 module.exports.detailsTable = function( data ) {
 	
+	let desc = ( data[3] == '' ? '⋯' : data[3] )
+	
 	return `<div class="details-panel">
 	<div class="row">
 		<div class="label">${i18n.t('bookmarktable:header.url', 'Url')}:</div>
@@ -115,7 +117,7 @@ module.exports.detailsTable = function( data ) {
 	
 	<div class="row">
 		<div class="label">${i18n.t('bookmarktable:header.description', 'Description')}:</div>
-		<div class="value">${data[3]}</div>
+		<div class="value">${desc}</div>
 	</div>
 	
 	<div class="row">

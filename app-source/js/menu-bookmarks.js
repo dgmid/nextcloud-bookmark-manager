@@ -32,12 +32,12 @@ function decodeEntities( str ) {
 
 ipcMain.on('show-bookmark-menu', ( event, message ) => {
 	
-	let title = decodeEntities( message[1] )
+	let title = decodeEntities( message[2] )
 	
 	const bookmarkMenuTemplate = [
 		{
 			label: i18n.t('menubookmarks:open', 'Open {{title}} in Default Browser', { title: title }),
-			click () { require('electron').shell.openExternal( message[3] ) }
+			click () { require('electron').shell.openExternal( message[4] ) }
 		},
 		{
 			label: i18n.t('menubookmarks:with', 'Open {{title}} with…', { title: title }),
@@ -45,7 +45,7 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 		},
 		{
 			label: i18n.t('menubookmarks:copy', 'Copy {{title}} url to Clipboard', { title: title }),
-			click () { clipboard.writeText(message[3], title) }	
+			click () { clipboard.writeText(message[4], title) }	
 		},
 		{
 			type: 'separator'
@@ -71,7 +71,7 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 		let launchScript =
 		
 		`tell application "${theBrowser}"
-			open location "${message[3]}"
+			open location "${message[4]}"
 		end tell
 		tell application "System Events"
 			tell application process "${theBrowser}"
@@ -88,7 +88,7 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 							
 							dialog.showErrorBox(
 								i18n.t('menubookmarks:errorbox.title', 'Error launching: {{browser}}', { browser: theBrowser }),
-								i18n.t('menubookmarks:errorbox.content', 'the url {{url}} could not be opened', { url: message[3] })
+								i18n.t('menubookmarks:errorbox.content', 'the url {{url}} could not be opened', { url: message[4] })
 							)
 							
 							console.log( err )

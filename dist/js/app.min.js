@@ -231,7 +231,7 @@ ipcRenderer.on('delete-bookmark', (event, message) => {
 	if( bookmark ) {
 		
 		let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {	
-								message: i18n.t('app:dialog.message.deletebookmark', 'Are you sure you want to delete the bookmark {{bookmark}}?', {bookmark: bookmark[1]}),
+								message: i18n.t('app:dialog.message.deletebookmark', 'Are you sure you want to delete the bookmark {{bookmark}}?', {bookmark: bookmark[2]}),
 								detail: i18n.t('app:dialog.detail.deletebookmark', 'This operation is not reversable.'),
 								buttons: [i18n.t('app:dialog.button.deletebookmark', 'Delete Bookmark'), i18n.t('app:dialog.button.cancel', 'Cancel')]
 							})
