@@ -3,6 +3,9 @@
 const i18n			= require( './i18n.min' )
 const dateFormat	= require( 'dateformat' )
 
+const locale		 = i18n.language
+
+
 
 dateFormat.i18n = {
 	dayNames: [
@@ -97,6 +100,13 @@ module.exports.columnDate = function ( timestamp ) {
 	} else {
 		
 		//else - show date
-		return dateFormat( timestamp * 1000, 'ddd d mmm yyyy' )
+		if( locale.startsWith('de') ) {
+			
+			return dateFormat( timestamp * 1000, 'ddd d. mmm yyyy' )
+			
+		} else {
+		
+			return dateFormat( timestamp * 1000, 'ddd d mmm yyyy' )
+		}
 	}
 }
