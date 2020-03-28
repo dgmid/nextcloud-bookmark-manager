@@ -660,7 +660,7 @@ $(document).ready(function() {
 	
 	//note(dgmid): open url on double-click
 	
-	$('#bookmarks tbody').on('dblclick', 'tr td:not(.details-control)', function() {
+	$('#bookmarks tbody').on('dblclick', 'tr td:not(.details-control):not([colspan])', function() {
 		
 		let tr = $(this).closest('tr')
 		
