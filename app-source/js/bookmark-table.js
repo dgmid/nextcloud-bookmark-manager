@@ -8,7 +8,7 @@ const $			= require( 'jquery' )
 const dt		= require( 'datatables.net' )( window, $ )
 const keytable	= require( 'datatables.net-keytable' )( window, $ )
 
-const log			= require( 'electron-log' )
+
 
 module.exports.bookmarkTable = $('#bookmarks').DataTable({
 	
@@ -23,27 +23,16 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 	scrollY: 	'calc(100vh - 59px)', // window height - header - footer
 	paging: 	false,
 	dom: 'ltipr', // hide default search field
-	columns:
-	[
-		{title: 'ID'},
-		{title: ''},
-		{title: i18n.t('bookmarktable:header.title', 'Title')},
-		{title: i18n.t('bookmarktable:header.description', 'Description')},
-		{title: i18n.t('bookmarktable:header.url', 'Url')},
-		{title: 'unix added'},
-		{title: i18n.t('bookmarktable:header.created', 'Created')},
-		{title: 'unix modified'},
-		{title: i18n.t('bookmarktable:header.modified', 'Modified')},
-		{title: i18n.t('bookmarktable:header.tags', 'Tags')}
-	],
 	columnDefs:
 		[
 			{
+				title: 'ID',
 				targets: [ 0 ],
 				visible: false,
 				searchable: false
 			},
 			{
+				title: '',
 				targets: [ 1 ],
 				className: 'details-control',
 				orderable: false,
@@ -52,21 +41,26 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				width: '5px'
             },
 			{
+				title: i18n.t('bookmarktable:header.title', 'Title'),
 				targets: [ 2 ],
 			},
 			{
+				title: i18n.t('bookmarktable:header.description', 'Description'),
 				targets: [ 3 ],
 				visible: false
 			},
 			{
+				title: i18n.t('bookmarktable:header.url', 'Url'),
 				targets: [ 4 ],
 				visible: false
 			},
 			{
+				title: 'unix added',
 				targets: [ 5 ],
 				visible: false
 			},
 			{
+				title: i18n.t('bookmarktable:header.created', 'Created'),
 				targets: [ 6 ],
 				visible: store.get('tableColumns.created'),
 				searchable: false,
@@ -74,10 +68,12 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				iDataSort: 5
 			},
 			{
+				title: 'unix modified',
 				targets: [ 7 ],
 				visible: false
 			},
 			{
+				title: i18n.t('bookmarktable:header.modified', 'Modified'),
 				targets: [ 8 ],
 				visible: store.get('tableColumns.modified'),
 				searchable: false,
@@ -85,12 +81,13 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				iDataSort: 7
 			},
 			{ 	className: 'date-column',
-				targets: [ 6, 7 ]
+				targets: [ 6, 8 ]
 			},
 			{
+				title: i18n.t('bookmarktable:header.tags', 'Tags'),
 				className: 'tags-column dt-body-right padded-right',
 				targets: [ 9 ],
-				width: '60px'
+				width: '50px'
 			}
 		],
 	
