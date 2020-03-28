@@ -1,4 +1,4 @@
 {
-  "edit": "Edit {{tag}} Tag…",
-  "delete": "Delete {{tag}} Tag…"
+  "edit": "Edit {{- tag}} Tag…",
+  "delete": "Delete {{- tag}} Tag…"
 }

@@ -1,6 +1,6 @@
 {
   "name": "nextcloud-bookmark-manager",
-  "version": "2.0.2-alpha",
+  "version": "2.0.2-beta",
   "productName": "Nextcloud Bookmark Manager",
   "description": "Access and manage your Nextcloud bookmarks on the Mac",
   "main": "dist/js/main.min.js",
@@ -25,7 +25,6 @@
     "compare-versions": "^3.6.0",
     "datatables.net": "^1.10.20",
     "datatables.net-keytable": "^2.5.1",
-    "datatables.net-plugins": "^1.10.20",
     "dateformat": "^3.0.3",
     "detect-installed-browsers": "^1.0.0",
     "electron-log": "^4.1.0",

@@ -11,8 +11,8 @@
   },
   "dialog": {
     "message": {
-      "deletetag": "Sei sicuro di voler eliminare il tag {{tag}}?",
-      "deletebookmark": "Sei sicuro di voler eliminare il segnalibro {{bookmark}}?"
+      "deletetag": "Sei sicuro di voler eliminare il tag {{- tag}}?",
+      "deletebookmark": "Sei sicuro di voler eliminare il segnalibro {{- bookmark}}?"
     },
     "detail": {
       "deletetag": "Questa operazione non è reversibile.",

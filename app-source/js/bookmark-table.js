@@ -8,7 +8,7 @@ const $			= require( 'jquery' )
 const dt		= require( 'datatables.net' )( window, $ )
 const keytable	= require( 'datatables.net-keytable' )( window, $ )
 
-
+const log			= require( 'electron-log' )
 
 module.exports.bookmarkTable = $('#bookmarks').DataTable({
 	
@@ -133,6 +133,11 @@ module.exports.detailsTable = function( data ) {
 	<div class="row">
 		<div class="label">${i18n.t('bookmarktable:header.tags', 'Tags')}:</div>
 		<div class="value">${data[9]}</div>
+	</div>
+	
+	<div class="buttons">
+		<button class="info-edit ui-button small" data-id="${data[0]}">${i18n.t('menu:bookmarks.edit', 'Edit Bookmark…')}</button>
+		<button class="info-delete ui-button small" data-id="${data[0]}">${i18n.t('menu:bookmarks.delete', 'Delete Bookmark…')}</button>
 	</div>
 </div>`
 }

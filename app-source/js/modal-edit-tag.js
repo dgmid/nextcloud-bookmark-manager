@@ -16,6 +16,7 @@ jqueryI18next.init(i18n, $)
 
 const fetch			= require( './fetch.min' )
 const serialize		= require( './serialize.min' )
+const entities		= require( './entities.min' )
 
 const 	urlParams = new URLSearchParams( location.search ),
 		theTag = urlParams.get('tag')
@@ -53,7 +54,7 @@ Mousetrap.bind('command+.', function() {
 
 function populateForm() {
 	
-	$('header').append( theTag )
+	$('header').append( entities.encode(theTag) )
 	$('input[name="old_name"]').val( theTag )
 	$('input[name="new_name"]').attr('placeholder', theTag).attr("pattern", '^(?!' + theTag + '$).*')
 }

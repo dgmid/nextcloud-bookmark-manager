@@ -48,6 +48,13 @@ button.ui-button {
 	font-size: 13px;
 	border-radius: 5px;
 	
+	&.small {
+		
+		font-size: 11px;
+		border-radius: 3px;
+		padding: 2px 12px;
+	}
+	
 	&:focus {
 		
 		color: #fff;

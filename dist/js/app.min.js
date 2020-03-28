@@ -15,6 +15,7 @@ const maintable		= require( './bookmark-table.min' )
 const dates			= require( './dates.min' )
 const modalWindow	= require( './modal.min' )
 const exp 			= require( './export.min' )
+const entities 		= require( './entities.min' )
 
 const jqueryI18next = require( 'jquery-i18next' )
 jqueryI18next.init(i18n, $)
@@ -79,7 +80,7 @@ function parseBookmarks( array ) {
 				untagged	 = ''
 			}
 			
-			taglist += `<span class="tag${untagged}" title="${tagitem}" style="background-color: ${color};">${tagitem}</span>`
+			taglist += `<span class="tag${untagged}" title="${entities.encode(tagitem)}" style="background-color: ${color};">${entities.encode(tagitem)}</span> <span class="tagname">${entities.encode(tagitem)}</span>`
 			
 			allTags.push( tagitem )
 		}
@@ -161,9 +162,9 @@ function buildTagList( array, noTag ) {
 			untagged =
 			
 			`<dd class="margin-top">
-				<a href="#" class="filter" data-filter="${tagitem.value}">
+				<a href="#" class="filter" data-filter="${escape(tagitem.value)}">
 					<span class="filter-icon icon-untagged"></span>
-					<span class="filter-name">${tagitem.value}</span>
+					<span class="filter-name">${entities.encode(tagitem.value)}</span>
 					<span class="filter-count">${tagitem.count}</span>
 				</a>
 			</dd>`
@@ -175,7 +176,7 @@ function buildTagList( array, noTag ) {
 			$('#taglist').append(
 			
 			`<dd>
-				<a href="#" class="filter" data-filter="${tagitem.value}"><span class="tag" title="${tagitem.value}" style="background-color: ${color};">${tagitem.value}</span> <span class="filter-name">${tagitem.value}</span>
+				<a href="#" class="filter" data-id="${count}" data-filter="${entities.encode(tagitem.value)}"><span class="tag" title="${entities.encode(tagitem.value)}" style="background-color: ${color};">${entities.encode(tagitem.value)}</span> <span class="filter-name">${entities.encode(tagitem.value)}</span>
 				<span class="filter-count">${tagitem.count}</span></a>
 			</dd>`
 			)
@@ -221,17 +222,47 @@ ipcRenderer.on('delete-bookmark', (event, message) => {
 	
 	if( message == 'delete-bookmark' ) {
 		
-		bookmark = maintable.bookmarkTable.row('.selected').data()
+		let row = maintable.bookmarkTable.row('.selected').data()
+		bookmark = [row[0], entities.decode(row[2])]
 	
 	} else {
 	
 		bookmark = message
 	}
 	
+	deleteBookmark( bookmark )
+})
+
+
+
+//note(dgmid): delete bookmarks from info panel
+
+$('body').on('click', '.info-delete', function(e) {
+	
+	let id = $( this ).data( 'id' )
+	
+	fetch.bookmarksApi( 'single', id, '', function( message ) {
+		
+		let obj 		= JSON.parse( message ),
+			bookmark 	= []
+		
+		bookmark.push( obj['item']['id'] )
+		bookmark.push( obj['item']['title'] )
+		
+		deleteBookmark( bookmark )
+	})
+})
+
+
+
+//note(dgmid): delete bookmark
+
+function deleteBookmark( bookmark ) {
+	
 	if( bookmark ) {
 		
 		let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {	
-								message: i18n.t('app:dialog.message.deletebookmark', 'Are you sure you want to delete the bookmark {{bookmark}}?', {bookmark: bookmark[2]}),
+								message: i18n.t('app:dialog.message.deletebookmark', 'Are you sure you want to delete the bookmark {{- bookmark}}?', {bookmark: bookmark[1]}),
 								detail: i18n.t('app:dialog.detail.deletebookmark', 'This operation is not reversable.'),
 								buttons: [i18n.t('app:dialog.button.deletebookmark', 'Delete Bookmark'), i18n.t('app:dialog.button.cancel', 'Cancel')]
 							})
@@ -257,7 +288,7 @@ ipcRenderer.on('delete-bookmark', (event, message) => {
 			i18n.t('app:errorbox.content.deletebookmark', 'A bookmark must be selected in order to delete it')
 		)
 	}
-})
+}
 
 
 
@@ -292,6 +323,18 @@ ipcRenderer.on('edit-bookmark', (event, message) => {
 
 
 
+//note(dgmid): edit bookmarks from info panel
+
+$('body').on('click', '.info-edit', function(e) {
+	
+	let id = $( this ).data( 'id' )
+	log.info(`CLICK - ID: ${id}`)
+	
+	modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + id, 480, 340, true )
+})
+
+
+
 //note(dgmid): edit tag
 
 ipcRenderer.on('edit-tag', (event, message) => {
@@ -305,9 +348,11 @@ ipcRenderer.on('edit-tag', (event, message) => {
 
 ipcRenderer.on('delete-tag', (event, message) => {
 	
-	let tag = message
+	let tags 	= store.get( 'tags' ),
+		tag 	= tags.find(x => x.id === message).text
+	
 	let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
-								message: i18n.t('app:dialog.message.deletetag', 'Are you sure you want to delete the tag {{tag}}?', {tag: tag}),
+								message: i18n.t('app:dialog.message.deletetag', 'Are you sure you want to delete the tag {{- tag}}?', {tag: tag}),
 								detail: i18n.t('app:dialog.detail.deletetag', 'This operation is not reversable.'),
 								buttons: [i18n.t('app:dialog.button.deletetag', 'Delete Tag'), i18n.t('app:dialog.button.cancel', 'Cancel')]
 							})
@@ -451,7 +496,7 @@ $('#clear').click(function() {
 	
 	$(this).hide()
 	$('#search').val('')
-	maintable.bookmarkTable.search( '' ).columns(6).search( data ).draw()
+	maintable.bookmarkTable.search( '' ).columns(9).search( data ).draw()
 })
 
 
@@ -511,8 +556,10 @@ $(document).ready(function() {
 		
 		if(e.which == 3) {
 			
-			let data = $(this).data('filter')
-			ipcRenderer.send('show-tags-menu', data )
+			let id 		= $(this).data('id'),
+				data 	= $(this).data('filter')
+			
+			ipcRenderer.send('show-tags-menu', [id, data] )
 		}
 	})
 	
@@ -599,12 +646,12 @@ $(document).ready(function() {
 			row = maintable.bookmarkTable.row( tr )
 		
 		if ( row.child.isShown() ) {
-			// This row is already open - close it
+			
 			row.child.hide()
 			tr.removeClass('shown')
 		
 		} else {
-			// Open this row
+			
 			row.child( maintable.detailsTable(row.data()) ).show()
 			tr.addClass('shown')
 		}

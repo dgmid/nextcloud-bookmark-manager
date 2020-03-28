@@ -1,9 +1,9 @@
 {
-  "open": "Open {{title}} in Default Browser",
-  "with": "Open {{title}} with…",
-  "copy": "Copy {{title}} url to Clipboard",
-  "edit": "Edit {{title}} Bookmark…",
-  "delete": "Delete {{title}} Bookmark…",
+  "open": "Open {{- title}} in Default Browser",
+  "with": "Open {{- title}} with…",
+  "copy": "Copy {{- title}} url to Clipboard",
+  "edit": "Edit {{- title}} Bookmark…",
+  "delete": "Delete {{- title}} Bookmark…",
   "errorbox": {
     "title": "Error launching: {{browser}}",
     "content": "the url {{url}} could not be opened"

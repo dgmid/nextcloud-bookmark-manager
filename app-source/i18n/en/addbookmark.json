@@ -2,8 +2,8 @@
   "header": "Add a new bookmark:",
   "label": {
     "url": "url",
-    "title": "titolo",
-    "description": "descrizione",
+    "title": "title",
+    "description": "description",
     "tags": "tags"
   },
   "input": {

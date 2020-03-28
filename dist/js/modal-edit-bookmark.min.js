@@ -18,7 +18,7 @@ require('select2')($)
 
 const fetch			= require( './fetch.min' )
 const serialize		= require( './serialize.min' )
-
+const entities		= require( './entities.min' )
 
 const 	urlParams = new URLSearchParams( location.search ),
 		theId = urlParams.get('id')
@@ -56,7 +56,7 @@ Mousetrap.bind('command+.', function() {
 
 function populateForm( bookmark ) {
 	
-	$('header').append( bookmark['item']['title'] )
+	$('header').append( entities.encode( bookmark['item']['title'] ) )
 	$('input[name="url"]').val( bookmark['item']['url'] )
 	$('input[name="title"]').val( bookmark['item']['title'] )
 	$('textarea[name="description"]').val( bookmark['item']['description'] )

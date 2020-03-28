@@ -11,8 +11,8 @@
   },
   "dialog": {
     "message": {
-      "deletetag": "Are you sure you want to delete the tag {{tag}}?",
-      "deletebookmark": "Are you sure you want to delete the bookmark {{bookmark}}?"
+      "deletetag": "Are you sure you want to delete the tag {{- tag}}?",
+      "deletebookmark": "Are you sure you want to delete the bookmark {{- bookmark}}?"
     },
     "detail": {
       "deletetag": "This operation is not reversable.",
