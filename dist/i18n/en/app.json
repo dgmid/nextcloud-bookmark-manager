@@ -31,7 +31,8 @@
       "description": "Description",
       "url": "URL",
       "created": "Created",
-      "modified": "Modified"
+      "modified": "Modified",
+      "tags": "Tags"
     },
     "title": {
       "tags": "Tags",

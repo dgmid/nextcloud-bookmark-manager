@@ -29,10 +29,9 @@ let store = new Store({
 		
 		tableColumns: {
 			
-			description: true,
-			url: true,
-			created: false,
-			modified: false
+			created: true,
+			modified: true,
+			tags: true
 		},
 		
 		loginCredentials: {
