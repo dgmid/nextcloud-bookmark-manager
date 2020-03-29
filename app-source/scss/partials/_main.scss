@@ -439,6 +439,11 @@ td.padded-right {
 			text-overflow: ellipsis;
 		}
 		
+		.wrap {
+			
+			white-space: normal;
+		}
+		
 		.tag {
 			
 			vertical-align: -2px;
@@ -448,6 +453,12 @@ td.padded-right {
 				background-color: var(--side-text);
 				mask: var(--icon-untagged) no-repeat center center;
 			}
+		}
+		
+		.favicon {
+			
+			vertical-align: text-bottom;
+			margin-right: 5px;
 		}
 	}
 	
