@@ -12,8 +12,8 @@ const getAvailableBrowsers = require('detect-installed-browsers').getAvailableBr
 
 
 let win,
-	loginFlow
-
+	loginFlow,
+	quit = false
 
 
 let store = new Store({
@@ -90,9 +90,13 @@ function createWindow() {
 	win.on('resize', saveWindowBounds)
 	win.on('move', saveWindowBounds)
 	
-	win.on('closed', () => {
-		
-		app.quit()
+	win.on('close', function(e) {
+	
+		if(quit === false) {
+			
+			e.preventDefault()
+			win.hide()
+		}
 	})
 	
 	win.webContents.on('did-fail-load', () => {
@@ -127,6 +131,17 @@ function createWindow() {
 		}
 	})
 	
+	require( './menu-app.min' )
+	require( './menu-bookmarks.min' )
+	require( './menu-tags.min' )
+}
+
+
+
+app.on('ready', function() {
+	
+	createWindow()
+	
 	protocol.registerFileProtocol('nc', (request, callack) => {
 		
 		const url = request.url
@@ -157,14 +172,28 @@ function createWindow() {
 			)
 		}
 	})
+}) 
+
+
+
+app.on('window-all-closed', function () {
+
+})
+
+
+
+app.on('activate', () => {
 	
-	require( './menu-app.min' )
-	require( './menu-bookmarks.min' )
-	require( './menu-tags.min' )
-}
+	win.show()
+})
 
-app.on('ready', createWindow) 
 
+
+app.on('quit-app', () => {
+	
+	quit = true
+	app.quit()
+})
 
 
 ipcMain.on('refresh', (event, message) => {

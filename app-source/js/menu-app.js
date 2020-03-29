@@ -56,7 +56,9 @@ const template = [
 				type: 'separator'
 			},
 			{
-				role: 'quit'
+				label: i18n.t('menu:app.quit', 'Quit {{name}}', { name: name }),
+				accelerator: 'Command+q',
+				click () { app.emit('quit-app') }
 			}
 		]
 	},
