@@ -1,7 +1,8 @@
 {
   "app": {
     "name": "About {{name}}",
-    "login": "Log in/out to Nextcloud…"
+    "login": "Log in/out to Nextcloud…",
+    "quit": "Quit {{name}}"
   },
   "bookmarks": {
     "bookmarks": "Bookmarks",

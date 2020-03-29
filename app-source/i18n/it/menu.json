@@ -1,7 +1,8 @@
 {
   "app": {
     "name": "Informazioni su {{name}}",
-    "login": "Accesso/disconnettersi a Nextcloud…"
+    "login": "Accesso/disconnettersi a Nextcloud…",
+    "quit": "Esci da {{name}}"
   },
   "bookmarks": {
     "bookmarks": "Segnalibri",
