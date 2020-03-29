@@ -95,6 +95,10 @@ table.dataTable tbody td {
 	color: var(--table-text);
 }
 
+table.dataTable.nowrap td {
+    white-space: nowrap;
+}
+
 table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 	
 	background-color: var(--stripe-odd);

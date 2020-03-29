@@ -59,7 +59,7 @@ function createWindow() {
 		y: y,
 		width: width,
 		height: height,
-		minWidth: 750,
+		minWidth: 550,
 		minHeight: 396,
 		vibrancy: 'under-window',
 		webPreferences: {
