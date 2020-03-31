@@ -1,6 +1,6 @@
 'use strict'
 
-const {app, BrowserWindow, ipcMain, protocol} = require('electron')
+const {app, BrowserWindow, ipcMain, protocol, Menu} = require('electron')
 const url 		= require('url') 
 const path 		= require('path')
 const dialog 	= require('electron').dialog
@@ -13,7 +13,7 @@ const getAvailableBrowsers = require('detect-installed-browsers').getAvailableBr
 
 let win,
 	loginFlow,
-	quit = false
+	isQuitting = false
 
 
 let store = new Store({
@@ -90,12 +90,17 @@ function createWindow() {
 	win.on('resize', saveWindowBounds)
 	win.on('move', saveWindowBounds)
 	
+	app.on('before-quit', () => {
+		
+		isQuitting = true
+	})
+	
 	win.on('close', function(e) {
 	
-		if(quit === false) {
+		if( !isQuitting ) {
 			
 			e.preventDefault()
-			win.hide()
+			Menu.sendActionToFirstResponder('hide:')
 		}
 	})
 	
@@ -177,21 +182,28 @@ app.on('ready', function() {
 
 
 app.on('window-all-closed', function () {
-
+	
+	if (process.platform !== 'darwin') {
+		
+		app.quit()
+	}
 })
 
 
 
-app.on('activate', () => {
+app.on('activate', ( event, hasVisibleWindows ) => {
 	
-	win.show()
+	if (!hasVisibleWindows) {
+		
+		createWindow()
+	}
 })
 
 
 
 app.on('quit-app', () => {
 	
-	quit = true
+	isQuitting = true
 	app.quit()
 })
 

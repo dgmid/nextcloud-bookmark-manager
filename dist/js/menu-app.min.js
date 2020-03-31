@@ -67,7 +67,6 @@ const template = [
 		submenu:
 		[
 			{
-				label: 'Add New Bookmark…',
 				label: i18n.t('menu:bookmarks.new', 'Add New Bookmark…'),
 				accelerator: 'Command+N',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('add-bookmark', 'add-bookmark') }
