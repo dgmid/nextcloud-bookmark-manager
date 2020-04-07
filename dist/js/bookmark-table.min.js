@@ -39,7 +39,7 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				searchable: false
 			},
 			{
-				title: '',
+				title: `<button id="toggle-info-panel" title="${i18n.t('bookmarktable:header.details', 'Details')}"></button>`,
 				targets: [ 1 ],
 				className: 'details-control',
 				orderable: false,
@@ -51,7 +51,8 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 			{
 				title: i18n.t('bookmarktable:header.title', 'Title'),
 				targets: [ 2 ],
-				responsivePriority: 1
+				responsivePriority: 1,
+				width: '75%'	
 			},
 			{
 				title: i18n.t('bookmarktable:header.description', 'Description'),

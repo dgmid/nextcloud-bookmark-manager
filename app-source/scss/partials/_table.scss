@@ -169,6 +169,11 @@ table.dataTable.compact thead td {
 	line-height: 23px;
 }
 
+table.dataTable.compact thead th.details-control {
+	
+	padding-right: 10px;
+}
+
 table.dataTable.compact thead th.tags-column {
 	
 	text-align: right;

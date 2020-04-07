@@ -544,6 +544,7 @@ $(document).ready(function() {
 	
 	$('.taglist').on('click', '.filter', function() {
 		
+		$('#toggle-info-panel').removeClass('opened')
 		$('.filter').removeClass('selected')
 		$(this).addClass('selected')
 		
@@ -676,6 +677,34 @@ $(document).ready(function() {
 		maintable.bookmarkTable.search($(this).val()).draw()
 	})
 	
+	
+	//note(dgmid): toggle info panels
+	
+	$('#toggle-info-panel').click( function() {
+		
+		let toggle = $(this)
+		toggle.toggleClass( 'opened' )
+		
+		maintable.bookmarkTable.rows( { filter : 'applied'} ).every(function() {
+			
+			if( toggle.hasClass( 'opened' ) ) {
+				
+				if(!this.child.isShown()){
+					
+					this.child( maintable.detailsTable(this.data()) ).show()
+					$(this.node()).addClass('shown')
+				}
+				
+			} else {
+			
+				if(this.child.isShown()){
+					
+					this.child.hide()
+					$(this.node()).removeClass('shown')
+				}
+			}
+		})
+	})
 	
 	//note(dgmid): if missing credentials, open login window, else load bookmarks
 	

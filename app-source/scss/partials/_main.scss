@@ -402,6 +402,18 @@ td.padded-right {
 	justify-content: flex-end;
 }
 
+#toggle-info-panel {
+	
+	appearance: none;
+	border: 0;
+	width: 15px;
+	height: 12px;
+	background-color: #868686;
+	mask: var(--icon-details) no-repeat center center;
+	
+	&.opened { background-color: #fff; }
+}
+
 .details-panel {
 	
 	margin: -4px -10px;

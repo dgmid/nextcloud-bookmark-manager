@@ -19,6 +19,10 @@
     "type": "git",
     "url": "https://github.com/dgmid/nextcloud-bookmark-manager"
   },
+  "bugs": "https://github.com/dgmid/nextcloud-bookmark-manager/issues",
+  "browserslist": [
+    "last 1 Chrome versions"
+  ],
   "dependencies": {
     "applescript": "^1.0.0",
     "color": "^3.1.2",
