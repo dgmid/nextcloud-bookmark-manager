@@ -49,14 +49,14 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				orderable: false,
 				data: null,
 				defaultContent: '',
-				width: '5px',
+				width: '35px',
 				responsivePriority: 1
 			},
 			{
 				title: i18n.t('bookmarktable:header.title', 'Title'),
 				targets: [ 2 ],
 				responsivePriority: 1,
-				width: '75%'	
+				width: '99%'	
 			},
 			{
 				title: i18n.t('bookmarktable:header.description', 'Description'),
@@ -78,9 +78,8 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				targets: [ 6 ],
 				visible: store.get('tableColumns.created'),
 				searchable: false,
-				width: '100px',
 				iDataSort: 5,
-				responsivePriority: 1002
+				responsivePriority: 1003
 			},
 			{
 				title: 'unix modified',
@@ -92,19 +91,20 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				targets: [ 8 ],
 				visible: store.get('tableColumns.modified'),
 				searchable: false,
-				width: '100px',
 				iDataSort: 7,
-				responsivePriority: 1001
+				responsivePriority: 1002
 			},
-			{ 	className: 'date-column',
-				targets: [ 6, 8 ]
+			{
+				targets: [ 6, 8 ],
+				className: 'date-column',
+				width: '135px'
 			},
 			{
 				title: i18n.t('bookmarktable:header.tags', 'Tags'),
 				className: 'tags-column dt-body-right padded-right',
 				targets: [ 9 ],
 				width: '50px',
-				responsivePriority: 2
+				responsivePriority: 1001
 			}
 		],
 	
