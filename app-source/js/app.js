@@ -374,6 +374,35 @@ ipcRenderer.on('delete-tag', (event, message) => {
 
 
 
+//note(dgmid): get info from context menu
+
+ipcRenderer.on('info-bookmark', (event, message) => {
+	
+	toggleInfoPanel( $(`#row_${message}`) )
+})
+
+
+
+//note(dgmid): toggle info
+
+function toggleInfoPanel( tr ) {
+	
+	let row = maintable.bookmarkTable.row( tr )
+	
+	if ( row.child.isShown() ) {
+		
+		row.child.hide()
+		tr.removeClass('shown')
+	
+	} else {
+		
+		row.child( maintable.detailsTable(row.data()) ).show()
+		tr.addClass('shown')
+	}
+} 
+
+
+
 //note(dgmid): log in modal
 
 ipcRenderer.on('open-login', (event, message) => {
@@ -502,7 +531,7 @@ $('#clear').click(function() {
 
 window.onkeydown = function(e) {
   if (e.keyCode == 32 && e.target == document.body) {
-    e.preventDefault();
+    e.preventDefault()
   }
 };
 
@@ -643,19 +672,9 @@ $(document).ready(function() {
 	
 	$('#bookmarks tbody').on('click', 'td.details-control', function () {
 		
-		let tr = $(this).closest('tr'),
-			row = maintable.bookmarkTable.row( tr )
+		let tr = $(this).closest('tr')
 		
-		if ( row.child.isShown() ) {
-			
-			row.child.hide()
-			tr.removeClass('shown')
-		
-		} else {
-			
-			row.child( maintable.detailsTable(row.data()) ).show()
-			tr.addClass('shown')
-		}
+		toggleInfoPanel( tr )
 	})
 	
 	

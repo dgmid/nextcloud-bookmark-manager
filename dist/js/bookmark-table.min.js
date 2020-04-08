@@ -30,6 +30,10 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 	scrollY: 	'calc(100vh - 59px)', // window height - header - footer
 	paging: 	false,
 	dom: 'ltipr', // hide default search field
+	rowId:
+		function(column) {
+			return 'row_' + column[0] // create unique row id form json ids
+		},
 	columnDefs:
 		[
 			{

@@ -4,6 +4,7 @@
   "copy": "Copy {{- title}} url to Clipboard",
   "edit": "Edit {{- title}} Bookmark…",
   "delete": "Delete {{- title}} Bookmark…",
+  "info": "Show / Hide Info…",
   "errorbox": {
     "title": "Error launching: {{browser}}",
     "content": "the url {{url}} could not be opened"

@@ -49,10 +49,16 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('edit-bookmark', message) }
 		},
 		{
-			label: `Delete ${title} Bookmark…`,
 			label: i18n.t('menubookmarks:delete', 'Delete {{- title}} Bookmark…', { title: title }),
 			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('delete-bookmark', [id, title]) }
 			
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: i18n.t('menubookmarks:info', 'Show / Hide Info…'),
+			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('info-bookmark', id) }
 		},
 	]
 	
