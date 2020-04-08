@@ -107,7 +107,7 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 	language: {
 		emptyTable: ' ',
 		zeroRecords: i18n.t('bookmarktable:footer.zero', 'No matching Bookmarks were found'),
-		info: i18n.t('bookmarktable:footer.info', 'Showing _TOTAL_ Bookmarks'),
+		info: i18n.t('bookmarktable:footer.info', 'Showing <span>_TOTAL_</span> Bookmarks'),
 		infoEmpty: i18n.t('bookmarktable:footer.empty', 'Showing 0 to 0 of 0 Bookmarks'),
 		infoFiltered: i18n.t('bookmarktable:footer.filtered', '(filtered from _MAX_ Bookmarks)')
 	}

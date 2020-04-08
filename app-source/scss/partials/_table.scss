@@ -220,10 +220,22 @@ table.dataTable td.date-column {
 .dataTables_wrapper .dataTables_info {
 	
 	font-size: 11px;
+	line-height: 15px;
 	padding-left: 20px;
 	position: absolute;
 	left: 0;
-	bottom: -23px;
+	bottom: -25px;
+	
+	span {
+		
+		font-weight: 600;
+		display: inline-block;
+		color: #fff;
+		background-color: #585858;
+		padding: 0 6px;
+		margin: 0 2px;
+		border-radius: 8px;
+	}
 }
 
 .dataTables_wrapper .dataTables_info {
@@ -295,3 +307,17 @@ table.dataTable.stripe tbody tr.even.selected td {
 }
 
 .dataTables_empty { text-align: center; }
+
+
+
+[data-theme^="dark"] {
+
+	.dataTables_wrapper .dataTables_info {
+		
+		span {
+			
+			color: #000;
+			background-color: #999;
+		}
+	}
+}

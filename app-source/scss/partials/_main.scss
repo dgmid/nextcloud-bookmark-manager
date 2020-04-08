@@ -411,7 +411,7 @@ td.padded-right {
 	background-color: #868686;
 	mask: var(--icon-details) no-repeat center center;
 	
-	&.opened { background-color: #fff; }
+	&.opened { background-color: var(--text); }
 }
 
 .details-panel {

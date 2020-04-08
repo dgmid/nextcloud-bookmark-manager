@@ -10,7 +10,7 @@
   },
   "footer": {
     "zero": "No matching Bookmarks were found",
-    "info": "Showing _TOTAL_ Bookmarks",
+    "info": "Showing <span>_TOTAL_</span> Bookmarks",
     "empty": "Showing 0 to 0 of 0 Bookmarks",
     "filtered": "(filtered from _MAX_ Bookmarks)"
   }
