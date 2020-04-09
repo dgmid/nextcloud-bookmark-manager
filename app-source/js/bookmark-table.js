@@ -133,7 +133,7 @@ module.exports.detailsTable = function( data ) {
 	return `<div class="details-panel">
 	<div class="row">
 		<div class="label">${i18n.t('bookmarktable:header.url', 'Url')}:</div>
-		<div class="value nowrap">${favicon}${data[4]}</div>
+		<div class="value nowrap"><a id="url_${data[0]}" href="${data[4]}">${favicon}${data[4]}</a></div>
 	</div>
 	
 	<div class="row">

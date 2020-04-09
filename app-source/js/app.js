@@ -497,6 +497,18 @@ function htmlEntities( str ) {
 
 
 
+//note(dgmid): open info panel link in default browser
+	
+$('body').on('click', '.details-panel a', function(event) {
+	
+	event.preventDefault()
+	
+	let link = $(this).attr( 'href' )
+	shell.openExternal(link)
+})
+
+
+
 //note(dgmid): open update link in default browser
 
 $('body').on('click', '#update', (event) => {

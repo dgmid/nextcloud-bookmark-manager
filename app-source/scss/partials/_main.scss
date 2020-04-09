@@ -470,6 +470,20 @@ td.padded-right {
 			vertical-align: text-bottom;
 			margin-right: 5px;
 		}
+		
+		[id^=url_] {
+			
+			color: var(--text);
+			text-decoration: none;
+			transition: color .4s;
+			
+			cursor: default;
+			
+			&:hover {
+				
+				color: royalblue;
+			}
+		}
 	}
 	
 	.buttons {
@@ -518,11 +532,22 @@ td.padded-right {
 	
 	.details-panel {
 		
-		.tag {
+		.row {
 			
-			&.untagged {
+			.tag {
 				
-				background-color: #000;
+				&.untagged {
+					
+					background-color: #000;
+				}
+			}
+			
+			[id^=url_] {
+				
+				&:hover {
+					
+					color: dodgerblue;
+				}
 			}
 		}
 	}
