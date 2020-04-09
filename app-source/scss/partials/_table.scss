@@ -226,7 +226,7 @@ table.dataTable td.date-column {
 	left: 0;
 	bottom: -25px;
 	
-	span {
+	b {
 		
 		font-weight: 600;
 		display: inline-block;
@@ -290,11 +290,18 @@ table.dataTable td.date-column {
 	height: 0;
 }
 
-@media screen and (max-width: 567px) {
-	.dataTables_wrapper .dataTables_info {
+@media screen and (max-width: 720px) {
+	
+	.dataTables_wrapper .dataTables_info .filtered {
 		
-		float: none;
-		text-align: center;
+		display: none;
+	}
+}
+
+@media screen and (max-width: 567px) {
+	
+	.dataTables_wrapper .dataTables_info .text {
+		
 		display: none;
 	}
 }
@@ -314,7 +321,7 @@ table.dataTable.stripe tbody tr.even.selected td {
 
 	.dataTables_wrapper .dataTables_info {
 		
-		span {
+		b {
 			
 			color: #000;
 			background-color: #999;
