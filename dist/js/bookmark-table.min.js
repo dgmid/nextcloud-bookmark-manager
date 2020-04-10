@@ -103,6 +103,7 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				title: i18n.t('bookmarktable:header.tags', 'Tags'),
 				className: 'tags-column dt-body-right padded-right',
 				targets: [ 9 ],
+				visible: store.get('tableColumns.tags'),
 				width: '50px',
 				responsivePriority: 1001
 			}

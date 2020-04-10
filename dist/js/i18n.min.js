@@ -23,6 +23,7 @@ const i18nextOptions = {
 		'login',
 		'menu',
 		'menubookmarks',
+		'menucolumns',
 		'menutags',
 		'version'
 		],

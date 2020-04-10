@@ -403,6 +403,21 @@ function toggleInfoPanel( tr ) {
 
 
 
+//note(dgmid): columns menu
+
+ipcRenderer.on('toggle-column', (event, message) => {
+	
+	log.info(message)
+	
+	let column 	= maintable.bookmarkTable.column( message.id ),
+		state 	= (message.state == false) ? true : false
+		
+	column.visible( state )
+	$(`#${message.name}`).prop('checked', state)
+	store.set( `tableColumns.${message.name}`, state )
+})
+
+
 //note(dgmid): log in modal
 
 ipcRenderer.on('open-login', (event, message) => {
@@ -642,7 +657,7 @@ $(document).ready(function() {
 	})
 	
 	
-	//note(dgmid): show context menu
+	//note(dgmid): show bookmark context menu
 	
 	$('body #bookmarks tbody').on('mouseup', 'tr', function(event) {
 		
@@ -654,6 +669,17 @@ $(document).ready(function() {
 			
 				ipcRenderer.send('show-bookmark-menu', data )
 			}
+		}
+	})
+	
+	
+	//note(dgmid): show columns context menu
+	
+	$('body thead').on('mouseup', 'th:not(.details-control)', function(event) {
+		
+		if( event.which === 3 ) {
+			
+			ipcRenderer.send('show-columns-menu', '' )
 		}
 	})
 	
