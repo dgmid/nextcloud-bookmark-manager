@@ -10,7 +10,7 @@
   },
   "footer": {
     "zero": "<span class=\"text\">Nessun segnalibro corrispondente trovato</span>",
-    "info": "<span class=\"text\">Mostra </span><b>_TOTAL_</b><span class=\"text\"> segnalibri</span>",
+    "info": "Mostra <b>_TOTAL_</b><span class=\"text\"> segnalibri</span>",
     "empty": "<span class=\"text\">Mostra </span><b>0</b><span class=\"text\"> a 0 di 0 Segnalibri</span>",
     "filtered": "<span class=\"filtered\">(filtrato da _MAX_ segnalibri)</span>"
   }

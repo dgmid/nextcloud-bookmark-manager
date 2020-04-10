@@ -613,6 +613,14 @@ $(document).ready(function() {
 		let column 	= maintable.bookmarkTable.column( $(this).attr('data-column') ),
 			id 		= $(this).prop( 'id' )
 		
+		$('#toggle-info-panel').removeClass( 'opened' )
+		
+		maintable.bookmarkTable.rows().every(function() {
+			
+			this.child.hide()
+			$(this.node()).removeClass('shown')
+		})
+		
 		if( $(this).prop('checked') === true ) {
 			
 			column.visible( true )
