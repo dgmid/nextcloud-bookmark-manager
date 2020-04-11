@@ -260,7 +260,10 @@ table.dataTable td.date-column {
 	-webkit-overflow-scrolling: touch;
 }
 
-.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > th, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > td, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > th, .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > td {
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > th,
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > thead > tr > td,
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > th,
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > td {
 	
 	vertical-align: top;
 }
@@ -295,6 +298,11 @@ table.dataTable td.date-column {
 	height: 0;
 }
 
+table.dataTable > tbody tr:last-child td {
+	
+	border-bottom: 1px solid var(--table-border);
+}
+
 @media screen and (max-width: 720px) {
 	
 	.dataTables_wrapper .dataTables_info .filtered {
@@ -318,7 +326,18 @@ table.dataTable.stripe tbody tr.even.selected td {
 	color: #fff !important;
 }
 
-.dataTables_empty { text-align: center; }
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody > table > tbody > tr > td.dataTables_empty {
+	
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	
+	.text {
+		
+		padding-left: 20px;
+		background: var(--icon-warning) no-repeat left center;
+	}
+}
 
 
 

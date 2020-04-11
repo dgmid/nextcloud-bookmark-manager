@@ -383,7 +383,12 @@ aside {
 	}
 	
 	.tag { text-indent: 1000px; }
-	.tags-column .tagname { display: none; }
+	
+	.tags-column {
+		
+		.tag { margin-bottom: 1px; }
+		.tagname { display: none; }
+	}
 }
 
 .padded-left { padding-left: 20px !important; }

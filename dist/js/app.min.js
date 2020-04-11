@@ -407,8 +407,6 @@ function toggleInfoPanel( tr ) {
 
 ipcRenderer.on('toggle-column', (event, message) => {
 	
-	log.info(message)
-	
 	let column 	= maintable.bookmarkTable.column( message.id ),
 		state 	= (message.state == false) ? true : false
 		

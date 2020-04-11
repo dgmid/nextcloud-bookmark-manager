@@ -9,6 +9,7 @@
     "tags": "Tags"
   },
   "footer": {
+    "nodata": "No data available",
     "zero": "<span class=\"text\">No matching Bookmarks were found</span>",
     "info": "Showing <b>_TOTAL_</b><span class=\"text\"> Bookmarks</span>",
     "empty": "<span class=\"text\">Showing </span><b>0</b><span class=\"text\"> to 0 of 0 Bookmarks</span>",
