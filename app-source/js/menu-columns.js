@@ -23,6 +23,30 @@ ipcMain.on('show-columns-menu', ( event, message ) => {
 	
 	const columnsMenuTemplate = [
 		{
+			label: i18n.t('menucolumns:description', 'Description'),
+			type: 'checkbox',
+			checked: settings.description,
+			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-column',
+				{
+					"id": 3,
+					"name": "description",
+					"state": settings.description
+				}
+			) }
+		},
+		{
+			label: i18n.t('menucolumns:url', 'Url'),
+			type: 'checkbox',
+			checked: settings.url,
+			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-column',
+				{
+					"id": 4,
+					"name": "url",
+					"state": settings.url
+				}
+			) }
+		},
+		{
 			label: i18n.t('menucolumns:created', 'Created'),
 			type: 'checkbox',
 			checked: settings.created,

@@ -410,7 +410,7 @@ ipcRenderer.on('toggle-column', (event, message) => {
 	let column 	= maintable.bookmarkTable.column( message.id ),
 		state 	= (message.state == false) ? true : false
 		
-	column.visible( state )
+	column.visible( state ).draw()
 	$(`#${message.name}`).prop('checked', state)
 	store.set( `tableColumns.${message.name}`, state )
 })
@@ -628,6 +628,7 @@ $(document).ready(function() {
 		
 		$('#toggle-info-panel').removeClass( 'opened' )
 		
+		//todo(dgmid): replace this with an adjustment of the colspan attr on the childrows
 		maintable.bookmarkTable.rows().every(function() {
 			
 			this.child.hide()
@@ -636,12 +637,12 @@ $(document).ready(function() {
 		
 		if( $(this).prop('checked') === true ) {
 			
-			column.visible( true )
+			column.visible( true ).draw()
 			store.set( `tableColumns.${id}`, true )
 		
 		} else {
 			
-			column.visible( false )
+			column.visible( false ).draw()
 			store.set( `tableColumns.${id}`, false )
 		}
 	})

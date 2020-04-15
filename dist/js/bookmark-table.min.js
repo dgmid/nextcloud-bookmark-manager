@@ -13,6 +13,53 @@ require( 'datatables.net-responsive' )( window, $ )
 
 
 
+$.fn.dataTable.render.ellipsis = function ( cutoff, wordbreak, escapeHtml ) {
+	
+	var esc = function ( t ) {
+		return t
+		.replace( /&/g, '&amp;' )
+		.replace( /</g, '&lt;' )
+		.replace( />/g, '&gt;' )
+		.replace( /"/g, '&quot;' )
+	}
+
+	return function ( d, type, row ) {
+	
+		if ( type !== 'display' ) {
+			
+			return d
+		}
+	
+		if ( typeof d !== 'number' && typeof d !== 'string' ) {
+			
+			return d
+		}
+	
+		d = d.toString()
+	
+		if ( d.length <= cutoff ) {
+			
+			return d
+		}
+	
+		var shortened = d.substr(0, cutoff-1)
+	
+		if ( wordbreak ) {
+			
+			shortened = shortened.replace(/\s([^\s]*)$/, '')
+		}
+	
+		if ( escapeHtml ) {
+			
+			shortened = esc( shortened )
+		}
+	
+		return '<span class="ellipsis" title="'+esc(d)+'">'+shortened+'&#8230;</span>'
+	}
+}
+
+
+
 module.exports.bookmarkTable = $('#bookmarks').DataTable({
 	
 	responsive: true,
@@ -44,29 +91,34 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 			},
 			{
 				title: `<button id="toggle-info-panel" title="${i18n.t('bookmarktable:header.details', 'Details')}"></button>`,
+				responsivePriority: 1,
 				targets: [ 1 ],
 				className: 'details-control',
 				orderable: false,
 				data: null,
 				defaultContent: '',
-				width: '35px',
-				responsivePriority: 1
+				width: '35px'
 			},
 			{
 				title: i18n.t('bookmarktable:header.title', 'Title'),
-				targets: [ 2 ],
+				render: $.fn.dataTable.render.ellipsis( 45, true, true ),
 				responsivePriority: 1,
-				width: '99%'	
+				targets: [ 2 ],
+				width: '99%'
 			},
 			{
 				title: i18n.t('bookmarktable:header.description', 'Description'),
+				render: $.fn.dataTable.render.ellipsis( 45, true, true ),
+				responsivePriority: 10000,
 				targets: [ 3 ],
-				visible: false
+				visible: true
 			},
 			{
 				title: i18n.t('bookmarktable:header.url', 'Url'),
+				render: $.fn.dataTable.render.ellipsis( 45, true, true ),
+				responsivePriority: 10001,
 				targets: [ 4 ],
-				visible: false
+				visible: true
 			},
 			{
 				title: 'unix added',
@@ -75,11 +127,11 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 			},
 			{
 				title: i18n.t('bookmarktable:header.created', 'Created'),
+				responsivePriority: 10003,
 				targets: [ 6 ],
 				visible: store.get('tableColumns.created'),
 				searchable: false,
-				iDataSort: 5,
-				responsivePriority: 1003
+				iDataSort: 5
 			},
 			{
 				title: 'unix modified',
@@ -88,11 +140,11 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 			},
 			{
 				title: i18n.t('bookmarktable:header.modified', 'Modified'),
+				responsivePriority: 10002,
 				targets: [ 8 ],
 				visible: store.get('tableColumns.modified'),
 				searchable: false,
-				iDataSort: 7,
-				responsivePriority: 1002
+				iDataSort: 7
 			},
 			{
 				targets: [ 6, 8 ],
@@ -102,10 +154,10 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 			{
 				title: i18n.t('bookmarktable:header.tags', 'Tags'),
 				className: 'tags-column dt-body-right padded-right',
+				responsivePriority: 2,
 				targets: [ 9 ],
 				visible: store.get('tableColumns.tags'),
 				width: '50px',
-				responsivePriority: 1001
 			}
 		],
 	
@@ -122,9 +174,9 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 
 module.exports.detailsTable = function( data ) {
 	
-	let desc = ( data[3] == '' ? '⋯' : data[3] ),
-		hostname = psl.get(extractHostname( data[4] )),
-		favicon
+	let desc 		= ( data[3] == '' ? '⋯' : data[3] ),
+		hostname 	= psl.get(extractHostname( data[4] )),
+		favicon		= '';
 	
 	if( hostname ) {
 		
@@ -135,6 +187,11 @@ module.exports.detailsTable = function( data ) {
 	<div class="row">
 		<div class="label">${i18n.t('bookmarktable:header.url', 'Url')}:</div>
 		<div class="value nowrap"><a id="url_${data[0]}" href="${data[4]}">${favicon}${data[4]}</a></div>
+	</div>
+	
+	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.title', 'Title')}:</div>
+		<div class="value wrap">${data[2]}</div>
 	</div>
 	
 	<div class="row">

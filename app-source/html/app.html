@@ -11,7 +11,7 @@
 
 <body>
 	<main>
-		<table id="bookmarks" class="stripe hover compact order-column nowrap">
+		<table id="bookmarks" class="stripe hover compact order-column responsive nowrap">
 		</table>
 	</main>
 	
@@ -32,6 +32,8 @@
 			
 			<dl id="column-list">
 				<dt data-i18n="app:sidebar.title.columns">Columns</dt>
+				<dd><label><input id="description" class="col-toggle" type="checkbox" data-column="3" /> <span data-i18n="app:sidebar.filter.description">Description</span></label></dd>
+				<dd><label><input id="url" class="col-toggle" type="checkbox" data-column="4" /> <span data-i18n="app:sidebar.filter.url">Url</span></label></dd>
 				<dd><label><input id="created" class="col-toggle" type="checkbox" data-column="6" /> <span data-i18n="app:sidebar.filter.created">Created</span></label></dd>
 				<dd><label><input id="modified" class="col-toggle" type="checkbox" data-column="8" /> <span data-i18n="app:sidebar.filter.modified">Modified</span></label></dd>
 				<dd><label><input id="tags" class="col-toggle" type="checkbox" data-column="9" /> <span data-i18n="app:sidebar.filter.tags">Tags</span></label></dd>
