@@ -71,12 +71,24 @@ ipcMain.on('show-columns-menu', ( event, message ) => {
 			) }
 		},
 		{
+			label: i18n.t('menucolumns:folders', 'Folders'),
+			type: 'checkbox',
+			checked: settings.folders,
+			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-column',
+				{
+					"id": 10,
+					"name": "folders",
+					"state": settings.folders
+				}
+			) }
+		},
+		{
 			label: i18n.t('menucolumns:tags', 'Tags'),
 			type: 'checkbox',
 			checked: settings.tags,
 			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-column',
 				{
-					"id": 9,
+					"id": 11,
 					"name": "tags",
 					"state": settings.tags
 				}
