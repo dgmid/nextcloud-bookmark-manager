@@ -32,9 +32,11 @@
       "url": "URL",
       "created": "Creato",
       "modified": "Modificato",
+      "folders": "Cartelle",
       "tags": "Tag"
     },
     "title": {
+      "home": "Home",
       "tags": "Tag",
       "columns": "Colonne"
     },

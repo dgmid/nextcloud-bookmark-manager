@@ -615,6 +615,7 @@ $(document).ready(function() {
 	
 	//note(dgmid): translate html strings
 	
+	$('#folder-home a').localize()
 	$('#sidebar-tags .list-title').html( i18n.t('app:sidebar.title.tags', 'Tags') )
 	$('#column-list dt').html( i18n.t('app:sidebar.title.columns', 'Columns') )
 	$('#description span').html( i18n.t('app:sidebar.filter.description', 'Description') )

@@ -32,9 +32,11 @@
       "url": "URL",
       "created": "Created",
       "modified": "Modified",
+      "folders": "Folders",
       "tags": "Tags"
     },
     "title": {
+      "home": "Home",
       "tags": "Tags",
       "columns": "Columns"
     },
