@@ -29,8 +29,11 @@ let store = new Store({
 		
 		tableColumns: {
 			
+			description: false,
+			url: false,
 			created: true,
 			modified: true,
+			folders: false,
 			tags: true
 		},
 		
@@ -43,7 +46,15 @@ let store = new Store({
 		
 		exportPath: app.getPath('desktop'),
 		tags: null,
+		folders: null,
 		browsers: null
+	}
+})
+
+let bookmarkFile = new Store({
+	name: 'bookmarks',
+	defaults: {
+		data: null
 	}
 })
 
@@ -60,7 +71,7 @@ function createWindow() {
 		width: width,
 		height: height,
 		minWidth: 550,
-		minHeight: 396,
+		minHeight: 544,
 		vibrancy: 'under-window',
 		webPreferences: {
 			devTools: true,

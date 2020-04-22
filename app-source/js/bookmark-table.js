@@ -111,14 +111,14 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				render: $.fn.dataTable.render.ellipsis( 45, true, true ),
 				responsivePriority: 10000,
 				targets: [ 3 ],
-				visible: true
+				visible: store.get('tableColumns.description')
 			},
 			{
 				title: i18n.t('bookmarktable:header.url', 'Url'),
 				render: $.fn.dataTable.render.ellipsis( 45, true, true ),
 				responsivePriority: 10001,
 				targets: [ 4 ],
-				visible: true
+				visible: store.get('tableColumns.url')
 			},
 			{
 				title: 'unix added',
@@ -152,10 +152,21 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 				width: '135px'
 			},
 			{
-				title: i18n.t('bookmarktable:header.tags', 'Tags'),
-				className: 'tags-column dt-body-right padded-right',
-				responsivePriority: 2,
+				title: 'folder id',
 				targets: [ 9 ],
+				visible: false
+			},
+			{
+				title: i18n.t('bookmarktable:header.folders', 'Folders'),
+				responsivePriority: 10004,
+				targets: [ 10 ],
+				visible: store.get('tableColumns.folders'),
+			},
+			{
+				title: i18n.t('bookmarktable:header.tags', 'Tags'),
+				className: 'tags-column padded-right',
+				responsivePriority: 2,
+				targets: [ 11 ],
 				visible: store.get('tableColumns.tags'),
 				width: '50px',
 			}
@@ -210,8 +221,13 @@ module.exports.detailsTable = function( data ) {
 	</div>
 	
 	<div class="row">
+		<div class="label">${i18n.t('bookmarktable:header.folders', 'Folders')}:</div>
+		<div class="value">${data[10]}</div>
+	</div>
+	
+	<div class="row">
 		<div class="label">${i18n.t('bookmarktable:header.tags', 'Tags')}:</div>
-		<div class="value">${data[9]}</div>
+		<div class="value">${data[11]}</div>
 	</div>
 	
 	<div class="buttons">

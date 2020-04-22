@@ -22,13 +22,22 @@
 				</dl>
 			</nav>
 			
-			<nav id="sidebar-tags">
-				<span class="list-title" data-i18n="app:sidebar.title.tags">Tags</span>
-				<div class="sidebar-scroll">
-					<dl id="taglist" class="taglist"></dl>
-				</div>
-				<dl id="taglist-extras" class="taglist"></dl>
-			</nav>
+			<div class="sidebar-filters">
+				<nav id="sidebar-folders">
+					<dl id="folder-home" class="folderlist"><dd><a href="#" class="filter folder" data-id="-1" data-filter="-1">Home</a></dd></dl>
+					<div class="sidebar-scroll">
+						<dl id="folderlist" class="folderlist"></dl>
+					</div>
+				</nav>
+				
+				<nav id="sidebar-tags">
+					<span class="list-title" data-i18n="app:sidebar.title.tags">Tags</span>
+					<dl id="taglist-extras" class="taglist"></dl>
+					<div class="sidebar-scroll">
+						<dl id="taglist" class="taglist"></dl>
+					</div>
+				</nav>
+			</div>
 			
 			<dl id="column-list">
 				<dt data-i18n="app:sidebar.title.columns">Columns</dt>
@@ -36,7 +45,8 @@
 				<dd><label><input id="url" class="col-toggle" type="checkbox" data-column="4" /> <span data-i18n="app:sidebar.filter.url">Url</span></label></dd>
 				<dd><label><input id="created" class="col-toggle" type="checkbox" data-column="6" /> <span data-i18n="app:sidebar.filter.created">Created</span></label></dd>
 				<dd><label><input id="modified" class="col-toggle" type="checkbox" data-column="8" /> <span data-i18n="app:sidebar.filter.modified">Modified</span></label></dd>
-				<dd><label><input id="tags" class="col-toggle" type="checkbox" data-column="9" /> <span data-i18n="app:sidebar.filter.tags">Tags</span></label></dd>
+				<dd><label><input id="folders" class="col-toggle" type="checkbox" data-column="10" /> <span data-i18n="app:sidebar.filter.folders">Folders</span></label></dd>
+				<dd><label><input id="tags" class="col-toggle" type="checkbox" data-column="11" /> <span data-i18n="app:sidebar.filter.tags">Tags</span></label></dd>
 			</dl>
 		</div>
 		

@@ -27,13 +27,9 @@ let server 		= store.get( 'loginCredentials.server' ),
 	modal,
 	total
 
-//xxx(dgmid): test
-let bookmarkFile = new Store({
-	name: 'bookmarks',
-	defaults: {
-		data: null
-	}
-})
+//note(dgmid): store for bookmarks
+
+let bookmarks	= new Store( {name: 'bookmarks'} )
 
 
 
@@ -52,12 +48,13 @@ function parseBookmarks( array ) {
 	
 	total = array.length
 	
-	let allTags = [],
+	let folderList	= store.get( 'folders' ),
+		allTags = [],
 		noTag
 	
 	for ( let item of array ) {
 		
-		let taglist = ''
+		let taglist 	= ''
 		
 		noTag = i18n.t('app:sidebar.filter.untagged', 'un-tagged')
 		
@@ -85,8 +82,20 @@ function parseBookmarks( array ) {
 			allTags.push( tagitem )
 		}
 			
-		let created = 	item.added,
-			modified = 	item.lastmodified
+		let created 	= item.added,
+			modified 	= item.lastmodified
+		
+		let theFolders
+		
+		if( item.folders[0] !== '-1' ) {
+			
+			theFolders = '<span class="folder">'
+			theFolders += folderList.find(x => x.id === item.folders[0]).title
+			theFolders += '</span>'
+			
+		} else {
+			theFolders = '⋯'
+		}
 		
 		maintable.bookmarkTable.row.add( [
 			
@@ -99,16 +108,19 @@ function parseBookmarks( array ) {
 			dates.columnDate( created ),
 			modified,
 			dates.columnDate( modified ),
+			item.folders[0],
+			theFolders,
 			taglist
 		
 		]).draw( false )
 	}
 	
+	buildFolderList( folderList )
 	buildTagList( allTags.sort(), noTag )
 	
 	if( firstLoad === true ) {
 		
-		setColControls()	
+		setColControls()
 		
 		const check = require( './version.min' )
 		firstLoad = false
@@ -118,11 +130,25 @@ function parseBookmarks( array ) {
 
 
 
+//note(dgmid): populate folder menu
+
+function buildFolderList( folders ) {
+	
+	$('#folderList').html('')
+	
+	folders.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
+	
+	for( let folder of folders ) {
+		
+		$('#folderlist').append( `<dd><a href="#" class="filter folder" data-id="${folder.id}" data-filter="${folder.id}">${folder.title}</a></dd>` )
+	}
+}
+
+
 //note(dgmid): get list of tags with count
 
 function buildTagList( array, noTag ) {
 	
-	//clear the taglists first
 	$('.taglist').html( '' )
 	
 	let compressed = [],
@@ -176,8 +202,11 @@ function buildTagList( array, noTag ) {
 			$('#taglist').append(
 			
 			`<dd>
-				<a href="#" class="filter" data-id="${count}" data-filter="${entities.encode(tagitem.value)}"><span class="tag" title="${entities.encode(tagitem.value)}" style="background-color: ${color};">${entities.encode(tagitem.value)}</span> <span class="filter-name">${entities.encode(tagitem.value)}</span>
-				<span class="filter-count">${tagitem.count}</span></a>
+				<a href="#" class="filter" data-id="${count}" data-filter="${entities.encode(tagitem.value)}">
+
+						<span class="tag" title="${entities.encode(tagitem.value)}" style="background-color: ${color};">${entities.encode(tagitem.value)}</span> <span class="filter-name">${entities.encode(tagitem.value)}</span>
+
+					<span class="filter-count">${tagitem.count}</span></a>
 			</dd>`
 			)
 			
@@ -193,7 +222,7 @@ function buildTagList( array, noTag ) {
 	$('#taglist-extras').append( `${untagged}` )
 	$('#filter-all').append(
 		 `<dd>
-			<a href="#" class="filter selected" data-filter="">
+			<a href="#" class="filter all  selected" data-filter="">
 				<span class="filter-icon icon-home"></span>
 				<span class="filter-name">${i18n.t('app:sidebar.filter.all','All Bookmarks')}</span>
 				<span class="filter-count">${total}</span>
@@ -328,7 +357,6 @@ ipcRenderer.on('edit-bookmark', (event, message) => {
 $('body').on('click', '.info-edit', function(e) {
 	
 	let id = $( this ).data( 'id' )
-	log.info(`CLICK - ID: ${id}`)
 	
 	modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + id, 480, 340, true )
 })
@@ -550,7 +578,7 @@ $('#clear').click(function() {
 	
 	$(this).hide()
 	$('#search').val('')
-	maintable.bookmarkTable.search( '' ).columns(9).search( data ).draw()
+	maintable.bookmarkTable.search( '' ).columns(11).search( data ).draw()
 })
 
 
@@ -596,14 +624,34 @@ $(document).ready(function() {
 	
 	//note(dgmid): click tag list item to filter table
 	
-	$('.taglist').on('click', '.filter', function() {
+	$('.taglist, .folderlist').on('click', '.filter', function() {
+		
+		let col = $(this).hasClass('folder') ? 9 : 11
 		
 		$('#toggle-info-panel').removeClass('opened')
 		$('.filter').removeClass('selected')
 		$(this).addClass('selected')
 		
 		let data = $(this).data('filter')
-		maintable.bookmarkTable.columns(9).search(data).draw()
+		
+		if( $(this).hasClass('all') ) {
+			
+			$('#clear').hide()
+			$('#search').val('')
+			
+			maintable.bookmarkTable.search('').columns().search('').draw()
+			
+		} else {
+			
+			if(col == 9) {
+				
+				maintable.bookmarkTable.columns(col).search('^'+data+'$',true,false).draw()
+			
+			} else {
+				
+				maintable.bookmarkTable.columns(col).search(data).draw()
+			}
+		}
 	})
 	
 	
@@ -779,9 +827,13 @@ $(document).ready(function() {
 	} else {
 		
 		loader( 'add' )
-		fetch.bookmarksApi( 'all', '', '', function( array ) {
+		
+		fetch.bookmarksApi( 'folders', '', '', function() {
 			
-			parseBookmarks( array )
+			fetch.bookmarksApi( 'all', '', '', function( array ) {
+				
+				parseBookmarks( array )
+			})
 		})
 	}
 })

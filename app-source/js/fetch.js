@@ -52,6 +52,10 @@ const calltype = {
 	'deletetag': {
 		'method': 'DELETE',
 		'url': '/tag?old_name='
+	},
+	'folders': {
+		'method': 'GET',
+		'url': '/folder'
 	}
 }
 
@@ -95,11 +99,11 @@ module.exports.bookmarksApi = function( call, id, data, callback ) {
 		
 	}).then(function(message) {
 		
+		let doc = JSON.parse(message)
+		
 		switch( call ) {
 			
 			case 'all':
-				
-				let doc = JSON.parse(message)
 				
 				if (doc['status'] == 'error') {
 					
@@ -115,6 +119,28 @@ module.exports.bookmarksApi = function( call, id, data, callback ) {
 					callback( doc.data )
 					bookmarkFile.set('data', doc.data)
 				}
+			break
+			
+			case 'folders':
+				
+				let folders = []
+				
+				function traverseFolders( obj ) {
+				
+					for( let prop in obj ) {
+				
+						folders.push( { "id": obj[prop].id, "title": obj[prop].title } )
+						
+						if( typeof obj[prop]=='object' ) {
+				
+							traverseFolders( obj[prop].children )
+						}
+					}
+				}
+				
+				traverseFolders( doc.data )
+				store.set( 'folders', folders )
+				callback()
 				
 			break
 			

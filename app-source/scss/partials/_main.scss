@@ -53,23 +53,50 @@ aside {
 		right: 0;
 	}
 	
-	#sidebar-tags {
+	.sidebar-filters {
 		
 		position: absolute;
-		top: 70px;
+		top: 60px;
 		left: 0;
 		right: 0;
-		bottom: 200px;
+		bottom: 230px;
+		
+		display: flex;
+		flex-direction: column;
 	}
 	
 	.sidebar-scroll {
 		
 		overflow-y: scroll;
 		position: absolute;
-		top: 60px;
 		left: 0;
 		right: 0;
 		bottom: 0;
+	}
+	
+	#sidebar-folders,
+	#sidebar-tags {
+		
+		height: 50%;
+		position: relative;
+	}
+	
+	#sidebar-folders {
+		
+		margin-bottom: 10px;
+		
+		.sidebar-scroll {
+			
+			top: 22px;
+		}
+	}
+	
+	#sidebar-tags {
+		
+		.sidebar-scroll {
+			
+			top: 49px;
+		}
 	}
 	
 	.list-title {
@@ -89,15 +116,12 @@ aside {
 		
 		&#taglist-extras {
 			
-			margin-top: 11px;
-			top: 20px;
-			left: 0;
-			right: 0;
+			margin-top: 5px;
 		}
 		
 		dt {
 			
-			padding: 0 20px 0 15px;
+			padding: 0 20px 5px 5px;
 			font-weight: 500;
 		}
 		
@@ -126,6 +150,18 @@ aside {
 					background: var(--side-hover);
 				}
 				
+				&.folder {
+					
+					padding-left: 30px;
+					background-image: var(--icon-folder);
+					background-position: left 8px top 5px;
+					background-repeat: no-repeat;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					display: block;
+				}
+				
 				.filter-icon {
 					
 					width: 25px;
@@ -135,7 +171,7 @@ aside {
 					background-color: var(--side-text);
 					
 					&.icon-home { mask: var(--icon-home) no-repeat center right; }
-					&.icon-untagged { mask: var(--icon-untagged) no-repeat center right 3px; }
+					&.icon-untagged { mask: var(--icon-untagged) no-repeat center right 5px; }
 				}
 				
 				.filter-name {
@@ -153,6 +189,13 @@ aside {
 					color: #fff;
 					
 					.filter-icon { background-color: #fff; }
+					
+					&.folder {
+						
+						background-image: var(--icon-folder-selected);
+						background-position: left 8px top 5px;
+						background-repeat: no-repeat;
+					}
 				}
 			}
 			
@@ -304,7 +347,7 @@ footer {
 	border-radius: 50%;
 	overflow: hidden;
 	text-indent: -1000px;
-	margin: 0 2px;
+	margin: 0 4px 0 0;
 }
 
 .tagname {
@@ -318,8 +361,10 @@ aside {
 	
 	.tag {
 		
-		width: 10px;
-		height: 10px;
+		min-width: 10px;
+		min-height: 10px;
+		max-width: 10px;
+		max-height: 10px;
 		margin-right: 10px;
 	 }
 }
@@ -488,6 +533,12 @@ td.padded-right {
 				
 				color: royalblue;
 			}
+		}
+		
+		.folder {
+			
+			padding-left: 20px;
+			background: var(--icon-folder) no-repeat left center;
 		}
 	}
 	
