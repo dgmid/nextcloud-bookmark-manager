@@ -20,7 +20,8 @@ const fetch			= require( './fetch.min' )
 const serialize		= require( './serialize.min' )
 const entities		= require( './entities.min' )
 
-const 	urlParams = new URLSearchParams( location.search ),
+const 	folders = store.get( 'folders' ),
+		urlParams = new URLSearchParams( location.search ),
 		theId = urlParams.get('id')
 
 
@@ -56,10 +57,16 @@ Mousetrap.bind('command+.', function() {
 
 function populateForm( bookmark ) {
 	
+	for( let folder of folders ) {
+		
+		$('#folder').append( `<option value="${folder.id}">${folder.title}</option>` )
+	}
+	
 	$('header').append( entities.encode( bookmark['item']['title'] ) )
 	$('input[name="url"]').val( bookmark['item']['url'] )
 	$('input[name="title"]').val( bookmark['item']['title'] )
 	$('textarea[name="description"]').val( bookmark['item']['description'] )
+	$('#folder').val( bookmark['item']['folders'][0] )
 	
 	//note(dgmid): set any active tags
 	
@@ -132,10 +139,13 @@ $(document).ready(function() {
 		})
 		
 		const tags = $('#tags').select2('data')
-		
 		for (var i = 0; i < tags.length; i++) {
-			
-			data += '&item[tags][]=' + encodeURIComponent(tags[i]['text'])
+			data += '&tags[]=' + encodeURIComponent(tags[i]['text'])
+		}
+		
+		let folder = $('#folder').val()
+		if( folder !== '-1' ) {
+			data += '&folders[]=' + encodeURIComponent(folder)
 		}
 		
 		fetch.bookmarksApi( 'modify', theId, data, function() {

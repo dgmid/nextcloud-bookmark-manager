@@ -37,6 +37,8 @@
 	
 	--disclosure-opened-focus: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="9" height="8" viewBox="0 0 9 8"><polygon fill-rule="evenodd" fill="rgb(255,255,255)" points="6 6 15 6 10.5 13.5" transform="translate(-6 -6)"/></svg>');
 	
+	--select-arrow: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5"><path fill="rgb(69,69,69)" d="M1.12679478,0.208222973 C0.88280644,-0.0551018863 0.471547832,-0.0707772298 0.208222973,0.173211113 C-0.0551018863,0.417199456 -0.0707772298,0.828458064 0.173211113,1.09178292 L3.42321111,4.59935128 C3.68045108,4.87697798 4.11955481,4.87697798 4.37679478,4.59935128 L7.62679478,1.09178292 C7.87078313,0.828458064 7.85510778,0.417199456 7.59178292,0.173211113 C7.32845806,-0.0707772298 6.91719946,-0.0551018863 6.67321111,0.208222973 L3.90000295,3.20121289 L1.12679478,0.208222973 Z"/></svg>');
+	
 	/*
 	SVG Loader by Aurer:
 	https://codepen.io/aurer/pen/jEGbA
@@ -68,6 +70,8 @@
 	--disclosure-closed: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="9" viewBox="0 0 8 9"> <polygon fill-rule="evenodd" fill="rgba(255,255,255,.55)" points="7 15 7 6 14.5 10.5" transform="translate(-7 -6)"/></svg>');
 	
 	--disclosure-opened: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="9" height="8" viewBox="0 0 9 8"><polygon fill-rule="evenodd" fill="rgba(255,255,255,.55)" points="6 6 15 6 10.5 13.5" transform="translate(-6 -6)"/></svg>');
+	
+	--select-arrow: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5"><path fill="rgb(255,255,255)" d="M1.12679478,0.208222973 C0.88280644,-0.0551018863 0.471547832,-0.0707772298 0.208222973,0.173211113 C-0.0551018863,0.417199456 -0.0707772298,0.828458064 0.173211113,1.09178292 L3.42321111,4.59935128 C3.68045108,4.87697798 4.11955481,4.87697798 4.37679478,4.59935128 L7.62679478,1.09178292 C7.87078313,0.828458064 7.85510778,0.417199456 7.59178292,0.173211113 C7.32845806,-0.0707772298 6.91719946,-0.0551018863 6.67321111,0.208222973 L3.90000295,3.20121289 L1.12679478,0.208222973 Z"/></svg>');
 	
 	/*
 	SVG Loader by Aurer:

@@ -57,6 +57,8 @@ form {
 				font-size: 13px;
 				line-height: 28px;
 				
+				&[for="folder"] { line-height: 22px; }
+				
 				&::after {
 					
 					content: ':';
@@ -101,6 +103,33 @@ form {
 				
 				height: 44px;
 				resize: none;
+			}
+			
+			.select-container {
+				
+				position: relative;
+				
+				&::after {
+					
+					content: var(--select-arrow);
+					position: absolute;
+					top: 0;
+					right: 8px;
+					pointer-events: none;
+				}
+			}
+			
+			select {
+				
+				appearance: none;
+				height: 22px;
+				width: calc(100% - 80px);
+				padding: 0 6px;
+				font-size: 12px;
+				background: var(--select);
+				border: 1px solid var(--select-border);
+				color: var(--input-color);
+				border-radius: 3px;
 			}
 			
 			.select2-container--custom .select2-selection {

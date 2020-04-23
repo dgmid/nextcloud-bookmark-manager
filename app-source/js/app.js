@@ -134,7 +134,7 @@ function parseBookmarks( array ) {
 
 function buildFolderList( folders ) {
 	
-	$('#folderList').html('')
+	$('#folderlist').empty()
 	
 	folders.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
 	
@@ -239,7 +239,7 @@ function buildTagList( array, noTag ) {
 
 ipcRenderer.on('add-bookmark', (event, message) => {
 	
-	modalWindow.openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 340, true )	
+	modalWindow.openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 370, true )	
 })
 
 
@@ -339,7 +339,7 @@ ipcRenderer.on('edit-bookmark', (event, message) => {
 	
 	if( bookmark ) {
 		
-		modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + bookmark[0], 480, 340, true )
+		modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + bookmark[0], 480, 370, true )
 		
 	} else {
 		
@@ -358,7 +358,7 @@ $('body').on('click', '.info-edit', function(e) {
 	
 	let id = $( this ).data( 'id' )
 	
-	modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + id, 480, 340, true )
+	modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + id, 480, 370, true )
 })
 
 
@@ -461,7 +461,7 @@ ipcRenderer.on('refresh-bookmarks', (event, message) => {
 		username 	= store.get( 'loginCredentials.username' ),
 		password 	= store.get( 'loginCredentials.password' )
 	
-	maintable.bookmarkTable.clear().draw()
+	maintable.bookmarkTable.search('').columns().search('').clear().draw()
 	
 	if( server && username && password ) {
 		
@@ -701,7 +701,7 @@ $(document).ready(function() {
 	
 	$( '#add-bookmark' ).click( function() {
 		
-		modalWindow.openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 340, true )
+		modalWindow.openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 370, true )
 	})
 	
 	

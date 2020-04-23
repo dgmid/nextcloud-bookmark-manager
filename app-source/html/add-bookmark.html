@@ -17,7 +17,7 @@
 				<ul id="fields">
 					<li>
 						<label for="url" data-i18n="addbookmark:label.url">url</label>
-						<input type="url" id="url" class="mousetrap" name="url" placeholder=" " required pattern="https?://.+" title="this field is required" data-i18n="[title]addbookmark:input.required" tabindex="1" autofocus>
+						<input type="url" id="url" class="mousetrap" name="url" placeholder=" " required pattern="https?://.+" title="this field is required" data-i18n="[title]addbookmark:input.required" tabindex="1">
 					</li>
 					<li>
 						<label for="title" data-i18n="addbookmark:label.title">title</label>
@@ -28,15 +28,23 @@
 						<textarea name="description" id="description" class="mousetrap" placeholder=" " tabindex="3"></textarea>
 					</li>
 					<li>
+						<label for="folder" data-i18n="addbookmark:label.folder">folder</label>
+						<div class="select-container">
+							<select id="folder" name="folder" tabindex="4">
+								<option value="-1">Home</option>
+							</select>
+						</div>
+					</li>
+					<li>
 						<label for="tags" data-i18n="addbookmark:label.tags">tags</label>
-						<select id="tags" name="tags[]" multiple="multiple" tabindex="4">
+						<select id="tags" name="tags[]" multiple="multiple" tabindex="5">
 						</select>
 					</li>
 				</ul>
 				
 				<footer>
-					<button id="cancel" class="ui-button" type="button" data-i18n="addbookmark:button.cancel" tabindex="6">Cancel</button>
-					<button id="update" class="ui-button" type="submit" data-i18n="addbookmark:button.submit" tabindex="5">Add Bookmark</button>
+					<button id="cancel" class="ui-button" type="button" data-i18n="addbookmark:button.cancel" tabindex="7">Cancel</button>
+					<button id="update" class="ui-button" type="submit" data-i18n="addbookmark:button.submit" tabindex="6">Add Bookmark</button>
 				</footer>
 			</form>		
 		<script>

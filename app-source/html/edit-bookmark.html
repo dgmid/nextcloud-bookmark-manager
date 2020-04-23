@@ -18,7 +18,7 @@
 				<ul id="fields">
 					<li>
 						<label for="url" data-i18n="editbookmark:label.url">url</label>
-						<input type="url" id="url" class="mousetrap" name="url" placeholder=" " required pattern="https?://.+" title="this field is required" data-i18n="[title]editbookmark:input.required" value="" tabindex="1" autofocus>
+						<input type="url" id="url" class="mousetrap" name="url" placeholder=" " required pattern="https?://.+" title="this field is required" data-i18n="[title]editbookmark:input.required" value="" tabindex="1">
 					</li>
 					<li>
 						<label for="title" data-i18n="editbookmark:label.title">title</label>
@@ -29,8 +29,16 @@
 						<textarea name="description" id="description" class="mousetrap" placeholder=" " tabindex="3"></textarea>
 					</li>
 					<li>
+						<label for="folder" data-i18n="addbookmark:label.folder">folder</label>
+						<div class="select-container">
+							<select id="folder" name="folder" tabindex="4">
+								<option value="-1">Home</option>
+							</select>
+						</div>
+					</li>
+					<li>
 						<label for="tags" data-i18n="editbookmark:label.tags">tags</label>
-						<select id="tags" name="tags[]" multiple="multiple" tabindex="4">
+						<select id="tags" name="tags[]" multiple="multiple" tabindex="5">
 						</select>
 					</li>
 				</ul>

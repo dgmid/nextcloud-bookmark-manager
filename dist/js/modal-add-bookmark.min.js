@@ -19,6 +19,8 @@ require('select2')($)
 const fetch			= require( './fetch.min' )
 const serialize		= require( './serialize.min' )
 
+const folders		= store.get( 'folders' )
+
 
 
 //note(dgmid): log exceptions
@@ -59,6 +61,11 @@ function closeModal() {
 
 $(document).ready(function() {
 	
+	for( let folder of folders ) {
+		
+		$('#folder').append( `<option value="${folder.id}">${folder.title}</option>` )
+	}
+	
 	
 	$('#tags').select2({
 		theme: "custom",
@@ -91,10 +98,13 @@ $(document).ready(function() {
 		})
 		
 		let tags = $('#tags').select2('data')
-		
 		for (var i = 0; i < tags.length; i++) {
+			data += '&tags[]=' + encodeURIComponent(tags[i]['text'])
+		}
 		
-			data += '&item[tags][]=' + encodeURIComponent(tags[i]['text'])
+		let folder = $('#folder').val()
+		if( folder !== '-1' ) {
+			data += '&folders[]=' + encodeURIComponent(folder)
 		}
 		
 		fetch.bookmarksApi( 'add', '', data, function() {
