@@ -4,6 +4,7 @@
     "url": "url",
     "title": "title",
     "description": "description",
+    "folder": "folder",
     "tags": "tags"
   },
   "input": {
