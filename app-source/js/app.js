@@ -202,7 +202,7 @@ function buildTagList( array, noTag ) {
 			$('#taglist').append(
 			
 			`<dd>
-				<a href="#" class="filter" data-id="${count}" data-filter="${entities.encode(tagitem.value)}">
+				<a href="#" class="filter tagfilter" data-id="${count}" data-filter="${entities.encode(tagitem.value)}">
 
 						<span class="tag" title="${entities.encode(tagitem.value)}" style="background-color: ${color};">${entities.encode(tagitem.value)}</span> <span class="filter-name">${entities.encode(tagitem.value)}</span>
 
@@ -469,9 +469,12 @@ ipcRenderer.on('refresh-bookmarks', (event, message) => {
 			
 			loader( 'add' )
 			
-			fetch.bookmarksApi( 'all', '', '', function( array ) {
+			fetch.bookmarksApi( 'folders', '', '', function() {
 				
-				parseBookmarks( array )
+				fetch.bookmarksApi( 'all', '', '', function( array ) {
+					
+					parseBookmarks( array )
+				})
 			})
 		}
 	}
@@ -630,12 +633,13 @@ $(document).ready(function() {
 		let col = $(this).hasClass('folder') ? 9 : 11
 		
 		$('#toggle-info-panel').removeClass('opened')
-		$('.filter').removeClass('selected')
-		$(this).addClass('selected')
 		
 		let data = $(this).data('filter')
 		
 		if( $(this).hasClass('all') ) {
+			
+			$('.filter').removeClass('selected')
+			$(this).addClass('selected')
 			
 			$('#clear').hide()
 			$('#search').val('')
@@ -646,9 +650,15 @@ $(document).ready(function() {
 			
 			if(col == 9) {
 				
+				$('.filter.folder, .filter.all').removeClass('selected')
+				$(this).addClass('selected')
+				
 				maintable.bookmarkTable.columns(col).search('^'+data+'$',true,false).draw()
 			
 			} else {
+				
+				$('.filter.tagfilter, .filter.all').removeClass('selected')
+				$(this).addClass('selected')
 				
 				maintable.bookmarkTable.columns(col).search(data).draw()
 			}
