@@ -12,16 +12,19 @@
   "dialog": {
     "message": {
       "deletetag": "Sei sicuro di voler eliminare il tag {{- tag}}?",
-      "deletebookmark": "Sei sicuro di voler eliminare il segnalibro {{- bookmark}}?"
+      "deletebookmark": "Sei sicuro di voler eliminare il segnalibro {{- bookmark}}?",
+      "deletefromfolder": "Sei sicuro di voler eliminare il segnalibro corrente da questa cartella?"
     },
     "detail": {
       "deletetag": "Questa operazione non è reversibile.",
-      "deletebookmark": "Questa operazione non è reversibile."
+      "deletebookmark": "Questa operazione non è reversibile.",
+      "deletefromfolder": "L’eliminazione del segnalibro corrente da questa cartella eliminerà anche il segnalibro."
     },
     "button": {
       "deletetag": "Elimina tag",
       "cancel": "Annulla",
-      "deletebookmark": "Elimina segnalibro"
+      "deletebookmark": "Elimina segnalibro",
+      "deletefromfolder": "Elimina segnalibro"
     }
   },
   "sidebar": {

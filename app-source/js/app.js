@@ -417,20 +417,41 @@ ipcRenderer.on('delete-tag', (event, message) => {
 
 
 
-//note(dgmid): move to folder
+//note(dgmid): add to and delete from folder
 
-ipcRenderer.on('add-to-folder', (event, message) => {
+ipcRenderer.on('move-bookmark', (event, message) => {
 	
-	fetch.bookmarksApi( 'addtofolder', message.folder_id, `/bookmarks/${message.bookmark_id}`, function() {
+	if( message.method === 'deletefromfolder' && message.count < 2 ) {
 		
-		maintable.bookmarkTable.clear().draw()
-			loader( 'add' )
-		
-		fetch.bookmarksApi( 'all', '', '', function( array ) {
-			
-			parseBookmarks( array )
+		let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
+			message: i18n.t('app:dialog.message.deletefromfolder', 'Are you sure you want to delete the current bookmark from this folder?'),
+			detail: i18n.t('app:dialog.detail.deletefromfolder', 'Deleting the current bookmark from this folder will also delete the bookmark.'),
+			buttons: [i18n.t('app:dialog.button.deletefromfolder', 'Delete Bookmark'), i18n.t('app:dialog.button.cancel', 'Cancel')]
 		})
-	})
+		
+		if( response === 0 ) {
+			
+			moveBookmark( message.method, message.folder_id, message.bookmark_id )	
+		}
+	
+	} else {
+		
+		moveBookmark( message.method, message.folder_id, message.bookmark_id )
+	}
+	
+	function moveBookmark( method, folder_id, bookmark_id ) {
+	
+		fetch.bookmarksApi( message.method, message.folder_id, `/bookmarks/${message.bookmark_id}`, function() {
+			
+			maintable.bookmarkTable.clear().draw()
+				loader( 'add' )
+			
+			fetch.bookmarksApi( 'all', '', '', function( array ) {
+				
+				parseBookmarks( array )
+			})
+		})
+	}
 })
 
 

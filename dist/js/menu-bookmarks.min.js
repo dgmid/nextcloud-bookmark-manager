@@ -60,6 +60,10 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 			submenu: []
 		},
 		{
+			label: i18n.t('menubookmarks:deletefromfolder', 'Delete from Folder…'),
+			submenu: []
+		},
+		{
 			type: 'separator'
 		},
 		{
@@ -111,23 +115,72 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 		bookmarkMenuTemplate[7].submenu.push(
 			{
 				label: i18n.t('menubookmarks:home', 'Home'),
-				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('add-to-folder', { 'bookmark_id': id, 'folder_id': '-1' }) }
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('move-bookmark',
+					{
+						'method': 'addtofolder',
+						'bookmark_id': id,
+						'folder_id': '-1',
+						'count': folderIds.length
+					}
+				)}
 			},
 			{
 				type: 'separator'
 			}
-		)	
+		)
+	
+	} else {
+		
+		bookmarkMenuTemplate[8].submenu.push(
+			{
+				label: i18n.t('menubookmarks:home', 'Home'),
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('move-bookmark',
+					{
+						'method': 'deletefromfolder',
+						'bookmark_id': id,
+						'folder_id': '-1',
+						'count': folderIds.length
+					}
+				)}
+			},
+			{
+				type: 'separator'
+			}
+		)
 	}
 	
 	for( let folder of folders ) {
 	
-		if( !folderIds.includes( folder.id )  )
+		if( !folderIds.includes( folder.id )  ) {
 	
 			bookmarkMenuTemplate[7].submenu.push({
 				
 				label: folder.text,
-				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('add-to-folder', { 'bookmark_id': id, 'folder_id': folder.id }) }
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('move-bookmark',
+					{
+						'method': 'addtofolder',
+						'bookmark_id': id,
+						'folder_id': folder.id,
+						'count': folderIds.length
+					}
+				)}
 			})
+		
+		} else {
+			
+			bookmarkMenuTemplate[8].submenu.push({
+				
+				label: folder.text,
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('move-bookmark',
+					{
+						'method': 'deletefromfolder',
+						'bookmark_id': id,
+						'folder_id': folder.id,
+						'count': folderIds.length
+					}
+				)}
+			})
+		}
 	}
 	
 	

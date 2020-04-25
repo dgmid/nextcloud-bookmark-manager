@@ -12,16 +12,19 @@
   "dialog": {
     "message": {
       "deletetag": "Are you sure you want to delete the tag {{- tag}}?",
-      "deletebookmark": "Are you sure you want to delete the bookmark {{- bookmark}}?"
+      "deletebookmark": "Are you sure you want to delete the bookmark {{- bookmark}}?",
+      "deletefromfolder": "Are you sure you want to delete the current bookmark from this folder?"
     },
     "detail": {
       "deletetag": "This operation is not reversable.",
-      "deletebookmark": "This operation is not reversable."
+      "deletebookmark": "This operation is not reversable.",
+      "deletefromfolder": "Deleting the current bookmark from this folder will also delete the bookmark."
     },
     "button": {
       "deletetag": "Delete Tag",
       "cancel": "Cancel",
-      "deletebookmark": "Delete Bookmark"
+      "deletebookmark": "Delete Bookmark",
+      "deletefromfolder": "Delete Bookmark"
     }
   },
   "sidebar": {

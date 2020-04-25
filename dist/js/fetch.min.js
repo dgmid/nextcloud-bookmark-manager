@@ -60,6 +60,10 @@ const calltype = {
 	'addtofolder': {
 		'method': 'POST',
 		'url': '/folder/'
+	},
+	'deletefromfolder': {
+		'method': 'DELETE',
+		'url': '/folder/'
 	}
 }
 

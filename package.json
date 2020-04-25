@@ -6,6 +6,7 @@
   "main": "dist/js/main.min.js",
   "scripts": {
     "start": "electron .",
+    "build": "gulp build",
     "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=8.2.3 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
   },
   "author": {
