@@ -56,7 +56,7 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 			type: 'separator'
 		},
 		{
-			label: i18n.t('menubookmarks:move', 'Move to Folder…'),
+			label: i18n.t('menubookmarks:addtofolder', 'Add to Folder…'),
 			submenu: []
 		},
 		{
@@ -111,7 +111,7 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 		bookmarkMenuTemplate[7].submenu.push(
 			{
 				label: i18n.t('menubookmarks:home', 'Home'),
-				click () {  }
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('add-to-folder', { 'bookmark_id': id, 'folder_id': '-1' }) }
 			},
 			{
 				type: 'separator'
@@ -126,7 +126,7 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 			bookmarkMenuTemplate[7].submenu.push({
 				
 				label: folder.text,
-				click () {  }
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('add-to-folder', { 'bookmark_id': id, 'folder_id': folder.id }) }
 			})
 	}
 	

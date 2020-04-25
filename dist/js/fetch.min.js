@@ -56,6 +56,10 @@ const calltype = {
 	'folders': {
 		'method': 'GET',
 		'url': '/folder'
+	},
+	'addtofolder': {
+		'method': 'POST',
+		'url': '/folder/'
 	}
 }
 

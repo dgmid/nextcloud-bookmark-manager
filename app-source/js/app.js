@@ -417,6 +417,24 @@ ipcRenderer.on('delete-tag', (event, message) => {
 
 
 
+//note(dgmid): move to folder
+
+ipcRenderer.on('add-to-folder', (event, message) => {
+	
+	fetch.bookmarksApi( 'addtofolder', message.folder_id, `/bookmarks/${message.bookmark_id}`, function() {
+		
+		maintable.bookmarkTable.clear().draw()
+			loader( 'add' )
+		
+		fetch.bookmarksApi( 'all', '', '', function( array ) {
+			
+			parseBookmarks( array )
+		})
+	})
+})
+
+
+
 //note(dgmid): get info from context menu
 
 ipcRenderer.on('info-bookmark', (event, message) => {

@@ -4,7 +4,7 @@
   "copy": "Copia l'URL di {{- title}} negli appunti",
   "edit": "Modifica {{- title}} segnalibro…",
   "delete": "Elimina {{- title}} segnalibro…",
-  "move": "Sposta nella cartella…",
+  "addtofolder": "Aggiungi alla cartella…",
   "home": "Home",
   "info": "Mostra / Nascondi info…",
   "errorbox": {
