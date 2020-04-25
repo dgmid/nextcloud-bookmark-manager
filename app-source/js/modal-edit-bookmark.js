@@ -24,6 +24,11 @@ const 	folders = store.get( 'folders' ),
 		urlParams = new URLSearchParams( location.search ),
 		theId = urlParams.get('id')
 
+folders.unshift({
+	"id": "-1",
+	"text": i18n.t( 'editbookmark:select.option.home', 'Home' )
+})
+
 
 
 //note(dgmid): log exceptions
@@ -41,6 +46,7 @@ $('html').attr('lang', i18n.language)
 $('header span').localize()
 $('label').localize()
 $('input').localize()
+$('option').localize()
 $('button').localize()
 
 
@@ -57,32 +63,43 @@ Mousetrap.bind('command+.', function() {
 
 function populateForm( bookmark ) {
 	
+	if( bookmark['item']['folders'].includes( -1 ) ) {
+		
+		$('#folders').val( '-1' )
+	}
+	
 	for( let folder of folders ) {
 		
-		$('#folder').append( `<option value="${folder.id}">${folder.title}</option>` )
+		let selected = ''
+		if( bookmark['item']['folders'].includes( folder.id ) ) {
+			
+			selected = ' selected'
+		}
+		$('#folders').append( `<option value="${folder.id}"${selected}>${folder.text}</option>` )
 	}
 	
 	$('header').append( entities.encode( bookmark['item']['title'] ) )
 	$('input[name="url"]').val( bookmark['item']['url'] )
 	$('input[name="title"]').val( bookmark['item']['title'] )
 	$('textarea[name="description"]').val( bookmark['item']['description'] )
-	$('#folder').val( bookmark['item']['folders'][0] )
+	
 	
 	//note(dgmid): set any active tags
 	
 	let activeTags = []
 	const allTags = store.get('tags')
 	
-	for (var i = 0; i < allTags.length; i++) {
+	for (let singleTag of  allTags) {
 		
-		if( bookmark['item']['tags'].indexOf( allTags[i]['text'] ) > -1 ) {
+		if( bookmark['item']['tags'].indexOf( singleTag['text'] ) > -1 ) {
 			
-			activeTags.push( allTags[i]['id'] )
+			activeTags.push( singleTag['id'] )
 		}
 	}
 	
 	$('#tags').val( activeTags )
 	$('#tags').trigger( 'change' )
+	
 }
 
 
@@ -98,6 +115,14 @@ function closeModal() {
 
 
 $(document).ready(function() {
+	
+	$('#folders').select2({
+		theme: "custom",
+		width: '320px',
+		language: {
+			noResults:function() { return i18n.t( 'editbookmark:select.noresults', 'No results found' ) }
+		}
+	})
 	
 	$('#tags').select2({
 		theme: "custom",
@@ -138,14 +163,18 @@ $(document).ready(function() {
 			'description': $('textarea[name="description"]').val()
 		})
 		
-		const tags = $('#tags').select2('data')
-		for (var i = 0; i < tags.length; i++) {
-			data += '&tags[]=' + encodeURIComponent(tags[i]['text'])
+		let selectedTags = $('#tags').select2('data')
+		
+		for (let tag of selectedTags) {
+			
+			data += '&tags[]=' + encodeURIComponent(tag['text'])
 		}
 		
-		let folder = $('#folder').val()
-		if( folder !== '-1' ) {
-			data += '&folders[]=' + encodeURIComponent(folder)
+		let selectedFolders = $('#folders').select2('data')
+		
+		for(let folder of selectedFolders) {
+			
+			data += '&folders[]=' + encodeURIComponent(folder['id'])
 		}
 		
 		fetch.bookmarksApi( 'modify', theId, data, function() {

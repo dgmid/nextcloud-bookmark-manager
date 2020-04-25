@@ -38,6 +38,7 @@ $('html').attr('lang', i18n.language)
 $('header').localize()
 $('label').localize()
 $('input').localize()
+$('option').localize()
 $('button').localize()
 
 
@@ -61,13 +62,22 @@ function closeModal() {
 
 $(document).ready(function() {
 	
-	for( let folder of folders ) {
+	for( let folder of folders.reverse() ) {
 		
-		$('#folder').append( `<option value="${folder.id}">${folder.title}</option>` )
+		$('#folders').append( `<option value="${folder.id}">${folder.text}</option>` )
 	}
 	
+	$('#folders').select2({
+		
+		theme: "custom",
+		width: '320px',
+		language: {
+			noResults:function() { return i18n.t( 'addbookmark:select.noresults', 'No results found' ) }
+		}
+	})
 	
 	$('#tags').select2({
+		
 		theme: "custom",
 		width: '320px',
 		tags: true,
@@ -97,14 +107,18 @@ $(document).ready(function() {
 			'description': $('textarea[name="description"]').val()
 		})
 		
-		let tags = $('#tags').select2('data')
-		for (var i = 0; i < tags.length; i++) {
-			data += '&tags[]=' + encodeURIComponent(tags[i]['text'])
+		let selectedTags = $('#tags').select2('data')
+		
+		for (let tag of selectedTags) {
+			
+			data += '&tags[]=' + encodeURIComponent(tag['text'])
 		}
 		
-		let folder = $('#folder').val()
-		if( folder !== '-1' ) {
-			data += '&folders[]=' + encodeURIComponent(folder)
+		let selectedFolders = $('#folders').select2('data')
+		
+		for(let folder of selectedFolders) {
+			
+			data += '&folders[]=' + encodeURIComponent(folder['id'])
 		}
 		
 		fetch.bookmarksApi( 'add', '', data, function() {

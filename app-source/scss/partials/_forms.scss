@@ -105,20 +105,6 @@ form {
 				resize: none;
 			}
 			
-			.select-container {
-				
-				position: relative;
-				
-				&::after {
-					
-					content: var(--select-arrow);
-					position: absolute;
-					top: 0;
-					right: 8px;
-					pointer-events: none;
-				}
-			}
-			
 			select {
 				
 				appearance: none;

@@ -51,7 +51,13 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 		{
 			label: i18n.t('menubookmarks:delete', 'Delete {{- title}} Bookmark…', { title: title }),
 			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('delete-bookmark', [id, title]) }
-			
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: i18n.t('menubookmarks:move', 'Move to Folder…'),
+			submenu: []
 		},
 		{
 			type: 'separator'
@@ -62,42 +68,68 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 		},
 	]
 	
-	const browsers = store.get('browsers')
+	const browsers = store.get( 'browsers' )
 	
-	for (let i = 0, len = browsers.length; i < len; i++) {
-		
-		let theBrowser = browsers[i]['name']
+	for ( let browser of browsers ) {
 		
 		let launchScript =
 		
-		`tell application "${theBrowser}"
+		`tell application "${browser.name}"
 			open location "${message[4]}"
 		end tell
 		tell application "System Events"
-			tell application process "${theBrowser}"
+			tell application process "${browser.name}"
 			set frontmost to true
 			end tell
 		end tell`
 		
 		bookmarkMenuTemplate[1].submenu.push({
-				label: theBrowser,
+				label: browser.name,
 				click () {
 					
 					applescript.execString(launchScript, function(err, rtn) {
 						if (err) {
 							
 							dialog.showErrorBox(
-								i18n.t('menubookmarks:errorbox.title', 'Error launching: {{browser}}', { browser: theBrowser }),
+								i18n.t('menubookmarks:errorbox.title', 'Error launching: {{browser}}', { browser: browser.name }),
 								i18n.t('menubookmarks:errorbox.content', 'the url {{url}} could not be opened', { url: message[4] })
 							)
 							
-							console.log( err )
+							log.info( err )
 						}
 					})
 				}
 			}
 		)
 	}
+	
+	const 	folders 	= store.get( 'folders' ),
+			folderIds 	= message[9].split( ',' )
+	
+	if( !folderIds.includes( '-1' ) ) {
+		
+		bookmarkMenuTemplate[7].submenu.push(
+			{
+				label: i18n.t('menubookmarks:home', 'Home'),
+				click () {  }
+			},
+			{
+				type: 'separator'
+			}
+		)	
+	}
+	
+	for( let folder of folders ) {
+	
+		if( !folderIds.includes( folder.id )  )
+	
+			bookmarkMenuTemplate[7].submenu.push({
+				
+				label: folder.text,
+				click () {  }
+			})
+	}
+	
 	
 	const bookmarkMenu = Menu.buildFromTemplate( bookmarkMenuTemplate )
 	

@@ -4,11 +4,17 @@
     "url": "url",
     "title": "title",
     "description": "description",
-    "folder": "folder",
+    "folders": "folders",
     "tags": "tags"
   },
   "input": {
     "required": "this field is required"
+  },
+    "select": {
+    "noresults": "No results found",
+    "option": {
+      "home": "Home"
+    }
   },
   "button": {
     "cancel": "Cancel",

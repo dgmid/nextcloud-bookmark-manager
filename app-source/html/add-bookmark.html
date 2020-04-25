@@ -28,16 +28,14 @@
 						<textarea name="description" id="description" class="mousetrap" placeholder=" " tabindex="3"></textarea>
 					</li>
 					<li>
-						<label for="folder" data-i18n="addbookmark:label.folder">folder</label>
-						<div class="select-container">
-							<select id="folder" name="folder" tabindex="4">
-								<option value="-1">Home</option>
-							</select>
-						</div>
+						<label for="folders" data-i18n="addbookmark:label.folders">folders</label>
+						<select id="folders" name="folders[]" multiple tabindex="4">
+							<option value="-1" selected data-i18n="addbookmark:select.option.home">Home</option>
+						</select>
 					</li>
 					<li>
 						<label for="tags" data-i18n="addbookmark:label.tags">tags</label>
-						<select id="tags" name="tags[]" multiple="multiple" tabindex="5">
+						<select id="tags" name="tags[]" multiple tabindex="5">
 						</select>
 					</li>
 				</ul>

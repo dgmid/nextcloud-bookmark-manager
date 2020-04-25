@@ -168,7 +168,7 @@ aside {
 					height: 22px;
 					margin-right: 5px;
 					
-					background-color: var(--side-text);
+					background-color: var(--side-icon);
 					
 					&.icon-home { mask: var(--icon-home) no-repeat center right; }
 					&.icon-untagged { mask: var(--icon-untagged) no-repeat center right 5px; }
@@ -427,6 +427,24 @@ aside {
 		}
 	}
 	
+	.folders-column {
+		
+		.folder {
+			
+			display: inline-block;
+			
+			&+.folder {
+				
+				&::before {
+					
+					content: ',';
+					display: inline-block;
+					padding-right: 10px;
+				}
+			}
+		}
+	}
+	
 	.tag { text-indent: 1000px; }
 	
 	.tags-column {
@@ -537,8 +555,11 @@ td.padded-right {
 		
 		.folder {
 			
+			display: inline-block;
 			padding-left: 20px;
 			background: var(--icon-folder) no-repeat left center;
+			
+			&+.folder { margin-left: 10px; }
 		}
 	}
 	

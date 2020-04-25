@@ -49,19 +49,19 @@ function parseBookmarks( array ) {
 	total = array.length
 	
 	let folderList	= store.get( 'folders' ),
-		allTags = [],
-		noTag
+		allTags 	= [],
+		noTag 		= i18n.t('app:sidebar.filter.untagged', 'un-tagged')
 	
 	for ( let item of array ) {
 		
-		let taglist 	= ''
+		let taglist = ''
 		
-		noTag = i18n.t('app:sidebar.filter.untagged', 'un-tagged')
+		//note(dgmid): remove duplicate tags
+		let uniqueTags = Array.from( new Set( item.tags ) )
 		
+		if( uniqueTags.length < 1 ) { uniqueTags.push( noTag ) }
 		
-		if( item.tags.length < 1 ) { item.tags.push( noTag ) }
-		
-		for ( let tagitem of item.tags ) {
+		for ( let tagitem of uniqueTags ) {
 		
 			let color,
 				untagged
@@ -85,16 +85,31 @@ function parseBookmarks( array ) {
 		let created 	= item.added,
 			modified 	= item.lastmodified
 		
-		let theFolders
+		let theFolders = ''
 		
-		if( item.folders[0] !== '-1' ) {
+		if( item.folders.length < 2 &&  item.folders[0] === '-1' ) {
 			
-			theFolders = '<span class="folder">'
-			theFolders += folderList.find(x => x.id === item.folders[0]).title
-			theFolders += '</span>'
-			
-		} else {
 			theFolders = '⋯'
+		
+		} else {
+			
+			for( let folderItem of item.folders  ) {
+				
+				theFolders += '<span class="folder">'
+				
+				if( folderItem === '-1' ) {
+					
+					theFolders += 'Home'
+				
+				} else {
+				
+					theFolders += folderList.find(x => x.id === folderItem).text
+					
+				}
+				
+				theFolders += '</span>'
+				
+			}
 		}
 		
 		maintable.bookmarkTable.row.add( [
@@ -108,7 +123,7 @@ function parseBookmarks( array ) {
 			dates.columnDate( created ),
 			modified,
 			dates.columnDate( modified ),
-			item.folders[0],
+			item.folders.join(','),
 			theFolders,
 			taglist
 		
@@ -136,11 +151,11 @@ function buildFolderList( folders ) {
 	
 	$('#folderlist').empty()
 	
-	folders.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
+	folders.sort((a,b) => (a.text > b.text) ? 1 : ((b.text > a.text) ? -1 : 0))
 	
 	for( let folder of folders ) {
 		
-		$('#folderlist').append( `<dd><a href="#" class="filter folder" data-id="${folder.id}" data-filter="${folder.id}">${folder.title}</a></dd>` )
+		$('#folderlist').append( `<dd><a href="#" class="filter folder" data-id="${folder.id}" data-filter="${folder.id}">${folder.text}</a></dd>` )
 	}
 }
 
@@ -239,7 +254,7 @@ function buildTagList( array, noTag ) {
 
 ipcRenderer.on('add-bookmark', (event, message) => {
 	
-	modalWindow.openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 370, true )	
+	modalWindow.openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 390, true )
 })
 
 
@@ -339,7 +354,7 @@ ipcRenderer.on('edit-bookmark', (event, message) => {
 	
 	if( bookmark ) {
 		
-		modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + bookmark[0], 480, 370, true )
+		modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + bookmark[0], 480, 390, true )
 		
 	} else {
 		
@@ -358,7 +373,7 @@ $('body').on('click', '.info-edit', function(e) {
 	
 	let id = $( this ).data( 'id' )
 	
-	modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + id, 480, 370, true )
+	modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + id, 480, 390, true )
 })
 
 
@@ -653,8 +668,8 @@ $(document).ready(function() {
 				$('.filter.folder, .filter.all').removeClass('selected')
 				$(this).addClass('selected')
 				
-				maintable.bookmarkTable.columns(col).search('^'+data+'$',true,false).draw()
-			
+				maintable.bookmarkTable.columns(col).search('(^|,)'+data+'(,|$)',true,false).draw()
+				
 			} else {
 				
 				$('.filter.tagfilter, .filter.all').removeClass('selected')
@@ -711,7 +726,7 @@ $(document).ready(function() {
 	
 	$( '#add-bookmark' ).click( function() {
 		
-		modalWindow.openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 370, true )
+		modalWindow.openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 390, true )
 	})
 	
 	

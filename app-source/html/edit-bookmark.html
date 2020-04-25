@@ -29,12 +29,9 @@
 						<textarea name="description" id="description" class="mousetrap" placeholder=" " tabindex="3"></textarea>
 					</li>
 					<li>
-						<label for="folder" data-i18n="editbookmark:label.folder">folder</label>
-						<div class="select-container">
-							<select id="folder" name="folder" tabindex="4">
-								<option value="-1">Home</option>
-							</select>
-						</div>
+						<label for="folders" data-i18n="editbookmark:label.folders">folders</label>
+						<select id="folders" name="folders[]" multiple tabindex="4">
+						</select>
 					</li>
 					<li>
 						<label for="tags" data-i18n="editbookmark:label.tags">tags</label>
@@ -44,8 +41,8 @@
 				</ul>
 				
 				<footer>
-					<button id="cancel" class="ui-button" type="button" data-i18n="editbookmark:button.cancel" tabindex="6">Cancel</button>
-					<button id="update" class="ui-button" type="submit" data-i18n="editbookmark:button.submit" tabindex="5">Update</button>
+					<button id="cancel" class="ui-button" type="button" data-i18n="editbookmark:button.cancel" tabindex="7">Cancel</button>
+					<button id="update" class="ui-button" type="submit" data-i18n="editbookmark:button.submit" tabindex="6">Update</button>
 				</footer>
 			</form>
 			

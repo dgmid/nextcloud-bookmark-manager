@@ -4,11 +4,17 @@
     "url": "url",
     "title": "titolo",
     "description": "descrizione",
-    "folder": "cartella",
+    "folders": "cartelle",
     "tags": "tag"
   },
   "input": {
     "required": "questo campo è richiesta"
+  },
+    "select": {
+    "noresults": "Nessun risultato trovato",
+    "option": {
+      "home": "Home"
+    }
   },
   "button": {
     "cancel": "Annulla",

@@ -158,6 +158,7 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 			},
 			{
 				title: i18n.t('bookmarktable:header.folders', 'Folders'),
+				className: 'folders-column',
 				responsivePriority: 10004,
 				targets: [ 10 ],
 				visible: store.get('tableColumns.folders'),

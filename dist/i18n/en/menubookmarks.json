@@ -4,6 +4,8 @@
   "copy": "Copy {{- title}} url to Clipboard",
   "edit": "Edit {{- title}} Bookmark…",
   "delete": "Delete {{- title}} Bookmark…",
+  "move": "Move to Folder…",
+  "home": "Home",
   "info": "Show / Hide Info…",
   "errorbox": {
     "title": "Error launching: {{browser}}",

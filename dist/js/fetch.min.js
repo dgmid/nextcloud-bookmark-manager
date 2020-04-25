@@ -129,7 +129,7 @@ module.exports.bookmarksApi = function( call, id, data, callback ) {
 				
 					for( let prop in obj ) {
 				
-						folders.push( { "id": obj[prop].id, "title": obj[prop].title } )
+						folders.push( { "id": obj[prop].id, "text": obj[prop].title } )
 						
 						if( typeof obj[prop]=='object' ) {
 				
