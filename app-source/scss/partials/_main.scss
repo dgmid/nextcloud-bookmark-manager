@@ -160,6 +160,13 @@ aside {
 					overflow: hidden;
 					text-overflow: ellipsis;
 					display: block;
+					
+					&.folder-home {
+						
+						display: flex;
+						background-image: none;
+						padding-left: 0;
+					}
 				}
 				
 				.filter-icon {
@@ -170,7 +177,20 @@ aside {
 					
 					background-color: var(--side-icon);
 					
-					&.icon-home { mask: var(--icon-home) no-repeat center right; }
+					&.icon-bookmarks {
+						
+						width: 22px;
+						margin-right: 8px;
+						mask: var(--icon-bookmark) no-repeat center right;
+					}
+					
+					&.icon-home {
+						
+						width: 23px;
+						margin-right: 7px;
+						mask: var(--icon-home) no-repeat center right;
+					}
+					
 					&.icon-untagged { mask: var(--icon-untagged) no-repeat center right 5px; }
 				}
 				
@@ -195,6 +215,8 @@ aside {
 						background-image: var(--icon-folder-selected);
 						background-position: left 8px top 5px;
 						background-repeat: no-repeat;
+						
+						&.folder-home { background-image: none; }
 					}
 				}
 			}

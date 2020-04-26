@@ -238,7 +238,7 @@ function buildTagList( array, noTag ) {
 	$('#filter-all').append(
 		 `<dd>
 			<a href="#" class="filter all  selected" data-filter="">
-				<span class="filter-icon icon-home"></span>
+				<span class="filter-icon icon-bookmarks"></span>
 				<span class="filter-name">${i18n.t('app:sidebar.filter.all','All Bookmarks')}</span>
 				<span class="filter-count">${total}</span>
 			</a>
@@ -672,7 +672,7 @@ $(document).ready(function() {
 	
 	//note(dgmid): translate html strings
 	
-	$('#folder-home a').localize()
+	$('#folder-home .filter-name').localize()
 	$('#sidebar-tags .list-title').html( i18n.t('app:sidebar.title.tags', 'Tags') )
 	$('#column-list dt').html( i18n.t('app:sidebar.title.columns', 'Columns') )
 	$('#description span').html( i18n.t('app:sidebar.filter.description', 'Description') )
