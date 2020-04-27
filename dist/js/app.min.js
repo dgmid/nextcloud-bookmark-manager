@@ -254,7 +254,7 @@ function buildTagList( array, noTag ) {
 
 ipcRenderer.on('add-bookmark', (event, message) => {
 	
-	modalWindow.openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 390, true )
+	modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}`, 480, 390, true )
 })
 
 
@@ -482,6 +482,17 @@ function toggleInfoPanel( tr ) {
 		tr.addClass('shown')
 	}
 } 
+
+
+
+//note(dgmid): get current folder
+
+function getCurrentFolder() {
+	
+	let id = $('.filter.folder.selected').data( 'id' )
+	if( !id ) id = '-1'
+	return id
+}
 
 
 
@@ -765,7 +776,16 @@ $(document).ready(function() {
 	
 	$( '#add-bookmark' ).click( function() {
 		
-		modalWindow.openModal( 'file://' + __dirname + '/../html/add-bookmark.html', 480, 390, true )
+		//todo(dgmid): function to get folder id -- then add it to queryString
+		
+		/*
+			
+			let id = $('.filter.folder.selected').data( 'id' )
+			if( !id ) id = '-1'
+		
+		*/
+		
+		modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}`, 480, 390, true )
 	})
 	
 	

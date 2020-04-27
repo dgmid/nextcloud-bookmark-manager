@@ -4,11 +4,16 @@
     "url": "url",
     "title": "title",
     "description": "description",
-    "folder": "folder",
+    "folders": "folders",
     "tags": "tags"
   },
   "input": {
     "required": "this field is required"
+  },
+  "select": {
+    "option": {
+      "home": "Home"
+    }
   },
   "button": {
     "cancel": "Cancel",

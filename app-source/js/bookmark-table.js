@@ -81,6 +81,7 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 		function(column) {
 			return 'row_' + column[0] // create unique row id form json ids
 		},
+	'order': [[ 5, 'desc' ]],
 	columnDefs:
 		[
 			{

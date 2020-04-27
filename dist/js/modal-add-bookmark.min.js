@@ -19,7 +19,15 @@ require('select2')($)
 const fetch			= require( './fetch.min' )
 const serialize		= require( './serialize.min' )
 
-const folders		= store.get( 'folders' )
+const folders		= store.get( 'folders' ).reverse()
+
+let urlParams = new URLSearchParams( location.search ),
+			currentFolder = urlParams.get('folder')
+
+folders.unshift({
+	"id": "-1",
+	"text": i18n.t( 'addbookmark:select.option.home', 'Home' )
+})
 
 
 
@@ -27,7 +35,7 @@ const folders		= store.get( 'folders' )
 
 window.onerror = function( error, url, line ) {
 	
-	ipcRenderer.send( 'error-in-render', {error, url, line} )
+	ipc.send( 'error-in-render', {error, url, line} )
 }
 
 
@@ -62,9 +70,13 @@ function closeModal() {
 
 $(document).ready(function() {
 	
-	for( let folder of folders.reverse() ) {
+	for( let folder of folders ) {
 		
-		$('#folders').append( `<option value="${folder.id}">${folder.text}</option>` )
+		let selected = ''
+		
+		if( folder.id === currentFolder ) selected = ' selected';
+		
+		$('#folders').append( `<option value="${folder.id}"${selected}>${folder.text}</option>` )
 	}
 	
 	$('#folders').select2({
