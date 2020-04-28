@@ -203,7 +203,7 @@ function buildTagList( array, noTag ) {
 			untagged =
 			
 			`<dd class="margin-top">
-				<a href="#" class="filter" data-filter="${escape(tagitem.value)}">
+				<a href="#" class="filter untagged" data-filter="${escape(tagitem.value)}">
 					<span class="filter-icon icon-untagged"></span>
 					<span class="filter-name">${entities.encode(tagitem.value)}</span>
 					<span class="filter-count">${tagitem.count}</span>
@@ -722,7 +722,7 @@ $(document).ready(function() {
 				
 			} else {
 				
-				$('.filter.tagfilter, .filter.all').removeClass('selected')
+				$('.filter.tagfilter, .filter.all, .filter.untagged').removeClass('selected')
 				$(this).addClass('selected')
 				
 				maintable.bookmarkTable.columns(col).search(data).draw()
