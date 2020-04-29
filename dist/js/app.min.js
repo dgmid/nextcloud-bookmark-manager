@@ -262,19 +262,25 @@ ipcRenderer.on('add-bookmark', (event, message) => {
 
 ipcRenderer.on('delete-bookmark', (event, message) => {
 	
-	let bookmark = false
-	
 	if( message == 'delete-bookmark' ) {
 		
 		let row = maintable.bookmarkTable.row('.selected').data()
-		bookmark = [row[0], entities.decode(row[2])]
+		
+		if( typeof row === 'undefined' ) {
+			
+			deleteBookmark( 'delete-bookmark' )
+		
+		} else {
+			
+			let bookmark = [row[0], entities.decode(row[2])]
+			deleteBookmark( bookmark )
+		}
 	
 	} else {
 	
-		bookmark = message
+		deleteBookmark( message )
 	}
-	
-	deleteBookmark( bookmark )
+
 })
 
 
@@ -303,7 +309,7 @@ $('body').on('click', '.info-delete', function(e) {
 
 function deleteBookmark( bookmark ) {
 	
-	if( bookmark ) {
+	if( bookmark !== 'delete-bookmark' ) {
 		
 		let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {	
 								message: i18n.t('app:dialog.message.deletebookmark', 'Are you sure you want to delete the bookmark {{- bookmark}}?', {bookmark: bookmark[1]}),
