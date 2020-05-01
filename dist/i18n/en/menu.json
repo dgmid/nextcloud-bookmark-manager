@@ -9,6 +9,7 @@
     "new": "Add New Bookmark…",
     "edit": "Edit Bookmark…",
     "delete": "Delete Bookmark…",
+    "newfolder": "New Folder…",
     "sync": "Sync all Bookmarks",
     "export": "Export Bookmarks File…"
   },

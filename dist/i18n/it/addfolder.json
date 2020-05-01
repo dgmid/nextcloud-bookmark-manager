@@ -1,0 +1,20 @@
+{
+  "header": "Aggiungi una cartella:",
+  "label": {
+    "child": "cartella principale",
+    "name": "nome"
+  },
+  "select": {
+    "option": {
+      "home": "Home"
+    }
+  },
+  "input": {
+    "placeholder": "alfanumerica",
+    "required": "questo campo è richiesta"
+  },
+  "button": {
+    "cancel": "Annulla",
+    "submit": "Aggiungi cartella"
+  }
+}

@@ -489,9 +489,12 @@ ipcRenderer.on('delete-folder', (event, message) => {
 			maintable.bookmarkTable.clear().draw()
 			loader( 'add' )
 			
-			fetch.bookmarksApi( 'all', '', '', function( array ) {
+			fetch.bookmarksApi( 'folders', '', '', function() {
 				
-				parseBookmarks( array )
+				fetch.bookmarksApi( 'all', '', '', function( array ) {
+					
+					parseBookmarks( array )
+				})
 			})
 		})
 	}

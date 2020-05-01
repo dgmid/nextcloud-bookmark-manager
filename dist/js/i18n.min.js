@@ -14,6 +14,7 @@ const i18nextOptions = {
 		'about',
 		'app',
 		'addbookmark',
+		'addfolder',
 		'bookmarktable',
 		'date',
 		'editbookmark',
@@ -24,6 +25,7 @@ const i18nextOptions = {
 		'menu',
 		'menubookmarks',
 		'menucolumns',
+		'menufolders',
 		'menutags',
 		'version'
 		],

@@ -1,0 +1,20 @@
+{
+  "header": "Add a new folder:",
+  "label": {
+    "child": "parent",
+    "name": "name"
+  },
+  "select": {
+    "option": {
+      "home": "Home"
+    }
+  },
+  "input": {
+    "placeholder": "alphanumeric",
+    "required": "this field is required"
+  },
+  "button": {
+    "cancel": "Cancel",
+    "submit": "Add Folder"
+  }
+}
