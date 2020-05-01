@@ -57,11 +57,19 @@ const calltype = {
 		'method': 'GET',
 		'url': '/folder'
 	},
+	'addfolder': {
+		'method': 'POST',
+		'url': '/folder?'
+	},
 	'addtofolder': {
 		'method': 'POST',
 		'url': '/folder/'
 	},
 	'deletefromfolder': {
+		'method': 'DELETE',
+		'url': '/folder/'
+	},
+	'deletefolder': {
 		'method': 'DELETE',
 		'url': '/folder/'
 	}

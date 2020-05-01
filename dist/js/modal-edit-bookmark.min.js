@@ -20,9 +20,9 @@ const fetch			= require( './fetch.min' )
 const serialize		= require( './serialize.min' )
 const entities		= require( './entities.min' )
 
-const 	folders = store.get( 'folders' ).reverse(),
-		urlParams = new URLSearchParams( location.search ),
-		theId = urlParams.get('id')
+let folders 		= store.get( 'folders' ).reverse(),
+	urlParams 		= new URLSearchParams( location.search ),
+	theId 			= urlParams.get('id')
 
 folders.unshift({
 	"id": "-1",

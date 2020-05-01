@@ -155,7 +155,7 @@ function buildFolderList( folders ) {
 	
 	for( let folder of folders ) {
 		
-		$('#folderlist').append( `<dd><a href="#" class="filter folder" data-id="${folder.id}" data-filter="${folder.id}">${folder.text}</a></dd>` )
+		$('#folderlist').append( `<dd><a href="#" class="filter folder" data-id="${folder.id}" data-filter="${folder.id}" data-name="${escape(folder.text)}">${folder.text}</a></dd>` )
 	}
 }
 
@@ -423,6 +423,14 @@ ipcRenderer.on('delete-tag', (event, message) => {
 
 
 
+///note(dgmid): create new folder
+
+ipcRenderer.on('new-folder', (event, message) => {
+	
+	modalWindow.openModal( 'file://' + __dirname + `/../html/add-folder.html?folder=${getCurrentFolder()}`, 480, 212, false )
+})
+
+
 //note(dgmid): add to and delete from folder
 
 ipcRenderer.on('move-bookmark', (event, message) => {
@@ -451,6 +459,35 @@ ipcRenderer.on('move-bookmark', (event, message) => {
 			
 			maintable.bookmarkTable.clear().draw()
 				loader( 'add' )
+			
+			fetch.bookmarksApi( 'all', '', '', function( array ) {
+				
+				parseBookmarks( array )
+			})
+		})
+	}
+})
+
+
+//note(dgmid): delete folder
+
+ipcRenderer.on('delete-folder', (event, message) => {
+	
+	let id 		= message[0],
+		title 	= message[1]
+	
+	let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
+								message: i18n.t('app:dialog.message.deletefolder', 'Are you sure you want to delete the folder {{- folder}}?', {folder: unescape(title)}),
+								detail: i18n.t('app:dialog.detail.deletefolder', 'Deleting this folder will also delete any bookmarks it contains'),
+								buttons: [i18n.t('app:dialog.button.deletefolder', 'Delete Folder'), i18n.t('app:dialog.button.cancel', 'Cancel')]
+							})
+	
+	if( response === 0 ) {
+		
+		fetch.bookmarksApi( 'deletefolder', id, '', function() {
+			
+			maintable.bookmarkTable.clear().draw()
+			loader( 'add' )
 			
 			fetch.bookmarksApi( 'all', '', '', function( array ) {
 				
@@ -749,6 +786,18 @@ $(document).ready(function() {
 	})
 	
 	
+	$('#folderlist').on('mousedown', '.filter', function(e) {
+		
+		if(e.which == 3) {
+			
+			let id 		= $(this).data('id'),
+				data 	= $(this).data('name')
+			
+			ipcRenderer.send('show-folders-menu', [id, data] )
+		}
+	})
+	
+	
 	//note(dgmid): toggle col visibility
 	
 	$('.col-toggle').on( 'click', function () {
@@ -781,15 +830,6 @@ $(document).ready(function() {
 	//note(dgmid): add bookmark
 	
 	$( '#add-bookmark' ).click( function() {
-		
-		//todo(dgmid): function to get folder id -- then add it to queryString
-		
-		/*
-			
-			let id = $('.filter.folder.selected').data( 'id' )
-			if( !id ) id = '-1'
-		
-		*/
 		
 		modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}`, 480, 390, true )
 	})

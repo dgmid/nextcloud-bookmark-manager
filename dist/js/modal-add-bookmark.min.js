@@ -19,10 +19,9 @@ require('select2')($)
 const fetch			= require( './fetch.min' )
 const serialize		= require( './serialize.min' )
 
-const folders		= store.get( 'folders' ).reverse()
-
-let urlParams = new URLSearchParams( location.search ),
-			currentFolder = urlParams.get('folder')
+let folders			= store.get( 'folders' ).reverse(),
+	urlParams 		= new URLSearchParams( location.search ),
+	currentFolder 	= urlParams.get('folder')
 
 folders.unshift({
 	"id": "-1",

@@ -88,6 +88,14 @@ const template = [
 				type: 'separator'
 			},
 			{
+				label: i18n.t('menu:bookmarks.newfolder', 'New Folder…'),
+				accelerator: 'Command+Alt+N',
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('new-folder', 'new-folder') }
+			},
+			{
+				type: 'separator'
+			},
+			{
 				label: i18n.t('menu:bookmarks.sync', 'Sync all Bookmarks'),
 				accelerator: 'Cmd+R',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('refresh-bookmarks', 'refresh-bookmarks') }

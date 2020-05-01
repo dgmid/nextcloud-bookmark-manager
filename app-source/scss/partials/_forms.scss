@@ -57,7 +57,7 @@ form {
 				font-size: 13px;
 				line-height: 28px;
 				
-				&[for="folder"] { line-height: 22px; }
+				&[for="child"] { line-height: 22px; }
 				
 				&::after {
 					
@@ -103,6 +103,20 @@ form {
 				
 				height: 44px;
 				resize: none;
+			}
+			
+			.select-container {
+				
+				position: relative;
+				
+				&::after {
+					
+					content: var(--select-arrow);
+					position: absolute;
+					top: 0;
+					right: 8px;
+					pointer-events: none;
+				}
 			}
 			
 			select {

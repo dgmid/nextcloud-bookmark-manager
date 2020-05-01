@@ -150,6 +150,7 @@ function createWindow() {
 	require( './menu-app.min' )
 	require( './menu-bookmarks.min' )
 	require( './menu-columns.min' )
+	require( './menu-folders.min' )
 	require( './menu-tags.min' )
 }
 

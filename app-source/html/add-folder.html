@@ -9,21 +9,28 @@
 		<link rel="stylesheet" type="text/css" href="../css/modal.min.css" media="all">
 	</head>
 	
-	<body class="resize">
+	<body>
 		<header data-i18n="addfolder:header">Add a new folder:</header>
 		
 		<div class="scroll">
 			<form id="modal-form">
 				<ul id="fields">
 					<li>
-						<label for="name" data-i18n="addfolder:label.name">name</label>
-						<input type="text" id="name" class="mousetrap" name="name" placeholder=" " required title="this field is required" data-i18n="[title]addfolder:input.required" tabindex="1">
+						<label for="parent_folder" data-i18n="addfolder:label.child">parent</label>
+						<div class="select-container">
+							<select id="parent_folder" name="parent_folder" tabindex="1">
+							</select>
+						</div>
+					</li>
+					<li>
+						<label for="title" data-i18n="addfolder:label.name">name</label>
+						<input type="text" id="title" class="mousetrap" name="title"  placeholder="alphanumeric" required pattern="[a-zA-Zà-žÀ-Ž0-9#-\)\+-\.\^-` !;=@\[\]\{\}~]+" title="this field is required" data-i18n="[placeholder]addfolder:input.placeholder;[title]addfolder:input.required" tabindex="2">
 					</li>
 				</ul>
 				
 				<footer>
-					<button id="cancel" class="ui-button" type="button" data-i18n="addfolder:button.cancel" tabindex="3">Cancel</button>
-					<button id="update" class="ui-button" type="submit" data-i18n="addfolder:button.submit" tabindex="2">Add Folder</button>
+					<button id="cancel" class="ui-button" type="button" data-i18n="addfolder:button.cancel" tabindex="4">Cancel</button>
+					<button id="update" class="ui-button" type="submit" data-i18n="addfolder:button.submit" tabindex="3">Add Folder</button>
 				</footer>
 			</form>		
 		<script>
