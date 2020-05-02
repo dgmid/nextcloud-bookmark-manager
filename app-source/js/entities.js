@@ -13,5 +13,4 @@ module.exports.decode = function( str ) {
 	return 	String( str )
 		.replace(/&lt;/g, '<')
 		.replace(/&gt;/g, '>')
-		
 }

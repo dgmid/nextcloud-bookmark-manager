@@ -755,7 +755,7 @@ $(document).ready(function() {
 			$('#clear').hide()
 			$('#search').val('')
 			
-			maintable.bookmarkTable.search('').columns().search('').draw()
+			maintable.bookmarkTable.search('').columns().search('').columns.adjust().responsive.recalc().draw()
 			
 		} else {
 			
@@ -764,14 +764,15 @@ $(document).ready(function() {
 				$('.filter.folder, .filter.all').removeClass('selected')
 				$(this).addClass('selected')
 				
-				maintable.bookmarkTable.columns(col).search('(^|,)'+data+'(,|$)',true,false).draw()
+				maintable.bookmarkTable.columns(col).search('(^|,)'+data+'(,|$)',true,false).columns.adjust().responsive.recalc().draw()
 				
 			} else {
 				
 				$('.filter.tagfilter, .filter.all, .filter.untagged').removeClass('selected')
 				$(this).addClass('selected')
 				
-				maintable.bookmarkTable.columns(col).search(data).draw()
+				maintable.bookmarkTable.columns(col).search(data).columns.adjust().responsive.recalc().draw()
+				
 			}
 		}
 	})
@@ -819,12 +820,12 @@ $(document).ready(function() {
 		
 		if( $(this).prop('checked') === true ) {
 			
-			column.visible( true ).draw()
+			column.visible( true ).columns.adjust().responsive.recalc().draw()
 			store.set( `tableColumns.${id}`, true )
 		
 		} else {
 			
-			column.visible( false ).draw()
+			column.visible( false ).columns.adjust().responsive.recalc().draw()
 			store.set( `tableColumns.${id}`, false )
 		}
 	})
