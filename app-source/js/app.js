@@ -87,7 +87,7 @@ function parseBookmarks( array ) {
 		
 		let theFolders = ''
 		
-		if( item.folders.length < 2 &&  item.folders[0] === '-1' ) {
+		if( item.folders.length < 2 && item.folders[0] == -1 ) {
 			
 			theFolders = '⋯'
 		
@@ -97,7 +97,7 @@ function parseBookmarks( array ) {
 				
 				theFolders += '<span class="folder">'
 				
-				if( folderItem === '-1' ) {
+				if( folderItem == -1 ) {
 					
 					theFolders += 'Home'
 				

@@ -25,7 +25,7 @@ let folders 		= store.get( 'folders' ).reverse(),
 	theId 			= urlParams.get('id')
 
 folders.unshift({
-	"id": "-1",
+	"id": -1,
 	"text": i18n.t( 'editbookmark:select.option.home', 'Home' )
 })
 

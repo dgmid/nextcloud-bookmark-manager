@@ -24,7 +24,7 @@ let folders			= store.get( 'folders' ).reverse(),
 	currentFolder 	= urlParams.get('folder')
 
 folders.unshift({
-	"id": "-1",
+	"id": -1,
 	"text": i18n.t( 'addbookmark:select.option.home', 'Home' )
 })
 
@@ -73,7 +73,7 @@ $(document).ready(function() {
 		
 		let selected = ''
 		
-		if( folder.id === currentFolder ) selected = ' selected';
+		if( folder.id == currentFolder ) selected = ' selected';
 		
 		$('#folders').append( `<option value="${folder.id}"${selected}>${folder.text}</option>` )
 	}

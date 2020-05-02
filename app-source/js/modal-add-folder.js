@@ -22,7 +22,7 @@ let folders 		= store.get( 'folders' ).reverse(),
 	currentFolder 	= urlParams.get('folder')
 
 folders.unshift({
-	"id": "-1",
+	"id": -1,
 	"text": i18n.t( 'addfolder:select.option.home', 'Home' )
 })
 
