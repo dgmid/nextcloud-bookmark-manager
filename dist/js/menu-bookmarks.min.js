@@ -12,14 +12,11 @@ const {
 	clipboard
 } = require( 'electron' )
 
-const dialog 		= require( 'electron' ).dialog
-const Store 		= require( 'electron-store' )
-const store 		= new Store()
-const applescript 	= require( 'applescript' )
+const Store 			= require( 'electron-store' )
+const store 			= new Store()
+const detectBrowsers 	= require('detect-browsers')
 
-const log			= require( 'electron-log' )
-
-const entities 		= require( './entities.min' )
+const entities 			= require( './entities.min' )
 
 
 
@@ -72,39 +69,17 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 		},
 	]
 	
-	const browsers = store.get( 'browsers' )
+	let browsers = store.get( 'browsers' )
 	
-	for ( let browser of browsers ) {
-		
-		let launchScript =
-		
-		`tell application "${browser.name}"
-			open location "${message[4]}"
-		end tell
-		tell application "System Events"
-			tell application process "${browser.name}"
-			set frontmost to true
-			end tell
-		end tell`
+	for(let browser of browsers) {
 		
 		bookmarkMenuTemplate[1].submenu.push({
-				label: browser.name,
-				click () {
-					
-					applescript.execString(launchScript, function(err, rtn) {
-						if (err) {
-							
-							dialog.showErrorBox(
-								i18n.t('menubookmarks:errorbox.title', 'Error launching: {{browser}}', { browser: browser.name }),
-								i18n.t('menubookmarks:errorbox.content', 'the url {{url}} could not be opened', { url: message[4] })
-							)
-							
-							log.info( err )
-						}
-					})
-				}
+			label: browser.browser,
+			click () {
+				
+				detectBrowsers.launchBrowser( browser, message[4] )
 			}
-		)
+		})
 	}
 	
 	const 	folders 	= store.get( 'folders' ),

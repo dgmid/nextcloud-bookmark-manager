@@ -7,7 +7,7 @@ const dialog 	= require('electron').dialog
 const Store 	= require('electron-store')
 const log		= require( 'electron-log' )
 
-const getAvailableBrowsers = require('detect-installed-browsers').getAvailableBrowsers
+const detectBrowsers = require('detect-browsers')
 
 
 
@@ -136,16 +136,13 @@ function createWindow() {
 		log.info( `main window is responding` )
 	})
 	
-	getAvailableBrowsers( {}, ( browserList ) => {
+	detectBrowsers.getAvailableBrowsers()
+	.then(browsers => {
 		
-		let results = []
-		
-		for ( let browser of browserList ) {
-			
-			results.push( { "name": browser.name } )
-			store.set('browsers', results )
-		}
+		store.set('browsers', browsers )
+	
 	})
+	.catch( error => log.error(error) )
 	
 	require( './menu-app.min' )
 	require( './menu-bookmarks.min' )

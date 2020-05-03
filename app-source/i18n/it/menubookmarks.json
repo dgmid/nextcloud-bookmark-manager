@@ -7,9 +7,5 @@
   "addtofolder": "Aggiungi alla cartella…",
   "deletefromfolder": "Elimina dalla cartella…",
   "home": "Home",
-  "info": "Mostra / Nascondi info…",
-  "errorbox": {
-    "title": "Errore durante l’avvio di: {{browser}}",
-    "content": "impossibile aprire l’url {{url}}"
-  }
+  "info": "Mostra / Nascondi info…"
 }

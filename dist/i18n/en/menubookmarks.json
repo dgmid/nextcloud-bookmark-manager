@@ -7,9 +7,5 @@
   "addtofolder": "Add to Folder…",
   "deletefromfolder": "Delete from Folder…",
   "home": "Home",
-  "info": "Show / Hide Info…",
-  "errorbox": {
-    "title": "Error launching: {{browser}}",
-    "content": "the url {{url}} could not be opened"
-  }
+  "info": "Show / Hide Info…"
 }
