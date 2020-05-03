@@ -254,7 +254,7 @@ function buildTagList( array, noTag ) {
 
 ipcRenderer.on('add-bookmark', (event, message) => {
 	
-	modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}`, 480, 390, true )
+	modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}&tag=${getCurrentTag()}`, 480, 390, true )
 })
 
 
@@ -531,12 +531,21 @@ function toggleInfoPanel( tr ) {
 
 
 
-//note(dgmid): get current folder
+//note(dgmid): get current folder / get current tag
 
 function getCurrentFolder() {
 	
 	let id = $('.filter.folder.selected').data( 'id' )
 	if( !id ) id = '-1'
+	return id
+}
+
+
+
+function getCurrentTag() {
+	
+	let id = $('#taglist .filter.selected').data( 'id' )
+	if( !id ) id = ''
 	return id
 }
 
@@ -835,7 +844,7 @@ $(document).ready(function() {
 	
 	$( '#add-bookmark' ).click( function() {
 		
-		modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}`, 480, 390, true )
+		modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}&tag=${getCurrentTag()}`, 480, 390, true )
 	})
 	
 	

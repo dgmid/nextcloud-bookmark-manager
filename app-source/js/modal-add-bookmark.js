@@ -20,8 +20,10 @@ const fetch			= require( './fetch.min' )
 const serialize		= require( './serialize.min' )
 
 let folders			= store.get( 'folders' ).reverse(),
+	tagsList 		= store.get('tags'),
 	urlParams 		= new URLSearchParams( location.search ),
-	currentFolder 	= urlParams.get('folder')
+	currentFolder 	= urlParams.get('folder'),
+	currentTag 		= urlParams.get('tag')
 
 folders.unshift({
 	"id": -1,
@@ -95,6 +97,15 @@ $(document).ready(function() {
 		tokenSeparators: [',',';'],
 		data: store.get('tags')
 	})
+		
+	if( currentTag ) {
+		
+		let tagArray = []
+		tagArray.push( currentTag )
+		
+		$('#tags').val( tagArray )
+		$('#tags').trigger( 'change' )
+	}
 	
 	
 	//note(dgmid): cancel modal
