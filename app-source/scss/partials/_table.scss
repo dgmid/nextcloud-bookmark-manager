@@ -117,7 +117,7 @@ table.dataTable.display tbody tr.even.selected {
 	background-color: var(--accent);
 }
 
-table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
+table.dataTable.hover tbody tr[role="row"]:hover, table.dataTable.display tbody tr[role="row"]:hover {
 	
 	background-color: var(--select-sort);
 }
@@ -130,11 +130,6 @@ table.dataTable.hover tbody tr:hover td, table.dataTable.display tbody tr:hover 
 table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected {
 	
 	background-color: var(--accent);
-}
-
-table.dataTable.hover tbody tr.shown + tr, table.dataTable.display tbody tr.shown + tr {
-	
-	background-color: var(--details-table);
 }
 
 table.dataTable.hover tbody tr.shown + tr td, table.dataTable.display tbody tr.shown + tr td {

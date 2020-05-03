@@ -197,44 +197,46 @@ module.exports.detailsTable = function( data ) {
 	}
 	
 	return `<div class="details-panel">
-	<div class="row">
-		<div class="label">${i18n.t('bookmarktable:header.url', 'Url')}:</div>
-		<div class="value nowrap"><a id="url_${data[0]}" href="${data[4]}">${favicon}${data[4]}</a></div>
-	</div>
-	
-	<div class="row">
-		<div class="label">${i18n.t('bookmarktable:header.title', 'Title')}:</div>
-		<div class="value wrap">${data[2]}</div>
-	</div>
-	
-	<div class="row">
-		<div class="label">${i18n.t('bookmarktable:header.description', 'Description')}:</div>
-		<div class="value wrap">${desc}</div>
-	</div>
-	
-	<div class="row">
-		<div class="label">${i18n.t('bookmarktable:header.created', 'Created')}:</div>
-		<div class="value">${data[6]}</div>
-	</div>
-	
-	<div class="row">
-		<div class="label">${i18n.t('bookmarktable:header.modified', 'Modified')}:</div>
-		<div class="value">${data[8]}</div>
-	</div>
-	
-	<div class="row">
-		<div class="label">${i18n.t('bookmarktable:header.folders', 'Folders')}:</div>
-		<div class="value">${data[10]}</div>
-	</div>
-	
-	<div class="row">
-		<div class="label">${i18n.t('bookmarktable:header.tags', 'Tags')}:</div>
-		<div class="value">${data[11]}</div>
-	</div>
-	
-	<div class="buttons">
-		<button class="info-edit ui-button small" data-id="${data[0]}">${i18n.t('menu:bookmarks.edit', 'Edit Bookmark…')}</button>
-		<button class="info-delete ui-button small" data-id="${data[0]}">${i18n.t('menu:bookmarks.delete', 'Delete Bookmark…')}</button>
+	<div class="inner">
+		<div class="row">
+			<div class="label">${i18n.t('bookmarktable:header.url', 'Url')}:</div>
+			<div class="value nowrap"><a id="url_${data[0]}" href="${data[4]}">${favicon}${data[4]}</a></div>
+		</div>
+		
+		<div class="row">
+			<div class="label">${i18n.t('bookmarktable:header.title', 'Title')}:</div>
+			<div class="value wrap">${data[2]}</div>
+		</div>
+		
+		<div class="row">
+			<div class="label">${i18n.t('bookmarktable:header.description', 'Description')}:</div>
+			<div class="value wrap">${desc}</div>
+		</div>
+		
+		<div class="row">
+			<div class="label">${i18n.t('bookmarktable:header.created', 'Created')}:</div>
+			<div class="value">${data[6]}</div>
+		</div>
+		
+		<div class="row">
+			<div class="label">${i18n.t('bookmarktable:header.modified', 'Modified')}:</div>
+			<div class="value">${data[8]}</div>
+		</div>
+		
+		<div class="row">
+			<div class="label">${i18n.t('bookmarktable:header.folders', 'Folders')}:</div>
+			<div class="value">${data[10]}</div>
+		</div>
+		
+		<div class="row">
+			<div class="label">${i18n.t('bookmarktable:header.tags', 'Tags')}:</div>
+			<div class="value">${data[11]}</div>
+		</div>
+		
+		<div class="buttons">
+			<button class="info-edit ui-button small" data-id="${data[0]}">${i18n.t('menu:bookmarks.edit', 'Edit Bookmark…')}</button>
+			<button class="info-delete ui-button small" data-id="${data[0]}">${i18n.t('menu:bookmarks.delete', 'Delete Bookmark…')}</button>
+		</div>
 	</div>
 </div>`
 }
