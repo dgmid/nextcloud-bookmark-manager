@@ -635,6 +635,20 @@ ipcRenderer.on('find', (event, message) => {
 
 
 
+//note(dgmid): info panel width
+
+function setPanelWidth() {
+	
+	if( $('td[colspan]') ) {
+	
+		let cols = maintable.bookmarkTable.columns().visible().toArray()
+		let count = cols.filter(Boolean).length
+		$('td[colspan]').attr( 'colspan', count )
+	}
+}
+
+
+
 //note(dgmid): set column checkboxes
 
 function setColControls() {
@@ -820,13 +834,6 @@ $(document).ready(function() {
 		
 		$('#toggle-info-panel').removeClass( 'opened' )
 		
-		//todo(dgmid): replace this with an adjustment of the colspan attr on the childrows
-		maintable.bookmarkTable.rows().every(function() {
-			
-			this.child.hide()
-			$(this.node()).removeClass('shown')
-		})
-		
 		if( $(this).prop('checked') === true ) {
 			
 			column.visible( true ).columns.adjust().responsive.recalc().draw()
@@ -837,6 +844,8 @@ $(document).ready(function() {
 			column.visible( false ).columns.adjust().responsive.recalc().draw()
 			store.set( `tableColumns.${id}`, false )
 		}
+		
+		setPanelWidth()
 	})
 	
 	
@@ -907,7 +916,15 @@ $(document).ready(function() {
 	})
 	
 	
-	$('#bookmarks tbody').on('click', 'td.details-control', function () {
+	//note(dgmid): info panel width on window resize
+	
+	$('#bookmarks').on('responsive-resize.dt', function() {
+		
+		setPanelWidth()
+	})
+	
+	
+	$('#bookmarks tbody').on('click', 'td.details-control', function() {
 		
 		let tr = $(this).closest('tr')
 		
