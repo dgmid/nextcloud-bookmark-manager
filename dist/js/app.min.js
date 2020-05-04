@@ -635,6 +635,22 @@ ipcRenderer.on('find', (event, message) => {
 
 
 
+//note(dgmid): window state
+
+ipcRenderer.on('state', (event, message) => {
+	
+	if( message === 'blur' ) {
+		
+		$('body').addClass( 'blurred' )
+		
+	} else {
+		
+		$('body').removeClass( 'blurred' )
+	}
+})
+
+
+
 //note(dgmid): info panel width
 
 function setPanelWidth() {

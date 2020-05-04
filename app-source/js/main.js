@@ -101,6 +101,16 @@ function createWindow() {
 	win.on('resize', saveWindowBounds)
 	win.on('move', saveWindowBounds)
 	
+	win.on('blur', () => {
+		
+		win.webContents.send('state', 'blur')
+	})
+	
+	win.on('focus', () => {
+		
+		win.webContents.send('state', 'focus')
+	})
+	
 	app.on('before-quit', () => {
 		
 		isQuitting = true

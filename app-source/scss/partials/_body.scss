@@ -21,6 +21,14 @@ body {
 					sans-serif;
 	
 	color: var(--text);
+	
+	&.blurred {
+		
+		background-color: #f6f6f6;
+		
+		--accent: rgba(0,0,0,.025);
+		--accent-light: rgba(0,0,0,.2);
+	}
 }
 
 ::placeholder {
@@ -78,4 +86,15 @@ button.ui-button {
 [data-theme^="dark"] {
 	
 	::placeholder { color: #fff; }
+	
+	body {
+		
+		&.blurred {
+			
+			background-color: rgb(57, 57, 57);
+			
+			--accent: rgba(255,255,255,.05);
+			--accent-light: rgba(255,255,255,.2);
+		}
+	}
 }
