@@ -70,7 +70,7 @@ $(document).ready(function() {
 		
 		let selected = ''
 		
-		if( folder.id === currentFolder ) selected = ' selected';
+		if( folder.id == currentFolder ) selected = ' selected';
 		
 		$('#parent_folder').append( `<option value="${folder.id}"${selected}>${folder.text}</option>` )
 	}

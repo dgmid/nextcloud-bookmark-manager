@@ -1,7 +1,7 @@
 {
   "header": "Add a new folder:",
   "label": {
-    "child": "parent",
+    "parent": "parent",
     "name": "name"
   },
   "select": {

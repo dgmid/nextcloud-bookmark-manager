@@ -536,7 +536,7 @@ function toggleInfoPanel( tr ) {
 function getCurrentFolder() {
 	
 	let id = $('.filter.folder.selected').data( 'id' )
-	if( !id ) id = '-1'
+	if( !id ) id = -1
 	return id
 }
 
@@ -870,6 +870,14 @@ $(document).ready(function() {
 	$( '#add-bookmark' ).click( function() {
 		
 		modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}&tag=${getCurrentTag()}`, 480, 390, true )
+	})
+	
+	
+	//note(dgmid): new folder
+	
+	$( '#new-folder' ).click( function() {
+		
+		modalWindow.openModal( 'file://' + __dirname + `/../html/add-folder.html?folder=${getCurrentFolder()}`, 480, 212, false )	
 	})
 	
 	

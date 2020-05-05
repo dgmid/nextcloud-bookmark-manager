@@ -1,7 +1,7 @@
 {
   "header": "Aggiungi una cartella:",
   "label": {
-    "child": "cartella principale",
+    "parent": "principale",
     "name": "nome"
   },
   "select": {
