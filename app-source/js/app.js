@@ -254,7 +254,7 @@ function buildTagList( array, noTag ) {
 
 ipcRenderer.on('add-bookmark', (event, message) => {
 	
-	modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}&tag=${getCurrentTag()}`, 480, 390, true )
+	modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}&tag=${getCurrentTag()}`, 480, 390, false )
 })
 
 
@@ -360,7 +360,7 @@ ipcRenderer.on('edit-bookmark', (event, message) => {
 	
 	if( bookmark ) {
 		
-		modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + bookmark[0], 480, 390, true )
+		modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + bookmark[0], 480, 390, false )
 		
 	} else {
 		
@@ -379,7 +379,7 @@ $('body').on('click', '.info-edit', function(e) {
 	
 	let id = $( this ).data( 'id' )
 	
-	modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + id, 480, 390, true )
+	modalWindow.openModal( 'file://' + __dirname + '/../html/edit-bookmark.html?id=' + id, 480, 390, false )
 })
 
 
@@ -869,7 +869,7 @@ $(document).ready(function() {
 	
 	$( '#add-bookmark' ).click( function() {
 		
-		modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}&tag=${getCurrentTag()}`, 480, 390, true )
+		modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}&tag=${getCurrentTag()}`, 480, 390, false )
 	})
 	
 	
