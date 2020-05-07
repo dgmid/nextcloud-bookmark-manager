@@ -42,13 +42,15 @@
       "tags": "Tag"
     },
     "title": {
-      "home": "Home",
+      "folders": "Cartelle",
       "tags": "Tag",
       "columns": "Colonne"
     },
     "search": "Cerca"
   },
   "button": {
+    "home": "Home",
+    "newfolder": "Nuova cartella…",
     "new": "Aggiungi nuovo segnalibro"
   },
   "export": {

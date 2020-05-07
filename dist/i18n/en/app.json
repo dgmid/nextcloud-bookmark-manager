@@ -42,13 +42,15 @@
       "tags": "Tags"
     },
     "title": {
-      "home": "Home",
+      "folders": "Folders",
       "tags": "Tags",
       "columns": "Columns"
     },
     "search": "Search"
   },
   "button": {
+    "home": "Home",
+    "newfolder": "New Folder…",
     "new": "Add New Bookmark"
   },
   "export": {

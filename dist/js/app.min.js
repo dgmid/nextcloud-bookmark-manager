@@ -768,7 +768,9 @@ $(document).ready(function() {
 	
 	//note(dgmid): translate html strings
 	
-	$('#folder-home .filter-name').localize()
+	$('.new-folder-name').html( i18n.t('app:button.newfolder', 'New Folder…') )
+	$('#folder-home .filter-name').html( i18n.t('app:button.home', 'Home') )
+	$('#sidebar-folders .list-title').html( i18n.t('app:sidebar.title.folders', 'Folders') )
 	$('#sidebar-tags .list-title').html( i18n.t('app:sidebar.title.tags', 'Tags') )
 	$('#column-list dt').html( i18n.t('app:sidebar.title.columns', 'Columns') )
 	$('#description span').html( i18n.t('app:sidebar.filter.description', 'Description') )
