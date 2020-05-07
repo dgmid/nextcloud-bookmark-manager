@@ -457,7 +457,7 @@ ipcRenderer.on('move-bookmark', (event, message) => {
 	
 		fetch.bookmarksApi( message.method, message.folder_id, `/bookmarks/${message.bookmark_id}`, function() {
 			
-			maintable.bookmarkTable.clear().draw()
+			maintable.bookmarkTable.clear().columns.adjust().responsive.recalc().draw()
 				loader( 'add' )
 			
 			fetch.bookmarksApi( 'all', '', '', function( array ) {
@@ -731,7 +731,7 @@ $('#clear').click(function() {
 	
 	$(this).hide()
 	$('#search').val('')
-	maintable.bookmarkTable.search( '' ).columns(11).search( data ).draw()
+	maintable.bookmarkTable.search( '' ).columns(11).search( data ).columns.adjust().responsive.recalc().draw()
 })
 
 
@@ -971,7 +971,7 @@ $(document).ready(function() {
 	
 	$('#search').keyup(function(){
 
-		maintable.bookmarkTable.search($(this).val()).draw()
+		maintable.bookmarkTable.search($(this).val()).columns.adjust().responsive.recalc().draw()
 	})
 	
 	
