@@ -5,7 +5,7 @@
   "edit": "Edit {{- title}} Bookmark…",
   "delete": "Delete {{- title}} Bookmark…",
   "addtofolder": "Add to Folder…",
-  "deletefromfolder": "Delete from Folder…",
+  "removefromfolder": "Remove from Folder…",
   "home": "Home",
   "info": "Show / Hide Info…"
 }

@@ -5,7 +5,7 @@
   "edit": "Modifica {{- title}} segnalibro…",
   "delete": "Elimina {{- title}} segnalibro…",
   "addtofolder": "Aggiungi alla cartella…",
-  "deletefromfolder": "Elimina dalla cartella…",
+  "removefromfolder": "Rimuovi dalla cartella…",
   "home": "Home",
   "info": "Mostra / Nascondi info…"
 }

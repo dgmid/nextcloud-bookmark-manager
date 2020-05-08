@@ -14,7 +14,7 @@
       "deletetag": "Sei sicuro di voler eliminare il tag {{- tag}}?",
       "deletebookmark": "Sei sicuro di voler eliminare il segnalibro {{- bookmark}}?",
       "deletefolder": "Sei sicuro di voler eliminare la cartella {{- folder}}?",
-      "deletefromfolder": "Sei sicuro di voler eliminare il segnalibro corrente da questa cartella?"
+      "deletefromfolder": "Sei sicuro di voler rimuovere il segnalibro corrente da questa cartella?"
     },
     "detail": {
       "deletetag": "Questa operazione non è reversibile.",

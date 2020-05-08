@@ -57,7 +57,7 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 			submenu: []
 		},
 		{
-			label: i18n.t('menubookmarks:deletefromfolder', 'Delete from Folder…'),
+			label: i18n.t('menubookmarks:removefromfolder', 'Remove from Folder…'),
 			submenu: []
 		},
 		{

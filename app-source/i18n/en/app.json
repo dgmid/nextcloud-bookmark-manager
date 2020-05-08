@@ -14,13 +14,13 @@
       "deletetag": "Are you sure you want to delete the tag {{- tag}}?",
       "deletebookmark": "Are you sure you want to delete the bookmark {{- bookmark}}?",
       "deletefolder": "Are you sure you want to delete the folder {{- folder}}?",
-      "deletefromfolder": "Are you sure you want to delete the current bookmark from this folder?"
+      "deletefromfolder": "Are you sure you want to remove the current bookmark from this folder?"
     },
     "detail": {
       "deletetag": "This operation is not reversable.",
       "deletebookmark": "This operation is not reversable.",
       "deletefolder": "Deleting this folder will also delete any bookmarks it contains",
-      "deletefromfolder": "Deleting the current bookmark from this folder will also delete the bookmark."
+      "deletefromfolder": "Removing the current bookmark from this folder will also delete the bookmark."
     },
     "button": {
       "cancel": "Cancel",
