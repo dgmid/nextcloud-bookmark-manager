@@ -17,7 +17,7 @@ const store 			= new Store()
 const detectBrowsers 	= require('detect-browsers')
 
 const entities 			= require( './entities.min' )
-
+const log			= require( 'electron-log' )
 
 
 ipcMain.on('show-bookmark-menu', ( event, message ) => {
@@ -83,9 +83,9 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 	}
 	
 	const 	folders 	= store.get( 'folders' ),
-			folderIds 	= message[9].split( ',' )
+			folderIds 	= message[9].split( ',' ).map( Number )
 	
-	if( !folderIds.includes( '-1' ) ) {
+	if( !folderIds.includes( -1 ) ) {
 		
 		bookmarkMenuTemplate[7].submenu.push(
 			{
@@ -94,7 +94,7 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 					{
 						'method': 'addtofolder',
 						'bookmark_id': id,
-						'folder_id': '-1',
+						'folder_id': -1,
 						'count': folderIds.length
 					}
 				)}
@@ -113,7 +113,7 @@ ipcMain.on('show-bookmark-menu', ( event, message ) => {
 					{
 						'method': 'deletefromfolder',
 						'bookmark_id': id,
-						'folder_id': '-1',
+						'folder_id': -1,
 						'count': folderIds.length
 					}
 				)}
