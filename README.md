@@ -4,11 +4,11 @@
 
 A Mac App for accessing and managing Nextcloud bookmarks.
 
-![ncbm-2 0 0-light](https://user-images.githubusercontent.com/1267580/76699121-6a2c8f00-66aa-11ea-9951-4ef8f1b4e974.png)
-<small>*light mode*</small>
-
-![ncbm-2 0 0-dark](https://user-images.githubusercontent.com/1267580/76699116-66990800-66aa-11ea-877f-fc9886a3a79b.png)
+![ncbm-2 0 3-light](https://user-images.githubusercontent.com/1267580/81381652-55e69a80-910d-11ea-9c6a-8247512325a0.png)
 <small>*dark mode*</small>
+
+![ncbm-2 0 3-dark](https://user-images.githubusercontent.com/1267580/81381733-77e01d00-910d-11ea-8385-3783ba81b0bf.png)
+<small>*light mode*</small>
 
 ## Requirements
 
@@ -44,3 +44,11 @@ To package the final app run:
 npm run package
 ```
 The packaged app will be written to `build/Nextcloud Bookmark Manager-darwin-x64/` in the project directory.
+
+## i18n
+Translations for this app are by:
+
+| language | translator |
+| --- | --- |
+| EN | [dgmid](https://github.com/dgmid) |
+| IT | [dgmid](https://github.com/dgmid) |
