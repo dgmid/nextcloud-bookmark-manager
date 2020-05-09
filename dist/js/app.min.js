@@ -133,6 +133,8 @@ function parseBookmarks( array ) {
 	buildFolderList( folderList )
 	buildTagList( allTags.sort(), noTag )
 	
+	ipcRenderer.send( 'tray-menu' )
+	
 	if( firstLoad === true ) {
 		
 		setColControls()

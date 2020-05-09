@@ -159,6 +159,7 @@ function createWindow() {
 	require( './menu-columns.min' )
 	require( './menu-folders.min' )
 	require( './menu-tags.min' )
+	require( './menu-tray.min' )
 }
 
 
