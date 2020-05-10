@@ -263,9 +263,9 @@ ipcRenderer.on('add-bookmark', (event, message) => {
 
 //note(dgmid): drag from browser to tray icon
 
-ipcRenderer.on('url-from-browser', (event, message) => {
+ipcRenderer.on('drop-on-tray', (event, message) => {
 	
-	modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}&tag=${getCurrentTag()}&url=${message}`, 480, 390, false )
+	modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}&tag=${getCurrentTag()}&url=${message.url}&title=${message.title}`, 480, 390, false )
 })
 
 

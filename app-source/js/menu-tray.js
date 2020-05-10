@@ -10,13 +10,15 @@ const {
 } = require( 'electron' )
 
 const path 	= require( 'path' )
+const fs 	= require( 'fs-extra' )
+const log	= require( 'electron-log' )
 const Store	= require( 'electron-store' )
 const store = new Store()
 
-let trayIcon 		= null,
-	bookmarks 		= new Store( {name: 'bookmarks'} )
-
-
+let trayIcon 	= null,
+	bookmarks 	= new Store( {name: 'bookmarks'} )
+	
+	
 
 ipcMain.on( 'tray-menu', (event) => {
 	
@@ -84,6 +86,30 @@ ipcMain.on( 'tray-menu', (event) => {
 		
 		let win = BrowserWindow.fromId(1)
 		win.show()
-		win.webContents.send( 'url-from-browser', text )
+		win.webContents.send( 'drop-on-tray', { "url": text, "title": '' } )
+	})
+	
+	trayIcon.on('drop-files', (event, files) => {
+		
+		if( path.extname( files[0] ) === '.webloc' ) {
+		
+			let name = path.basename( files[0], '.webloc' )
+			
+			fs.readFile( files[0], 'utf8', (err, data ) => {
+				
+				if ( err ) {
+					
+					log.error( err )
+					return
+				}
+				
+				let loc = data.match( '\<string\>(.*?)\<\/string\>' )
+				
+				let win = BrowserWindow.fromId(1)
+				win.show()
+				win.webContents.send( 'drop-on-tray', { "url": loc[1], "title": name } )
+				
+			})
+		}
 	})
 })

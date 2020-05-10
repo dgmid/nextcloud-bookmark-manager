@@ -24,7 +24,8 @@ let folders			= store.get( 'folders' ).reverse(),
 	urlParams 		= new URLSearchParams( location.search ),
 	currentFolder 	= urlParams.get('folder'),
 	currentTag 		= urlParams.get('tag'),
-	newUrl 			= urlParams.get('url')
+	newUrl 			= urlParams.get('url'),
+	newTitle 		= urlParams.get('title')
 
 folders.unshift({
 	"id": -1,
@@ -73,6 +74,7 @@ function closeModal() {
 $(document).ready(function() {
 	
 	if( newUrl ) $('#url').val( newUrl )
+	if( newTitle !== null ) $('#title').val( newTitle )
 	
 	for( let folder of folders ) {
 		
