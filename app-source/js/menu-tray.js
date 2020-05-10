@@ -2,6 +2,7 @@
 
 const {
 	app,
+	BrowserWindow,
 	ipcMain,
 	Menu,
 	Tray,
@@ -78,4 +79,11 @@ ipcMain.on( 'tray-menu', (event) => {
 	
 	const trayMenu = Menu.buildFromTemplate( trayMenuTemplate )
 	trayIcon.setContextMenu( trayMenu )
+	
+	trayIcon.on('drop-text', (event, text) => {
+		
+		let win = BrowserWindow.fromId(1)
+		win.show()
+		win.webContents.send( 'url-from-browser', text )
+	})
 })

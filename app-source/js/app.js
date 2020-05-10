@@ -260,6 +260,16 @@ ipcRenderer.on('add-bookmark', (event, message) => {
 })
 
 
+
+//note(dgmid): drag from browser to tray icon
+
+ipcRenderer.on('url-from-browser', (event, message) => {
+	
+	modalWindow.openModal( 'file://' + __dirname + `/../html/add-bookmark.html?folder=${getCurrentFolder()}&tag=${getCurrentTag()}&url=${message}`, 480, 390, false )
+})
+
+
+
 //note(dgmid): delete bookmark
 
 ipcRenderer.on('delete-bookmark', (event, message) => {

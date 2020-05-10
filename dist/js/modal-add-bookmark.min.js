@@ -23,7 +23,8 @@ let folders			= store.get( 'folders' ).reverse(),
 	tagsList 		= store.get('tags'),
 	urlParams 		= new URLSearchParams( location.search ),
 	currentFolder 	= urlParams.get('folder'),
-	currentTag 		= urlParams.get('tag')
+	currentTag 		= urlParams.get('tag'),
+	newUrl 			= urlParams.get('url')
 
 folders.unshift({
 	"id": -1,
@@ -70,6 +71,8 @@ function closeModal() {
 
 
 $(document).ready(function() {
+	
+	if( newUrl ) $('#url').val( newUrl )
 	
 	for( let folder of folders ) {
 		
