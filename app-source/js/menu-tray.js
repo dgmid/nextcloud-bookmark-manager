@@ -14,6 +14,8 @@ const fs 	= require( 'fs-extra' )
 const log	= require( 'electron-log' )
 const Store	= require( 'electron-store' )
 const store = new Store()
+const isUrl = require( 'is-url' )
+
 
 let trayIcon 	= null,
 	bookmarks 	= new Store( {name: 'bookmarks'} )
@@ -84,9 +86,12 @@ ipcMain.on( 'tray-menu', (event) => {
 	
 	trayIcon.on('drop-text', (event, text) => {
 		
-		let win = BrowserWindow.fromId(1)
-		win.show()
-		win.webContents.send( 'drop-on-tray', { "url": text, "title": '' } )
+		if( isUrl( text ) ) {
+		
+			let win = BrowserWindow.fromId(1)
+			win.show()
+			win.webContents.send( 'drop-on-tray', { "url": text, "title": '' } )
+		}
 	})
 	
 	trayIcon.on('drop-files', (event, files) => {
