@@ -543,6 +543,27 @@ function toggleInfoPanel( tr ) {
 
 
 
+//note(dgmid): toggle info panels from context menu
+
+ipcRenderer.on('toggle-info-panels', (event, message) => {
+	
+	maintable.bookmarkTable.rows( { filter : 'applied'} ).every(function() {
+	
+		if(  message === 'open' ) {
+			
+			this.child( maintable.detailsTable(this.data()) ).show()
+			$(this.node()).addClass('shown')
+		
+		} else {
+			
+			this.child.hide()
+			$(this.node()).removeClass('shown')
+		}
+	})
+})
+
+
+
 //note(dgmid): get current folder / get current tag
 
 function getCurrentFolder() {
@@ -913,11 +934,18 @@ $(document).ready(function() {
 	
 	//note(dgmid): show columns context menu
 	
-	$('body thead').on('mouseup', 'th:not(.details-control)', function(event) {
+	$('body thead').on('mouseup', 'th', function(event) {
 		
 		if( event.which === 3 ) {
 			
-			ipcRenderer.send('show-columns-menu', '' )
+			if( $(this).hasClass( 'details-control' ) ) {
+				
+				ipcRenderer.send('show-panels-menu', '' )
+			
+			} else {
+				
+				ipcRenderer.send('show-columns-menu', '' )
+			}
 		}
 	})
 	

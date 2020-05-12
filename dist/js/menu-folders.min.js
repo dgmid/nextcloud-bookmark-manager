@@ -11,7 +11,7 @@ const {
 } = require( 'electron' )
 
 const entities = require( './entities.min' )
-const log			= require( 'electron-log' )
+
 
 
 ipcMain.on('show-folders-menu', ( event, message ) => {
