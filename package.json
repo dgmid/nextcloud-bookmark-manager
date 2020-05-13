@@ -27,9 +27,9 @@
   "dependencies": {
     "color": "^3.1.2",
     "compare-versions": "^3.6.0",
-    "datatables.net": "^1.10.20",
-    "datatables.net-keytable": "^2.5.1",
-    "datatables.net-responsive": "^2.2.3",
+    "datatables.net": "^1.10.21",
+    "datatables.net-keytable": "^2.5.2",
+    "datatables.net-responsive": "^2.2.4",
     "dateformat": "^3.0.3",
     "detect-browsers": "^5.0.1",
     "electron-log": "^4.1.2",
