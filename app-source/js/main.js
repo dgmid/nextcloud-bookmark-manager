@@ -45,6 +45,7 @@ let store = new Store({
 		},
 		
 		exportPath: app.getPath('desktop'),
+		dirPath: app.getPath( 'appData' ) + '/' + app.name,
 		tags: null,
 		folders: null,
 		browsers: null

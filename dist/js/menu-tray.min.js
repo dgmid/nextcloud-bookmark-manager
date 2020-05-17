@@ -9,13 +9,15 @@ const {
 	shell
 } = require( 'electron' )
 
-const path 	= require( 'path' )
-const fs 	= require( 'fs-extra' )
-const log	= require( 'electron-log' )
-const Store	= require( 'electron-store' )
-const store = new Store()
-const isUrl = require( 'is-url' )
+const path 		= require( 'path' )
+const fs 		= require( 'fs-extra' )
+const log		= require( 'electron-log' )
+const Store		= require( 'electron-store' )
+const store 	= new Store()
+const isUrl 	= require( 'is-url' )
 
+const favicon 	= require( './favicon.min' )
+const dir 		= store.get( 'dirPath' )
 
 let trayIcon 	= null,
 	bookmarks 	= new Store( {name: 'bookmarks'} )
@@ -31,10 +33,8 @@ ipcMain.on( 'tray-menu', (event) => {
 	
 	folders.sort((a,b) => (a.text > b.text) ? 1 : ((b.text > a.text) ? -1 : 0))
 	
-	const 	iconName 	= '../assets/png/iconTemplate.png',
-			folderName 	= '../assets/png/folderTemplate.png',
-			iconPath 	= path.join( __dirname , iconName ),
-			folderPath 	= path.join( __dirname , folderName )
+	const 	iconPath 	= path.join( __dirname , '../assets/png/iconTemplate.png' ),
+			folderPath 	= path.join( __dirname , '../assets/png/folderTemplate.png' )
 	
 	trayIcon = new Tray( iconPath )
 	
@@ -60,7 +60,7 @@ ipcMain.on( 'tray-menu', (event) => {
 				
 				trayMenuTemplate.push({
 					label: bookmark.title,
-					icon: iconPath,
+					icon: favicon.exists( bookmark.id ),
 					click () {
 						shell.openExternal( bookmark.url )
 					}
@@ -72,7 +72,7 @@ ipcMain.on( 'tray-menu', (event) => {
 				
 				submenu.push({
 					label: bookmark.title,
-					icon: iconPath,
+					icon: favicon.exists( bookmark.id ),
 					click () {
 						shell.openExternal( bookmark.url )
 					}

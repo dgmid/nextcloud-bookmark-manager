@@ -2,9 +2,10 @@
 
 const i18n		= require( './i18n.min' )
 
+const fs 		= require( 'fs-extra' )
+const path 		= require('path')
 const Store		= require( 'electron-store' )
 const store		= new Store()
-const psl 		= require( 'psl' )
 const $			= require( 'jquery' )
 const dt		= require( 'datatables.net' )( window, $ )
 const keytable	= require( 'datatables.net-keytable' )( window, $ )
@@ -187,20 +188,13 @@ module.exports.bookmarkTable = $('#bookmarks').DataTable({
 
 module.exports.detailsTable = function( data ) {
 	
-	let desc 		= ( data[3] == '' ? '⋯' : data[3] ),
-		hostname 	= psl.get(extractHostname( data[4] )),
-		favicon		= '';
-	
-	if( hostname ) {
-		
-		favicon = `<img class="favicon" src="https://www.google.com/s2/favicons?domain=${hostname}" width="16" height="16">&nbsp;`
-	}
+	let desc = ( data[3] == '' ? '⋯' : data[3] )
 	
 	return `<div class="details-panel">
 	<div class="inner">
 		<div class="row">
 			<div class="label">${i18n.t('bookmarktable:header.url', 'Url')}:</div>
-			<div class="value nowrap"><a id="url_${data[0]}" href="${data[4]}" title="${data[2]}">${favicon}${data[4]}</a></div>
+			<div class="value nowrap"><a id="url_${data[0]}" href="${data[4]}" title="${data[2]}"><img class="favicon" src="${getFavicon(data[0])}" width="16" height="16">&nbsp;${data[4]}</a></div>
 		</div>
 		
 		<div class="row">
@@ -243,23 +237,16 @@ module.exports.detailsTable = function( data ) {
 
 
 
-//note(dgmid): source: https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string
-
-function extractHostname(url) {
+function getFavicon( id ) {
 	
-	let hostname
+	const dir = store.get( 'dirPath' )
 	
-	if (url.indexOf("//") > -1) {
+	if( fs.pathExistsSync( `${dir}/favicons/${id}.png` ) ) {
 		
-		hostname = url.split('/')[2]
-	
+		return `${dir}/favicons/${id}.png`
+		
 	} else {
-	
-		hostname = url.split('/')[0]
+		
+		return path.join(__dirname, '../assets/png/iconTemplate.png') 
 	}
-	
-	hostname = hostname.split(':')[0]
-	hostname = hostname.split('?')[0]
-	
-	return hostname
 }
