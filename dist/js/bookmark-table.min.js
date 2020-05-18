@@ -239,11 +239,12 @@ module.exports.detailsTable = function( data ) {
 
 function getFavicon( id ) {
 	
-	const dir = store.get( 'dirPath' )
+	let dir = store.get( 'dirPath' ),
+		res = ( matchMedia( '(-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 192dpi)' ).matches ? '@2x' : '' )
 	
-	if( fs.pathExistsSync( `${dir}/favicons/${id}.png` ) ) {
+	if( fs.pathExistsSync( `${dir}/favicons/${id}${res}.png` ) ) {
 		
-		return `${dir}/favicons/${id}.png`
+		return `${dir}/favicons/${id}${res}.png`
 		
 	} else {
 		
