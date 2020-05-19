@@ -4,7 +4,7 @@ const {app} 		= require( 'electron' )
 const path 			= require('path')
 const fs 			= require( 'fs-extra' )
 const nativeImage 	= require( 'electron' ).nativeImage
-const request 		= require( 'request' ).defaults({ encoding: null })
+const axios 		= require( 'axios' ).default
 const log  			= require( 'electron-log' )
 
 const dir 			= app.getPath( 'appData' ) + '/' + app.name
@@ -20,13 +20,16 @@ module.exports.generate = function ( id, url ) {
 			iconurl 	= `https://api.faviconkit.com/${domain}/32`,
 			file 		= `${dir}/favicons/${id}.png`,
 			file2x		= `${dir}/favicons/${id}@2x.png`
-		
-		request( iconurl, (err, resp, buffer) => {
-		
+
+		axios.get(iconurl,  { responseType: 'arraybuffer' })
+		.then( function( response ) {
+			
+			const buffer = Buffer.from(response.data, "utf-8")
+			
 			if(
-				resp.headers['content-type'].includes('png') ||
-				resp.headers['content-type'].includes('jpeg') ||
-				resp.headers['content-type'].includes('x-icon')
+				response.headers['content-type'].includes('png') ||
+				response.headers['content-type'].includes('jpeg') ||
+				response.headers['content-type'].includes('x-icon')
 			) {
 				
 				let imgpng = nativeImage.createFromBuffer(buffer, {
@@ -47,21 +50,24 @@ module.exports.generate = function ( id, url ) {
 						quality: 'best'
 					}).toPNG()
 				
-				fs.outputFile(file, imgpng, err => {
+				fs.outputFileSync(file, imgpng, err => {
 					
 					if(err) log.info(err)
 				})
 				
-				fs.outputFile(file2x, imgpng2x, err => {
+				fs.outputFileSync(file2x, imgpng2x, err => {
 					
 					if(err) log.info(err)
 				})
-			
+	
 			} else {
 				
 				let iconurl = 'https://www.google.com/s2/favicons?sz=32&domain_url=' + bookmarkUrl
-				
-				request( iconurl, (err, resp, buffer) => {
+			
+				axios.get(iconurl,  { responseType: 'arraybuffer' })
+				.then( function( response ) {
+					
+					const buffer = Buffer.from(response.data, "utf-8")
 					
 					let imgpng = nativeImage.createFromBuffer(buffer, {
 							
@@ -80,26 +86,26 @@ module.exports.generate = function ( id, url ) {
 							height: 32,
 							quality: 'best'
 						}).toPNG()
-		
-		
-					let b64enc = btoa(String.fromCharCode.apply(null, imgpng))
+					
+					let b64enc = Buffer.from(imgpng, 'binary').toString('base64')
 					
 					if( isNotDefaultIcon( b64enc ) ) {
 						
-						fs.outputFile(file, imgpng, err => {
+						fs.outputFileSync(file, imgpng, err => {
 							
 							if (err) log.info(err)
 						})
 						
-						fs.outputFile(file2x, imgpng2x, err => {
+						fs.outputFileSync(file2x, imgpng2x, err => {
 							
 							if (err) log.info(err)
 						})
-					
 					}
 				})
+				.catch( err => log.info( `favicon error: ${err.message}` ) )
 			}
 		})
+		.catch( err => log.info( `favicon error: ${err.message}` ) )
 	}
 }
 

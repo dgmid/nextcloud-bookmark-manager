@@ -25,6 +25,7 @@
     "last 1 Chrome versions"
   ],
   "dependencies": {
+    "axios": "^0.19.2",
     "color": "^3.1.2",
     "compare-versions": "^3.6.0",
     "datatables.net": "^1.10.21",

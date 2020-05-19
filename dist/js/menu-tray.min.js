@@ -54,6 +54,8 @@ ipcMain.on( 'tray-menu', (event) => {
 	
 	for( let bookmark of bookmarkdata ) {
 		
+		favicon.generate( bookmark.id, bookmark.url )
+		
 		for( let id of bookmark.folders  ) {
 			
 			if( id === -1 ) {

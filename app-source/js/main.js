@@ -10,7 +10,6 @@ const log		= require( 'electron-log' )
 const detectBrowsers = require('detect-browsers')
 
 
-
 let win,
 	loginFlow,
 	isQuitting = false
