@@ -1,13 +1,14 @@
 'use strict'
 
 const {app, BrowserWindow, ipcMain, protocol, Menu} = require('electron')
-const url 		= require('url') 
-const path 		= require('path')
-const dialog 	= require('electron').dialog
-const Store 	= require('electron-store')
-const log		= require( 'electron-log' )
+const url 				= require('url') 
+const path 				= require('path')
+const dialog 			= require('electron').dialog
+const Store 			= require('electron-store')
+const log				= require( 'electron-log' )
+const detectBrowsers	= require('detect-browsers')
 
-const detectBrowsers = require('detect-browsers')
+const favicon 			= require( './favicon.min' )
 
 
 let win,
@@ -168,6 +169,7 @@ function createWindow() {
 app.on('ready', function() {
 	
 	createWindow()
+	favicon.generate()
 	
 	protocol.registerFileProtocol('nc', (request, callack) => {
 		

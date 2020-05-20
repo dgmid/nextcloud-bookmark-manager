@@ -250,6 +250,6 @@ function getFavicon( id ) {
 		
 		let theme = ( $('html').attr('data-theme') === 'dark' ) ? 'dark-'  : ''
 		
-		return path.join(__dirname, `../assets/png/${theme}iconTemplate${res}.png`) 
+		return path.join(__dirname, `../assets/png/${theme}faviconTemplate${res}.png`) 
 	}
 }

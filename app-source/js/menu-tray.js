@@ -32,13 +32,14 @@ ipcMain.on( 'tray-menu', (event) => {
 		folders 		= store.get( 'folders' )
 	
 	folders.sort((a,b) => (a.text > b.text) ? 1 : ((b.text > a.text) ? -1 : 0))
+	bookmarkdata.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
 	
 	const 	iconPath 	= path.join( __dirname , '../assets/png/iconTemplate.png' ),
 			folderPath 	= path.join( __dirname , '../assets/png/folderTemplate.png' )
 	
 	trayIcon = new Tray( iconPath )
 	
-	const trayMenuTemplate = []
+	const	trayMenuTemplate = []
 	
 	for( let folder of folders ) {
 		
@@ -50,11 +51,10 @@ ipcMain.on( 'tray-menu', (event) => {
 		})
 	}
 	
+	
 	trayMenuTemplate.push({ type: 'separator' })
 	
 	for( let bookmark of bookmarkdata ) {
-		
-		favicon.generate( bookmark.id, bookmark.url )
 		
 		for( let id of bookmark.folders  ) {
 			
@@ -62,7 +62,8 @@ ipcMain.on( 'tray-menu', (event) => {
 				
 				trayMenuTemplate.push({
 					label: bookmark.title,
-					icon: favicon.exists( bookmark.id ),
+					id: bookmark.id,
+					icon: favicon.get( bookmark.id ),
 					click () {
 						shell.openExternal( bookmark.url )
 					}
@@ -74,7 +75,8 @@ ipcMain.on( 'tray-menu', (event) => {
 				
 				submenu.push({
 					label: bookmark.title,
-					icon: favicon.exists( bookmark.id ),
+					id: bookmark.id,
+					icon: favicon.get( bookmark.id ),
 					click () {
 						shell.openExternal( bookmark.url )
 					}
@@ -83,8 +85,11 @@ ipcMain.on( 'tray-menu', (event) => {
 		}
 	}
 	
+	
 	const trayMenu = Menu.buildFromTemplate( trayMenuTemplate )
 	trayIcon.setContextMenu( trayMenu )
+	
+	
 	
 	trayIcon.on('drop-text', (event, text) => {
 		
@@ -95,6 +100,7 @@ ipcMain.on( 'tray-menu', (event) => {
 			win.webContents.send( 'drop-on-tray', { "url": text, "title": '' } )
 		}
 	})
+	
 	
 	trayIcon.on('drop-files', (event, files) => {
 		
