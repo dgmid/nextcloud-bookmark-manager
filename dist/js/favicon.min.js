@@ -10,116 +10,104 @@ const store 		= new Store()
 const log  			= require( 'electron-log' )
 
 const dir 			= store.get( 'dirPath' )
+const defaultIcon 	= path.join(__dirname, '../assets/png/')
 
 
 
 module.exports.generate = function () {
 	
-	let bookmarks 		= new Store( {name: 'bookmarks'} )
-	let bookmarkdata 	= bookmarks.get( 'data' )
+	let bookmarks 		= new Store( {name: 'bookmarks'} ),
+		bookmarkdata 	= bookmarks.get( 'data' ),
+		faviconcount 	= 0,
+		faviconarray	= []
 	
-	for( let bookmark of bookmarkdata ) {
+	for( let  bookmark of bookmarkdata ) {
 	
 		if( !fs.pathExistsSync( `${dir}/favicons/${bookmark.id}.png` ) ) {
 			
-			let bookmarkUrl = new URL( bookmark.url ),
-				domain 		= bookmarkUrl.hostname,
-				iconurl 	= `https://api.faviconkit.com/${domain}/32`,
-				file 		= `${dir}/favicons/${bookmark.id}.png`,
-				file2x		= `${dir}/favicons/${bookmark.id}@2x.png`
-	
-			axios.get(iconurl,  { responseType: 'arraybuffer' })
-			.then( function( response ) {
-				
-				const buffer = Buffer.from(response.data, "utf-8")
-				
-				if(
-					response.headers['content-type'].includes('png') ||
-					response.headers['content-type'].includes('jpeg') ||
-					response.headers['content-type'].includes('x-icon')
-				) {
-					
-					let imgpng = nativeImage.createFromBuffer(buffer, {
-							
-							scaleFactor: 1.0
-						}).resize({
-							width: 16,
-							height: 16,
-							quality: 'best'
-						}).toPNG()
-					
-					let imgpng2x = nativeImage.createFromBuffer(buffer, {
-							
-							scaleFactor: 1.0
-						}).resize({
-							width: 32,
-							height: 32,
-							quality: 'best'
-						}).toPNG()
-					
-					fs.outputFileSync(file, imgpng, err => {
-						
-						if(err) log.info(err)
-					})
-					
-					fs.outputFileSync(file2x, imgpng2x, err => {
-						
-						if(err) log.info(err)
-					})
-					
-				} else {
-					
-					let iconurl = 'https://www.google.com/s2/favicons?sz=32&domain_url=' + bookmarkUrl
-				
-					axios.get(iconurl,  { responseType: 'arraybuffer' })
-					.then( function( response ) {
-						
-						const buffer = Buffer.from(response.data, "utf-8")
-						
-						let imgpng = nativeImage.createFromBuffer(buffer, {
-								
-								scaleFactor: 1.0
-							}).resize({
-								width: 16,
-								height: 16,
-								quality: 'best'
-							}).toPNG()
-						
-						let imgpng2x = nativeImage.createFromBuffer(buffer, {
-								
-								scaleFactor: 1.0
-							}).resize({
-								width: 32,
-								height: 32,
-								quality: 'best'
-							}).toPNG()
-						
-						let b64enc = Buffer.from(imgpng, 'binary').toString('base64')
-						
-						if( isNotDefaultIcon( b64enc ) ) {
-							
-							fs.outputFileSync(file, imgpng, err => {
-								
-								if (err) log.info(err)
-							})
-							
-							fs.outputFileSync(file2x, imgpng2x, err => {
-								
-								if (err) log.info(err)
-							})
-						}
-					})
-					.catch( function( err ) {
-						
-						log.info( `favicon error: ${err.message}` )
-					})
-				}
-			})
-			.catch( function( err ) {
-				
-				log.info( `favicon error: ${err.message}` )
-			})
+			faviconarray.push( bookmark )
 		}
+	}
+	
+	let arraylength = faviconarray.length
+	
+	for( let i = 0; i < arraylength; i++ ) {
+			
+		let bookmarkUrl = new URL( faviconarray[i].url ),
+			domain 		= bookmarkUrl.hostname,
+			iconurl 	= `https://api.faviconkit.com/${domain}/32`,
+			file 		= `${dir}/favicons/${faviconarray[i].id}.png`,
+			file2x		= `${dir}/favicons/${faviconarray[i].id}@2x.png`
+	
+		axios.get(iconurl,  { responseType: 'arraybuffer' })
+		.then( function( response ) {
+			
+			const buffer = Buffer.from(response.data, "utf-8")
+			
+			if(
+				response.headers['content-type'].includes('png') ||
+				response.headers['content-type'].includes('jpeg') ||
+				response.headers['content-type'].includes('x-icon')
+			) {
+				
+				let imgpng = nativeImage.createFromBuffer(buffer, {
+						
+						scaleFactor: 1.0
+					}).resize({
+						width: 16,
+						height: 16,
+						quality: 'best'
+					}).toPNG()
+				
+				let imgpng2x = nativeImage.createFromBuffer(buffer, {
+						
+						scaleFactor: 1.0
+					}).resize({
+						width: 32,
+						height: 32,
+						quality: 'best'
+					}).toPNG()
+				
+				fs.outputFileSync(file, imgpng, err => {
+					
+					if(err) log.info(err)
+				})
+				
+				fs.outputFileSync(file2x, imgpng2x, err => {
+					
+					if(err) log.info(err)
+				})
+				
+				log.info(faviconarray[i].id)
+				
+				faviconcount++
+				if( faviconcount === arraylength ) log.info('FINISHED!')
+				
+			} else {
+				
+				faviconFallback( bookmarkdata[i].id, bookmarkUrl, file, file2x, function() {
+					
+					log.info(faviconarray[i].id)
+					
+					faviconcount++
+					if( faviconcount === arraylength ) log.info('FINISHED!')
+				})
+			}
+		})
+		.catch( function( err ) {
+			
+			log.info( `favicon error: ${faviconarray[i].id}: ${err.message}` )
+			
+			faviconFallback( bookmarkdata[i].id, bookmarkUrl, file, file2x, function() {
+				
+				log.info()
+				
+				log.info(faviconarray[i].id)
+				
+				faviconcount++
+				if( faviconcount === arraylength ) log.info('FINISHED!')
+			})
+		})
 	}
 }
 
@@ -142,6 +130,58 @@ module.exports.get = function ( id ) {
 module.exports.exists = function ( id ) {
 	
 	return ( fs.pathExistsSync( `${dir}/favicons/${id}.png` ) ) ? true : false
+}
+
+
+
+function faviconFallback( id, url, file, file2x, callback ) {
+	
+	let iconurl = 'https://www.google.com/s2/favicons?sz=32&domain_url=' + url
+
+	axios.get(iconurl,  { responseType: 'arraybuffer' })
+	.then( function( response ) {
+		
+		const buffer = Buffer.from(response.data, "utf-8")
+		
+		let imgpng = nativeImage.createFromBuffer(buffer, {
+				
+				scaleFactor: 1.0
+			}).resize({
+				width: 16,
+				height: 16,
+				quality: 'best'
+			}).toPNG()
+		
+		let imgpng2x = nativeImage.createFromBuffer(buffer, {
+				
+				scaleFactor: 1.0
+			}).resize({
+				width: 32,
+				height: 32,
+				quality: 'best'
+			}).toPNG()
+		
+		let b64enc = Buffer.from(imgpng, 'binary').toString('base64')
+		
+		if( isNotDefaultIcon( b64enc ) ) {
+			
+			fs.outputFileSync(file, imgpng, err => {
+				
+				if (err) log.info(err)
+			})
+			
+			fs.outputFileSync(file2x, imgpng2x, err => {
+				
+				if (err) log.info(err)
+			})
+		}
+		
+		callback()
+	})
+	.catch( function( err ) {
+		
+		log.info( `fallback favicon error: ${id}: ${err.message}` )
+	})
 }
 
 
