@@ -1,6 +1,6 @@
 'use strict'
 
-const {BrowserWindow} = require( 'electron' )
+const {BrowserWindow} 		= require( 'electron' )
 const path 					= require( 'path' )
 const fs 					= require( 'fs-extra' )
 const nativeImage 			= require( 'electron' ).nativeImage
@@ -14,41 +14,41 @@ const defaultIcon 			= path.join( __dirname, '../assets/png/' )
 
 
 
-module.exports.generate = function () {
+module.exports.generate = function ( winId ) {
 	
-	let win = BrowserWindow.fromId(1)
-	
-	let bookmarks 		= new Store( {name: 'bookmarks'} ),
-		bookmarkdata 	= bookmarks.get( 'data' ),
+	let win 			= BrowserWindow.fromId( winId ),
+		bookmarks 		= new Store( {name: 'bookmarks'} ),
+		bookmarkData 	= bookmarks.get( 'data' ),
 		defaultIcons	= store.get( 'defaultIcons' ),
-		faviconcount 	= 0,
-		faviconarray	= []
+		faviconCount 	= 0,
+		faviconArray	= []
 	
-	for( let  bookmark of bookmarkdata ) {
-	
-		if(  !defaultIcons.includes( bookmark.id ) && !fs.pathExistsSync( `${dir}/favicons/${bookmark.id}.png` ) ) {
+	for( let  bookmark of bookmarkData ) {
+		
+		if( !defaultIcons.includes( bookmark.id ) &&
+			!fs.pathExistsSync( `${dir}/favicons/${bookmark.id}.png`
+		) ) {
 			
-			faviconarray.push( bookmark )
+			faviconArray.push( bookmark )
 		}
 	}
 	
-	let arraylength = faviconarray.length
+	let arrayLength = faviconArray.length
 	
-	if( arraylength < 1 ) {
+	if( arrayLength < 1 ) {
 		
-		log.info( 'No favicons to generate' )
+		log.info( `No favicons to generate` )
+		log.info( `Default favicons are: ${defaultIcons}` )
 		win.webContents.send( 'load-tray-menu', '' )
 	}
 	
-	for( let i = 0; i < arraylength; i++ ) {
+	for( let i = 0; i < arrayLength; i++ ) {
 		
-		let win = BrowserWindow.fromId(1)
-		
-		let bookmarkUrl = new URL( faviconarray[i].url ),
+		let bookmarkUrl = new URL( faviconArray[i].url ),
 			domain 		= bookmarkUrl.hostname,
 			iconurl 	= `https://api.faviconkit.com/${domain}/32`,
-			file 		= `${dir}/favicons/${faviconarray[i].id}.png`,
-			file2x		= `${dir}/favicons/${faviconarray[i].id}@2x.png`
+			file 		= `${dir}/favicons/${faviconArray[i].id}.png`,
+			file2x		= `${dir}/favicons/${faviconArray[i].id}@2x.png`
 	
 		axios.get(iconurl,  { responseType: 'arraybuffer' })
 		.then( function( response ) {
@@ -89,12 +89,14 @@ module.exports.generate = function () {
 					if(err) log.info(err)
 				})
 				
-				log.info(faviconarray[i].id)
+				log.info(faviconArray[i].id)
 				
-				faviconcount++
-				if( faviconcount === arraylength ) {
+				faviconCount++
+				if( faviconCount === arrayLength ) {
 					
-					log.info( `Generated ${faviconcount} favicons` )
+					generatedFavicons( win, faviconCount, defaultIcons )
+					
+					log.info( `Generated ${faviconCount} favicons` )
 					store.set( 'defaultIcons', defaultIcons )
 					
 					win.webContents.send( 'load-tray-menu', '' )
@@ -102,19 +104,21 @@ module.exports.generate = function () {
 				
 			} else {
 				
-				faviconFallback( bookmarkdata[i].id, bookmarkUrl, file, file2x, function( defaultIcon ) {
+				faviconFallback( bookmarkData[i].id, bookmarkUrl, file, file2x, function( defaultIcon ) {
 					
-					log.info(faviconarray[i].id)
+					log.info(faviconArray[i].id)
 					
 					if( defaultIcon ) {
 						
 						defaultIcons.push( defaultIcon )
 					}
 					
-					faviconcount++
-					if( faviconcount === arraylength ) {
+					faviconCount++
+					if( faviconCount === arrayLength ) {
 						
-						log.info( `Generated ${faviconcount} favicons` )
+						generatedFavicons( win, faviconCount, defaultIcons )
+						
+						log.info( `Generated ${faviconCount} favicons` )
 						store.set( 'defaultIcons', defaultIcons )
 						
 						win.webContents.send( 'load-tray-menu', '' )
@@ -124,21 +128,23 @@ module.exports.generate = function () {
 		})
 		.catch( function( err ) {
 			
-			log.info( `favicon error: ${faviconarray[i].id}: ${err.message}` )
+			log.info( `favicon error: ${faviconArray[i].id}: ${err.message}` )
 			
-			faviconFallback( bookmarkdata[i].id, bookmarkUrl, file, file2x, function( defaultIcon ) {
+			faviconFallback( bookmarkData[i].id, bookmarkUrl, file, file2x, function( defaultIcon ) {
 				
-				log.info(faviconarray[i].id)
+				log.info(faviconArray[i].id)
 				
 				if( defaultIcon ) {
 					
 					defaultIcons.push( defaultIcon )
 				}
 				
-				faviconcount++
-				if( faviconcount === arraylength ) {
+				faviconCount++
+				if( faviconCount === arrayLength ) {
 					
-					log.info( `Generated ${faviconcount} favicons` )
+					generatedFavicons( win, faviconCount, defaultIcons )
+					
+					log.info( `Generated ${faviconCount} favicons` )
 					store.set( 'defaultIcons', defaultIcons )
 					
 					win.webContents.send( 'load-tray-menu', '' )
@@ -224,6 +230,16 @@ function faviconFallback( id, url, file, file2x, callback ) {
 		
 		log.info( `fallback favicon error: ${id}: ${err.message}` )
 	})
+}
+
+
+
+function generatedFavicons( win, count, defaults ) {
+	
+	log.info( `Generated ${count} favicons` )
+	store.set( 'defaultIcons', defaults )
+	
+	win.webContents.send( 'load-tray-menu', '' )
 }
 
 

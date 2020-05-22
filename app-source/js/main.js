@@ -100,7 +100,7 @@ function createWindow() {
 	win.once('ready-to-show', () => {
 		
 		win.show()
-		favicon.generate()
+		favicon.generate( win.id  )
 	})
 	
 	win.on('resize', saveWindowBounds)
