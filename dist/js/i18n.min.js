@@ -26,6 +26,7 @@ const i18nextOptions = {
 		'menubookmarks',
 		'menucolumns',
 		'menufolders',
+		'menupanels',
 		'menutags',
 		'version'
 		],
