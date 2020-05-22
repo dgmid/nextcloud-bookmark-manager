@@ -1,29 +1,32 @@
 'use strict'
 
-const {app} 		= require( 'electron' )
-const path 			= require('path')
-const fs 			= require( 'fs-extra' )
-const nativeImage 	= require( 'electron' ).nativeImage
-const axios 		= require( 'axios' ).default
-const Store			= require( 'electron-store' )
-const store 		= new Store()
-const log  			= require( 'electron-log' )
+const {BrowserWindow} = require( 'electron' )
+const path 					= require( 'path' )
+const fs 					= require( 'fs-extra' )
+const nativeImage 			= require( 'electron' ).nativeImage
+const axios 				= require( 'axios' ).default
+const Store					= require( 'electron-store' )
+const store 				= new Store()
+const log  					= require( 'electron-log' )
 
-const dir 			= store.get( 'dirPath' )
-const defaultIcon 	= path.join(__dirname, '../assets/png/')
+const dir 					= store.get( 'dirPath' )
+const defaultIcon 			= path.join( __dirname, '../assets/png/' )
 
 
 
 module.exports.generate = function () {
 	
+	let win = BrowserWindow.fromId(1)
+	
 	let bookmarks 		= new Store( {name: 'bookmarks'} ),
 		bookmarkdata 	= bookmarks.get( 'data' ),
+		defaultIcons	= store.get( 'defaultIcons' ),
 		faviconcount 	= 0,
 		faviconarray	= []
 	
 	for( let  bookmark of bookmarkdata ) {
 	
-		if( !fs.pathExistsSync( `${dir}/favicons/${bookmark.id}.png` ) ) {
+		if(  !defaultIcons.includes( bookmark.id ) && !fs.pathExistsSync( `${dir}/favicons/${bookmark.id}.png` ) ) {
 			
 			faviconarray.push( bookmark )
 		}
@@ -31,8 +34,16 @@ module.exports.generate = function () {
 	
 	let arraylength = faviconarray.length
 	
+	if( arraylength < 1 ) {
+		
+		log.info( 'No favicons to generate' )
+		win.webContents.send( 'load-tray-menu', '' )
+	}
+	
 	for( let i = 0; i < arraylength; i++ ) {
-			
+		
+		let win = BrowserWindow.fromId(1)
+		
 		let bookmarkUrl = new URL( faviconarray[i].url ),
 			domain 		= bookmarkUrl.hostname,
 			iconurl 	= `https://api.faviconkit.com/${domain}/32`,
@@ -81,16 +92,33 @@ module.exports.generate = function () {
 				log.info(faviconarray[i].id)
 				
 				faviconcount++
-				if( faviconcount === arraylength ) log.info('FINISHED!')
+				if( faviconcount === arraylength ) {
+					
+					log.info( `Generated ${faviconcount} favicons` )
+					store.set( 'defaultIcons', defaultIcons )
+					
+					win.webContents.send( 'load-tray-menu', '' )
+				}
 				
 			} else {
 				
-				faviconFallback( bookmarkdata[i].id, bookmarkUrl, file, file2x, function() {
+				faviconFallback( bookmarkdata[i].id, bookmarkUrl, file, file2x, function( defaultIcon ) {
 					
 					log.info(faviconarray[i].id)
 					
+					if( defaultIcon ) {
+						
+						defaultIcons.push( defaultIcon )
+					}
+					
 					faviconcount++
-					if( faviconcount === arraylength ) log.info('FINISHED!')
+					if( faviconcount === arraylength ) {
+						
+						log.info( `Generated ${faviconcount} favicons` )
+						store.set( 'defaultIcons', defaultIcons )
+						
+						win.webContents.send( 'load-tray-menu', '' )
+					}
 				})
 			}
 		})
@@ -98,14 +126,23 @@ module.exports.generate = function () {
 			
 			log.info( `favicon error: ${faviconarray[i].id}: ${err.message}` )
 			
-			faviconFallback( bookmarkdata[i].id, bookmarkUrl, file, file2x, function() {
-				
-				log.info()
+			faviconFallback( bookmarkdata[i].id, bookmarkUrl, file, file2x, function( defaultIcon ) {
 				
 				log.info(faviconarray[i].id)
 				
+				if( defaultIcon ) {
+					
+					defaultIcons.push( defaultIcon )
+				}
+				
 				faviconcount++
-				if( faviconcount === arraylength ) log.info('FINISHED!')
+				if( faviconcount === arraylength ) {
+					
+					log.info( `Generated ${faviconcount} favicons` )
+					store.set( 'defaultIcons', defaultIcons )
+					
+					win.webContents.send( 'load-tray-menu', '' )
+				}
 			})
 		})
 	}
@@ -136,7 +173,8 @@ module.exports.exists = function ( id ) {
 
 function faviconFallback( id, url, file, file2x, callback ) {
 	
-	let iconurl = 'https://www.google.com/s2/favicons?sz=32&domain_url=' + url
+	let iconurl = 'https://www.google.com/s2/favicons?sz=32&domain_url=' + url,
+	defaultIcon = null
 
 	axios.get(iconurl,  { responseType: 'arraybuffer' })
 	.then( function( response ) {
@@ -174,9 +212,13 @@ function faviconFallback( id, url, file, file2x, callback ) {
 				
 				if (err) log.info(err)
 			})
+		
+		} else {
+			
+			defaultIcon = id
 		}
 		
-		callback()
+		callback( defaultIcon )
 	})
 	.catch( function( err ) {
 		

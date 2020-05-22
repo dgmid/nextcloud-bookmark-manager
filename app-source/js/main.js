@@ -48,7 +48,8 @@ let store = new Store({
 		dirPath: app.getPath( 'appData' ) + '/' + app.name,
 		tags: null,
 		folders: null,
-		browsers: null
+		browsers: null,
+		defaultIcons: []
 	}
 })
 
@@ -59,6 +60,8 @@ let bookmarkFile = new Store({
 	}
 })
 
+
+app.allowRendererProcessReuse = true
 
 
 function createWindow() {
@@ -97,6 +100,7 @@ function createWindow() {
 	win.once('ready-to-show', () => {
 		
 		win.show()
+		favicon.generate()
 	})
 	
 	win.on('resize', saveWindowBounds)
@@ -169,7 +173,6 @@ function createWindow() {
 app.on('ready', function() {
 	
 	createWindow()
-	favicon.generate()
 	
 	protocol.registerFileProtocol('nc', (request, callack) => {
 		

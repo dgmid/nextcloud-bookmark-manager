@@ -133,8 +133,6 @@ function parseBookmarks( array ) {
 	buildFolderList( folderList )
 	buildTagList( allTags.sort(), noTag )
 	
-	ipcRenderer.send( 'tray-menu' )
-	
 	if( firstLoad === true ) {
 		
 		setColControls()
@@ -642,6 +640,14 @@ ipcRenderer.on('export-bookmarks', (event, message) => {
 	let exportPath	= store.get('exportPath')
 	exp.exportBookmarks( exportPath )
 })
+
+
+
+ipcRenderer.on('load-tray-menu', (event, message) => {
+	
+	ipcRenderer.send( 'tray-menu', '' )
+})
+
 
 
 //note(dgmid): close login modal
