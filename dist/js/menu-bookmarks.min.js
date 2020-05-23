@@ -17,7 +17,8 @@ const store 			= new Store()
 const detectBrowsers 	= require('detect-browsers')
 
 const entities 			= require( './entities.min' )
-const log			= require( 'electron-log' )
+const log 				= require( 'electron-log' )
+
 
 
 ipcMain.on('show-bookmark-menu', ( event, message ) => {

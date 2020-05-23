@@ -21,7 +21,7 @@ module.exports = {
 			
 			if( compareVersions.compare( version, latest, '<' ) ) {
 				
-				module.exports.displayVersion( `<button id="update" class="fadein" type="button" tabindex="-1" data-url="https://github.com/dgmid/nextcloud-bookmark-manager/releases"><span id="update-version">${latest}</span> <span id="update-label">${i18n.t('version:update', 'Update Available')}</span> &rarr;</button>` )
+				module.exports.displayVersion( `<button id="update" class="fadein" type="button" tabindex="-1" data-url="https://github.com/dgmid/nextcloud-bookmark-manager/releases/latest"><span id="update-version">${latest}</span> <span id="update-label">${i18n.t('version:update', 'Update Available')}</span> &rarr;</button>` )
 			}
 			
 			if( compareVersions.compare( version, latest, '>' ) ) {
