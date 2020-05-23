@@ -11,7 +11,7 @@ const name 			= app.name
 const log			= require( 'electron-log' )
 
 const about 		= require('./about.min')
-const favicon 		= require('./favicon.min')
+const favicon  		= require('./favicon.min')
 
 
 
