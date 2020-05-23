@@ -11,6 +11,7 @@
     "delete": "Delete Bookmark…",
     "newfolder": "New Folder…",
     "sync": "Sync all Bookmarks",
+    "favicons": "Regenerate Favicons",
     "export": "Export Bookmarks File…"
   },
   "edit": {

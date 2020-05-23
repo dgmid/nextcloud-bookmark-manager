@@ -11,6 +11,7 @@
     "delete": "Elimina segnalibro…",
     "newfolder": "Nuova cartella…",
     "sync": "Sincronizza segnalibri",
+    "favicons": "Rigenera le favicon",
     "export": "Esporta file segnalibri…"
   },
   "edit": {

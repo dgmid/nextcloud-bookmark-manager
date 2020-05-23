@@ -14,6 +14,23 @@ const defaultIcon 			= path.join( __dirname, '../assets/png/' )
 
 
 
+module.exports.regenerate = function ( winId ) {
+	
+	log.info( `regenerating favicons` )
+	
+	store.set( 'defaultIcons', [] )
+	
+	fs.remove( `${dir}/favicons/`, err => {
+		
+		if ( err ) return console.error( err )
+		
+		log.info( `deleted cached favicons` )
+		module.exports.generate( winId )
+	})
+}
+
+
+
 module.exports.generate = function ( winId ) {
 	
 	let win 			= BrowserWindow.fromId( winId ),
