@@ -16,7 +16,7 @@ const Store		= require( 'electron-store' )
 const store 	= new Store()
 const isUrl 	= require( 'is-url' )
 
-const favicon 	= require( './favicon.min' )
+const favicons 	= require( './favicons.min' )
 const dir 		= store.get( 'dirPath' )
 
 let trayIcon 	= null,
@@ -63,7 +63,7 @@ ipcMain.on( 'tray-menu', (event) => {
 				trayMenuTemplate.push({
 					label: bookmark.title,
 					id: bookmark.id,
-					icon: favicon.get( bookmark.id ),
+					icon: favicons.get( bookmark.id ),
 					click () {
 						shell.openExternal( bookmark.url )
 					}
@@ -76,7 +76,7 @@ ipcMain.on( 'tray-menu', (event) => {
 				submenu.push({
 					label: bookmark.title,
 					id: bookmark.id,
-					icon: favicon.get( bookmark.id ),
+					icon: favicons.get( bookmark.id ),
 					click () {
 						shell.openExternal( bookmark.url )
 					}

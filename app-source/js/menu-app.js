@@ -11,7 +11,7 @@ const name 			= app.name
 const log			= require( 'electron-log' )
 
 const about 		= require('./about.min')
-const favicon  		= require('./favicon.min')
+const favicons  	= require('./favicons.min')
 
 
 
@@ -105,7 +105,7 @@ module.exports.menuApp = function () {
 				},
 				{
 					label: i18n.t('menu:bookmarks.favicons', 'Regenerate Favicons'),
-					click ( item, focusedWindow ) { favicon.regenerate( focusedWindow.id ) }
+					click ( item, focusedWindow ) { favicons.regenerate( focusedWindow.id ) }
 				},
 				{
 					type: 'separator'

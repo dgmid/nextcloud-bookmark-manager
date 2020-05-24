@@ -20,6 +20,7 @@ const i18nextOptions = {
 		'editbookmark',
 		'edittag',
 		'export',
+		'favicons',
 		'fetch',
 		'login',
 		'menu',

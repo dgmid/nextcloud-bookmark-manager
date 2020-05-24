@@ -9,7 +9,7 @@ const log				= require( 'electron-log' )
 const detectBrowsers	= require( 'detect-browsers' )
 
 const menuApp 			= require( './menu-app.min' )
-const favicon 			= require( './favicon.min' )
+const favicons 			= require( './favicons.min' )
 
 
 let win,
@@ -101,7 +101,7 @@ function createWindow() {
 	win.once('ready-to-show', () => {
 		
 		win.show()
-		favicon.generate( win.id  )
+		favicons.generate( win.id, false  )
 	})
 	
 	win.on('resize', saveWindowBounds)
