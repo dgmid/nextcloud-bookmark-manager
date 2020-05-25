@@ -126,7 +126,7 @@ module.exports.generate = function ( winId, notify ) {
 					if(err) log.info(err)
 				})
 				
-				log.info(faviconArray[i].id)
+				log.info( `favicon: ${faviconArray[i].id} -  generated` )
 				
 				faviconCount++
 				if( faviconCount === arrayLength ) {
@@ -138,7 +138,7 @@ module.exports.generate = function ( winId, notify ) {
 				
 				faviconFallback( bookmarkData[i].id, bookmarkUrl, file, file2x, function( theDefault ) {
 					
-					log.info(faviconArray[i].id)
+					log.info( `favicon: ${faviconArray[i].id} -  generated` )
 					
 					if( theDefault ) {
 						
@@ -159,7 +159,7 @@ module.exports.generate = function ( winId, notify ) {
 			
 			faviconFallback( bookmarkData[i].id, bookmarkUrl, file, file2x, function( theDefault ) {
 				
-				log.info(faviconArray[i].id)
+				log.info( `favicon: ${faviconArray[i].id} -  generated` )
 				
 				if( theDefault ) {
 					
