@@ -62,6 +62,7 @@ ipcMain.on( 'tray-menu', (event) => {
 				
 				trayMenuTemplate.push({
 					label: bookmark.title,
+					toolTip: bookmark.description,
 					id: bookmark.id,
 					icon: favicons.get( bookmark.id ),
 					click () {
@@ -75,6 +76,7 @@ ipcMain.on( 'tray-menu', (event) => {
 				
 				submenu.push({
 					label: bookmark.title,
+					toolTip: bookmark.description,
 					id: bookmark.id,
 					icon: favicons.get( bookmark.id ),
 					click () {
