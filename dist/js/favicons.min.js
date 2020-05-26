@@ -50,6 +50,7 @@ function notify( title, body ) {
 }
 
 
+
 module.exports.generate = function ( winId, notify ) {
 	
 	let win 			= BrowserWindow.fromId( winId ),

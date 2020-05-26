@@ -9,6 +9,10 @@ const log				= require( 'electron-log' )
 const detectBrowsers	= require( 'detect-browsers' )
 
 const menuApp 			= require( './menu-app.min' )
+const menuTable 		= require( './menu-table.min' )
+const menuSidebar 		= require( './menu-sidebar.min' )
+const menuTray 			= require( './menu-tray.min' )
+
 const favicons 			= require( './favicons.min' )
 
 
@@ -161,12 +165,12 @@ function createWindow() {
 	.catch( error => log.error(error) )
 	
 	menuApp.menuApp()
-	require( './menu-bookmarks.min' )
-	require( './menu-columns.min' )
-	require( './menu-folders.min' )
-	require( './menu-panels.min' )
-	require( './menu-tags.min' )
-	require( './menu-tray.min' )
+	menuTable.menuBookmarks( win.id )
+	menuTable.menuColumns( win.id )
+	menuTable.menuPanels( win.id )
+	menuSidebar.menuFolders( win.id )
+	menuSidebar.menuTags( win.id )
+	menuTray.menuTray()
 }
 
 
