@@ -57,7 +57,6 @@ module.exports.generate = function ( winId, notify ) {
 		bookmarks 		= new Store( {name: 'bookmarks'} ),
 		bookmarkData 	= bookmarks.get( 'data' ),
 		defaultArray	= store.get( 'defaultIcons' ),
-		defaultIcons 	= [],
 		faviconCount 	= 0,
 		faviconArray	= []
 	
@@ -127,12 +126,12 @@ module.exports.generate = function ( winId, notify ) {
 					if(err) log.info(err)
 				})
 				
-				log.info( `favicon: ${faviconArray[i].id} -  generated` )
+				log.info( `favicon: ${faviconArray[i].id} - generated` )
 				
 				faviconCount++
 				if( faviconCount === arrayLength ) {
 					
-					generatedFavicons( win, faviconCount, defaultIcons, notify )
+					generatedFavicons( win, faviconCount, defaultArray, notify )
 				}
 				
 			} else {
@@ -141,15 +140,15 @@ module.exports.generate = function ( winId, notify ) {
 					
 					log.info( `favicon: ${faviconArray[i].id} -  generated` )
 					
-					if( theDefault ) {
+					if( !defaultArray.includes( theDefault ) ) {
 						
-						defaultIcons.push( theDefault )
+						defaultArray.push( theDefault )
 					}
 					
 					faviconCount++
 					if( faviconCount === arrayLength ) {
 						
-						generatedFavicons( win, faviconCount, defaultIcons, notify )
+						generatedFavicons( win, faviconCount, defaultArray, notify )
 					}
 				})
 			}
@@ -162,15 +161,15 @@ module.exports.generate = function ( winId, notify ) {
 				
 				log.info( `favicon: ${faviconArray[i].id} -  generated` )
 				
-				if( theDefault ) {
-					
-					defaultIcons.push( theDefault )
-				}
+					if( !defaultArray.includes( theDefault ) ) {
+						
+						defaultArray.push( theDefault )
+					}
 				
 				faviconCount++
 				if( faviconCount === arrayLength ) {
 					
-					generatedFavicons( win, faviconCount, defaultIcons, notify )
+					generatedFavicons( win, faviconCount, defaultArray, notify )
 				}
 			})
 		})
