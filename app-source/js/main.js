@@ -86,8 +86,7 @@ function createWindow() {
 			devTools: true,
 			preload: path.join(__dirname, './preload.min.js'),
 			nodeIntegration: true,
-		},
-		icon: path.join(__dirname, '../assets/icon/Icon.icns')
+		}
 	})
 	
 	function saveWindowBounds() {
