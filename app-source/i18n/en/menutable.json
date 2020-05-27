@@ -1,0 +1,25 @@
+{
+  "bookmarks": {
+    "open": "Open {{- title}} in Default Browser",
+    "with": "Open {{- title}} with…",
+    "copy": "Copy {{- title}} url to Clipboard",
+    "edit": "Edit {{- title}} Bookmark…",
+    "delete": "Delete {{- title}} Bookmark…",
+    "addtofolder": "Add to Folder…",
+    "removefromfolder": "Remove from Folder…",
+    "home": "Home",
+    "info": "Show / Hide Info…"
+  },
+  "columns": {
+    "description": "Description",
+    "url": "Url",
+    "created": "Created",
+    "modified": "Modified",
+    "folders": "Folders",
+    "tags": "Tags"
+  },
+  "panels": {
+    "open": "Open All",
+    "close": "Close All"
+  }
+}

@@ -239,6 +239,7 @@ app.on('quit-app', () => {
 })
 
 
+
 ipcMain.on('refresh', (event, message) => {
 	
 	win.webContents.send('refresh-bookmarks', 'refresh')

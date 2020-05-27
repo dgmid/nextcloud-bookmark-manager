@@ -1,0 +1,9 @@
+{
+  "folders": {
+    "delete": "Elimina cartella {{- folder}}…"
+  },
+  "tags": {
+    "edit": "Modifica il tag {{- tag}}…",
+    "delete": "Elimina il tag {{- tag}}…"
+  }
+}

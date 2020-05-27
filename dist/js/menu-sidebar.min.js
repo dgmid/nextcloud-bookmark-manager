@@ -22,7 +22,7 @@ module.exports.menuFolders = function ( winId ) {
 		
 		const foldersMenuTemplate = [
 			{
-				label: i18n.t('menufolders:delete', 'Delete {{- folder}} Folder…', { folder: unescape(folder) }),
+				label: i18n.t('menusidebar:folders.delete', 'Delete {{- folder}} Folder…', { folder: unescape(folder) }),
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('delete-folder', message) }
 			}
 		]
@@ -46,14 +46,14 @@ module.exports.menuTags = function ( winId ) {
 		
 		const tagsMenuTemplate = [
 			{
-				label: i18n.t('menutags:edit', 'Edit {{- tag}} Tag…', { tag: unescape(tag) }),
+				label: i18n.t('menusidebar:tags.edit', 'Edit {{- tag}} Tag…', { tag: unescape(tag) }),
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('edit-tag', message[1]) }
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: i18n.t('menutags:delete', 'Delete {{- tag}} Tag…', { tag: unescape(tag) }),
+				label: i18n.t('menusidebar:tags.delete', 'Delete {{- tag}} Tag…', { tag: unescape(tag) }),
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('delete-tag', message[0]) }
 			},
 		]

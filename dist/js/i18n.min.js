@@ -24,11 +24,8 @@ const i18nextOptions = {
 		'fetch',
 		'login',
 		'menu',
-		'menubookmarks',
-		'menucolumns',
-		'menufolders',
-		'menupanels',
-		'menutags',
+		'menusidebar',
+		'menutable',
 		'version'
 		],
 	defaultNS: 'app',

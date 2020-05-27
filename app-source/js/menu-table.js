@@ -30,44 +30,44 @@ module.exports.menuBookmarks = function ( winId ) {
 		
 		const bookmarkMenuTemplate = [
 			{
-				label: i18n.t('menubookmarks:open', 'Open {{- title}} in Default Browser', { title: title }),
+				label: i18n.t('menutable:bookmarks.open', 'Open {{- title}} in Default Browser', { title: title }),
 				click () { require('electron').shell.openExternal( message[4] ) }
 			},
 			{
-				label: i18n.t('menubookmarks:with', 'Open {{- title}} with…', { title: title }),
+				label: i18n.t('menutable:bookmarks.with', 'Open {{- title}} with…', { title: title }),
 				submenu: []
 			},
 			{
-				label: i18n.t('menubookmarks:copy', 'Copy {{- title}} url to Clipboard', { title: title }),
+				label: i18n.t('menutable:bookmarks.copy', 'Copy {{- title}} url to Clipboard', { title: title }),
 				click () { clipboard.writeText(message[4], title) }	
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: i18n.t('menubookmarks:edit', 'Edit {{- title}} Bookmark…', { title: title }),
+				label: i18n.t('menutable:bookmarks.edit', 'Edit {{- title}} Bookmark…', { title: title }),
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('edit-bookmark', message) }
 			},
 			{
-				label: i18n.t('menubookmarks:delete', 'Delete {{- title}} Bookmark…', { title: title }),
+				label: i18n.t('menutable:bookmarks.delete', 'Delete {{- title}} Bookmark…', { title: title }),
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('delete-bookmark', [id, title]) }
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: i18n.t('menubookmarks:addtofolder', 'Add to Folder…'),
+				label: i18n.t('menutable:bookmarks.addtofolder', 'Add to Folder…'),
 				submenu: []
 			},
 			{
-				label: i18n.t('menubookmarks:removefromfolder', 'Remove from Folder…'),
+				label: i18n.t('menutable:bookmarks.removefromfolder', 'Remove from Folder…'),
 				submenu: []
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: i18n.t('menubookmarks:info', 'Show / Hide Info…'),
+				label: i18n.t('menutable:bookmarks.info', 'Show / Hide Info…'),
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('info-bookmark', id) }
 			},
 		]
@@ -92,7 +92,7 @@ module.exports.menuBookmarks = function ( winId ) {
 			
 			bookmarkMenuTemplate[7].submenu.push(
 				{
-					label: i18n.t('menubookmarks:home', 'Home'),
+					label: i18n.t('menutable:bookmarks.home', 'Home'),
 					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('move-bookmark',
 						{
 							'method': 'addtofolder',
@@ -111,7 +111,7 @@ module.exports.menuBookmarks = function ( winId ) {
 			
 			bookmarkMenuTemplate[8].submenu.push(
 				{
-					label: i18n.t('menubookmarks:home', 'Home'),
+					label: i18n.t('menutable:bookmarks.home', 'Home'),
 					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('move-bookmark',
 						{
 							'method': 'deletefromfolder',
@@ -181,7 +181,7 @@ module.exports.menuColumns = function ( winId ) {
 		
 		const columnsMenuTemplate = [
 			{
-				label: i18n.t('menucolumns:description', 'Description'),
+				label: i18n.t('menutable:columns.description', 'Description'),
 				type: 'checkbox',
 				checked: settings.description,
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-column',
@@ -193,7 +193,7 @@ module.exports.menuColumns = function ( winId ) {
 				) }
 			},
 			{
-				label: i18n.t('menucolumns:url', 'Url'),
+				label: i18n.t('menutable:columns.url', 'Url'),
 				type: 'checkbox',
 				checked: settings.url,
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-column',
@@ -205,7 +205,7 @@ module.exports.menuColumns = function ( winId ) {
 				) }
 			},
 			{
-				label: i18n.t('menucolumns:created', 'Created'),
+				label: i18n.t('menutable:columns.created', 'Created'),
 				type: 'checkbox',
 				checked: settings.created,
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-column',
@@ -217,7 +217,7 @@ module.exports.menuColumns = function ( winId ) {
 				) }
 			},
 			{
-				label: i18n.t('menucolumns:modified', 'Modified'),
+				label: i18n.t('menutable:columns.modified', 'Modified'),
 				type: 'checkbox',
 				checked: settings.modified,
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-column',
@@ -229,7 +229,7 @@ module.exports.menuColumns = function ( winId ) {
 				) }
 			},
 			{
-				label: i18n.t('menucolumns:folders', 'Folders'),
+				label: i18n.t('menutable:columns.folders', 'Folders'),
 				type: 'checkbox',
 				checked: settings.folders,
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-column',
@@ -241,7 +241,7 @@ module.exports.menuColumns = function ( winId ) {
 				) }
 			},
 			{
-				label: i18n.t('menucolumns:tags', 'Tags'),
+				label: i18n.t('menutable:columns.tags', 'Tags'),
 				type: 'checkbox',
 				checked: settings.tags,
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-column',
@@ -271,11 +271,11 @@ module.exports.menuPanels = function ( winId ) {
 		
 		const panelsMenuTemplate = [
 			{
-				label: i18n.t('menupanels:open', 'Open All'),
+				label: i18n.t('menutable:panels.open', 'Open All'),
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-info-panels', 'open') }
 			},
 			{
-				label: i18n.t('menupanels:close', 'Close All'),
+				label: i18n.t('menutable:panels.close', 'Close All'),
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-info-panels', 'close') }
 			}
 		]
