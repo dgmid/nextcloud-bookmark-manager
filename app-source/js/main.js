@@ -104,7 +104,7 @@ function createWindow() {
 	win.once('ready-to-show', () => {
 		
 		win.show()
-		favicons.generate( win.id, false  )
+		favicons.generate( win.id, false, false  )
 	})
 	
 	win.on('resize', saveWindowBounds)
@@ -245,6 +245,12 @@ ipcMain.on('refresh', (event, message) => {
 	win.webContents.send('refresh-bookmarks', 'refresh')
 })
 
+
+
+ipcMain.on('update-favicon', (event, message) => {
+	
+	favicons.generate( win.id, message, false )
+})
 
 
 ipcMain.on('loginflow', (event, message) => {

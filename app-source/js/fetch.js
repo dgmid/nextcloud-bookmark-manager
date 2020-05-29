@@ -160,10 +160,11 @@ module.exports.bookmarksApi = function( call, id, data, callback ) {
 				
 			break
 			
+			//todo - not needed
 			case 'single': callback( message )
 			break
 			
-			default: callback()
+			default: callback( message )
 		}
 		
 	}).catch(function( error ) {

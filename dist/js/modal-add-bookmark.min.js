@@ -148,7 +148,10 @@ $(document).ready(function() {
 			data += '&folders[]=' + encodeURIComponent(folder['id'])
 		}
 		
-		fetch.bookmarksApi( 'add', '', data, function() {
+		fetch.bookmarksApi( 'add', '', data, function( message ) {
+			
+			let returnedBookmark = JSON.parse( message )
+			ipc.send('update-favicon', returnedBookmark['item'] )
 			
 			ipc.send('refresh', 'refresh')
 			closeModal()

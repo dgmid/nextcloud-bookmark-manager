@@ -33,7 +33,7 @@ module.exports.regenerate = function ( winId ) {
 		if ( err ) return console.error( err )
 		
 		log.info( `deleted cached favicons` )
-		module.exports.generate( winId, true )
+		module.exports.generate( winId, false, true )
 	})
 }
 
@@ -51,7 +51,7 @@ function notify( title, body ) {
 
 
 
-module.exports.generate = function ( winId, notify ) {
+module.exports.generate = function (  winId, singleBookmark, notify ) {
 	
 	let win 			= BrowserWindow.fromId( winId ),
 		bookmarks 		= new Store( {name: 'bookmarks'} ),
@@ -60,13 +60,20 @@ module.exports.generate = function ( winId, notify ) {
 		faviconCount 	= 0,
 		faviconArray	= []
 	
-	for( let  bookmark of bookmarkData ) {
+	if( singleBookmark ) {
 		
-		if( !defaultArray.includes( bookmark.id ) &&
-			!fs.pathExistsSync( `${dir}/favicons/${bookmark.id}.png`
-		) ) {
+		faviconArray.push( singleBookmark )
+		
+	} else {
+	
+		for( let  bookmark of bookmarkData ) {
 			
-			faviconArray.push( bookmark )
+			if( !defaultArray.includes( bookmark.id ) &&
+				!fs.pathExistsSync( `${dir}/favicons/${bookmark.id}.png`
+			) ) {
+				
+				faviconArray.push( bookmark )
+			}
 		}
 	}
 	
