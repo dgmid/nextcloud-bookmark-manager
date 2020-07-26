@@ -189,7 +189,7 @@ app.on('ready', function() {
 			const 	user = parts[1].replace('user:', ''),
 					pass = parts[2].replace('password:', '')
 			
-			store.set( 'loginCredentials.username', user )
+			store.set( 'loginCredentials.username', decodeURIComponent(user) )
 			store.set( 'loginCredentials.password', pass )
 			
 			loginFlow.close()
