@@ -25,8 +25,9 @@ exports.createAbout = () => {
 			vibrancy: 'under-window',
 			webPreferences: {
 				devTools: true,
-				preload: path.join(__dirname, './preload.min.js'),
 				nodeIntegration: true,
+				enableRemoteModule: true,
+				preload: path.join(__dirname, './preload.min.js')
 			}
 		})
 		

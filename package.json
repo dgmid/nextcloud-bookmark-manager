@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron .",
     "build": "gulp build",
-    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=9.1.1 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
+    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=10.1.1 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
   },
   "author": {
     "name": "D.G. Midwinter",
@@ -25,7 +25,7 @@
     "last 1 Chrome versions"
   ],
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "color": "^3.1.2",
     "compare-versions": "^3.6.0",
     "datatables.net": "^1.10.21",
@@ -33,10 +33,10 @@
     "datatables.net-responsive": "^2.2.5",
     "dateformat": "^3.0.3",
     "detect-browsers": "^5.0.5",
-    "electron-log": "^4.2.2",
+    "electron-log": "^4.2.4",
     "electron-store": "^6.0.0",
     "fs-extra": "^9.0.1",
-    "i18next": "^19.6.3",
+    "i18next": "^19.7.0",
     "i18next-electron-language-detector": "0.0.10",
     "i18next-sync-fs-backend": "^1.1.1",
     "is-url": "^1.2.4",
@@ -44,12 +44,12 @@
     "jquery-i18next": "^1.2.1",
     "mousetrap": "^1.6.5",
     "select2": "^4.0.13",
-    "string-to-color": "^2.2.1"
+    "string-to-color": "^2.2.2"
   },
   "devDependencies": {
     "del": "^5.1.0",
     "devtron": "^1.4.0",
-    "electron": "^9.1.1",
+    "electron": "^10.1.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-cssnano": "^2.1.3",
