@@ -24,8 +24,10 @@ module.exports.openModal = function( url, width, height, resize ) {
 		vibrancy: 'popover',
 		webPreferences: {
 		devTools: true,
-			preload: path.join(__dirname, './preload.min.js'),
-			nodeIntegration: true
+			devTools: true,
+			nodeIntegration: true,
+			enableRemoteModule: true,
+			preload: path.join(__dirname, './preload.min.js')
 		}
 	})
 	
