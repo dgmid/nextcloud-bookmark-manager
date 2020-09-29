@@ -227,7 +227,7 @@ module.exports.menuApp = function () {
 			]
 		}
 	]
-		
+	
 	
 	const menu = Menu.buildFromTemplate(template)
 	Menu.setApplicationMenu(menu)
