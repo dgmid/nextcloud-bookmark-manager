@@ -36,7 +36,7 @@
     "electron-log": "^4.2.4",
     "electron-store": "^6.0.1",
     "fs-extra": "^9.0.1",
-    "i18next": "^19.8.2",
+    "i18next": "^19.8.3",
     "i18next-electron-language-detector": "0.0.10",
     "i18next-sync-fs-backend": "^1.1.1",
     "is-url": "^1.2.4",
